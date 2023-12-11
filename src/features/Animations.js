@@ -130,7 +130,7 @@ export const floatingBottle = () => {
             endTrigger: scrubEndEl,
             start: startSetting,
             end: endSetting,
-            scrub: 2,
+            scrub: 1,
           },
         })
 
@@ -144,6 +144,83 @@ export const floatingBottle = () => {
             },
           })
         )
+      })
+
+      const canvas = document.getElementById('hero-lightpass')
+
+      const context = canvas.getContext('2d')
+
+      const frameCount = 300
+      const currentFrame = (index) =>
+        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
+          .toString()
+          .padStart(4, '0')}.webp`
+
+      // Set canvas dimensions
+      canvas.width = 900
+      canvas.height = 1050
+
+      const images = []
+
+      //this figures out which index to give to the currentFrame, based on the index from frameCount
+      function mapToRange(num) {
+        // Calculate the percentage of num in the range 0-100
+        const percentage = num / 100
+
+        // Map the percentage to the range 0-51
+        const result = percentage * 100
+
+        // Round the result to the nearest integer
+        return Math.round(result)
+      }
+
+      const preloadImages = () => {
+        for (let i = 1; i < frameCount; i++) {
+          const img = new Image()
+          img.src = currentFrame(i)
+          images.push(img)
+        }
+        setTimeout(() => {
+          updateImage(0)
+          //gsap.from('.inflating-logo', { opacity: 0 })
+        }, 500)
+      }
+
+      const updateImage = (index) => {
+        context.clearRect(0, 0, canvas.width, canvas.height) // clear canvas
+        const img = images[index]
+
+        // Calculate the center position based on canvas dimensions
+        const centerX = (canvas.width - img.width) / 2
+        const centerY = (canvas.height - img.height) / 2
+
+        context.drawImage(img, centerX, centerY)
+      }
+
+      preloadImages()
+
+      gsap.to(canvas, {
+        scrollTrigger: {
+          trigger: scrubStartEl,
+          endTrigger: scrubEndEl,
+          start: startSetting,
+          end: endSetting,
+          scrub: 2,
+        },
+        frame: 0,
+        duration: 1,
+        ease: 'none',
+        onUpdate: function () {
+          const roundedIndex = Math.round(this.progress() * 300)
+          const mappedIndex = mapToRange(roundedIndex)
+          if (mappedIndex <= 0) {
+            updateImage(0)
+          } else if (mappedIndex >= 298) {
+            updateImage(298)
+          } else {
+            updateImage(mappedIndex)
+          }
+        },
       })
     }
 
@@ -160,84 +237,6 @@ export const floatingBottle = () => {
           }, 250)
         })
       })
-
-    //gsap.registerPlugin(ScrollTrigger)
-
-    const canvas = document.getElementById('hero-lightpass')
-    console.log(canvas)
-    const context = canvas.getContext('2d')
-
-    const frameCount = 51
-    const currentFrame = (index) =>
-      `https://raw.githubusercontent.com/Fergie77/buttermilk-logo/main/V1/${index
-        .toString()
-        .padStart(3, '0')}.webp`
-
-    // Set canvas dimensions
-    canvas.width = 1920
-    canvas.height = 1000
-
-    const images = []
-
-    //this figures out which index to give to the currentFrame, based on the index from frameCount
-    function mapToRange(num) {
-      // Calculate the percentage of num in the range 0-100
-      const percentage = num / 100
-
-      // Map the percentage to the range 0-51
-      const result = percentage * 51
-
-      // Round the result to the nearest integer
-      return Math.round(result)
-    }
-
-    const preloadImages = () => {
-      for (let i = 1; i < frameCount; i++) {
-        const img = new Image()
-        img.src = currentFrame(i)
-        images.push(img)
-      }
-      setTimeout(() => {
-        updateImage(0)
-        gsap.from('.inflating-logo', { opacity: 0 })
-      }, 500)
-    }
-
-    const updateImage = (index) => {
-      context.clearRect(0, 0, canvas.width, canvas.height) // clear canvas
-      context.drawImage(images[index], 0, 0)
-    }
-
-    preloadImages()
-
-    ScrollTrigger.defaults({
-      markers: { startColor: 'green', endColor: 'red', fontSize: '12px' },
-    })
-
-    gsap.to(canvas, {
-      scrollTrigger: {
-        trigger: '.floating-bottle-section_wrapper',
-        markers: false,
-        start: 'top 0%',
-        end: 'bottom 10%',
-        scrub: true,
-      },
-      frame: 0,
-      duration: 1,
-      ease: 'none',
-      onUpdate: function () {
-        const roundedIndex = Math.round(this.progress() * 100)
-        const mappedIndex = mapToRange(roundedIndex)
-
-        if (mappedIndex <= 0) {
-          updateImage(0)
-        } else if (mappedIndex >= 49) {
-          updateImage(49)
-        } else {
-          updateImage(mappedIndex)
-        }
-      },
-    })
   })
 }
 
