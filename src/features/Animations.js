@@ -551,7 +551,7 @@ export const igSlider = () => {
     renderMode: 'performance',
     slides: {
       perView: 4,
-      origin: 'center',
+      //origin: 'center',
       spacing: 40,
     },
     created(s) {
