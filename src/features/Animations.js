@@ -105,8 +105,8 @@ export const roundingImageElement = () => {
 
   tl.to(roundingElement, {
     borderRadius: 20,
-    marginLeft: '2.5rem',
-    marginRight: '2.5rem',
+    marginLeft: '5rem',
+    marginRight: '5rem',
   })
   tl.to(
     roundingElement.querySelector('.header30_background-image'),
@@ -392,76 +392,6 @@ export const storySliderSlideIn = () => {
   addKeenSlider()
 }
 
-export const navAnimation = () => {
-  const duration = 0.6
-  const navbuttons = document.querySelector('.nav-buttons_wrapper')
-  const navLinksList = document.querySelector('.nav-links_center')
-  const hamburger = document.querySelector('#hamburger')
-  const closeNav = document.querySelector('#close-nav')
-
-  let tl = gsap.timeline({ paused: true })
-  tl.fromTo(
-    '.nav-links_wrapper',
-    { width: '0%', height: '0%' },
-    {
-      width: '100%',
-      height: '800%',
-      ease: 'elastic(0.3,0.5)',
-      duration: 1.5,
-      onStart: () => {
-        navLinksList.style.display = 'flex'
-        navbuttons.style.zIndex = 1
-        navLinksList.style.zIndex = 2
-      },
-      onReverseComplete: () => {
-        navLinksList.style.display = 'none'
-        navbuttons.style.zIndex = 2
-        navLinksList.style.zIndex = 1
-      },
-    }
-  )
-  tl.to('.nav-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' }, '<')
-  tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
-  tl.from(
-    '.nav-links_list > *',
-    {
-      opacity: 0,
-      y: 50,
-      duration: duration,
-      ease: 'power2.out',
-      stagger: 0.1,
-    },
-    '<0.2'
-  )
-
-  function openNav() {
-    tl.timeScale(2).play()
-  }
-
-  function closeNavFunction() {
-    tl.timeScale(2).reverse()
-  }
-
-  hamburger.addEventListener('click', openNav)
-  closeNav.addEventListener('click', closeNavFunction)
-
-  // Check for clicks outside of menu to close it
-  document.addEventListener('click', function (event) {
-    // If the clicked element is not the specified element and not a descendant of it
-    if (!document.querySelector('.nav').contains(event.target)) {
-      closeNavFunction()
-    }
-  })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeNavFunction()
-    }
-  })
-
-  // Return the functions
-  return { openNav, closeNavFunction }
-}
-
 export const pageTransition = () => {
   let container = document.querySelector('.page-transition')
   const hamburger = document.querySelector('#close-nav')
@@ -661,6 +591,569 @@ export const accordionToggle = () => {
 
     element.addEventListener('click', () => {
       toggleAnimation(element, element.nextSibling)
+    })
+  })
+}
+
+export const navAnimation = () => {
+  const duration = 0.6
+  const navbuttons = document.querySelector('.nav-buttons_wrapper')
+  const navLinksList = document.querySelector('.nav-links_center')
+  const hamburger = document.querySelector('#hamburger')
+  const closeNav = document.querySelector('#close-nav')
+
+  let tl = gsap.timeline({ paused: true })
+  tl.fromTo(
+    '.nav-links_wrapper',
+    { width: '0%', height: '0%' },
+    {
+      width: '100%',
+      height: '800%',
+      ease: 'elastic(0.3,0.5)',
+      duration: 1.5,
+      onStart: () => {
+        navLinksList.style.display = 'flex'
+        navbuttons.style.zIndex = 1
+        navLinksList.style.zIndex = 2
+      },
+      onReverseComplete: () => {
+        navbuttons.style.zIndex = 2
+        navLinksList.style.zIndex = 1
+      },
+    }
+  )
+  tl.to('.nav-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' }, '<')
+  tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
+  tl.from(
+    '.nav-links_list > *',
+    {
+      opacity: 0,
+      y: 50,
+      duration: duration,
+      ease: 'power2.out',
+      stagger: 0.1,
+    },
+    '<0.2'
+  )
+
+  function openNav() {
+    tl.timeScale(2).play()
+  }
+
+  function closeNavFunction() {
+    tl.timeScale(2).reverse()
+  }
+
+  hamburger.addEventListener('click', openNav)
+  closeNav.addEventListener('click', closeNavFunction)
+
+  // Check for clicks outside of menu to close it
+  document.addEventListener('click', function (event) {
+    // If the clicked element is not the specified element and not a descendant of it
+    if (!document.querySelector('.nav').contains(event.target)) {
+      closeNavFunction()
+    }
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeNavFunction()
+    }
+  })
+
+  // Return the functions
+  return { openNav, closeNavFunction }
+}
+
+const cartPopUpItemInfo = (data) => {
+  const popupItem = document.querySelector('.cart-popup-item')
+  const popupTitle = popupItem.querySelector('[popup="title"')
+  const popupPrice = popupItem.querySelector('[popup="price"')
+  popupTitle.textContent = data.items[0].product_title
+  popupPrice.textContent = '£' + (data.items[0].price / 100).toFixed(2)
+}
+
+export const cartPopUpAnimation = () => {
+  const duration = 0.6
+  const navbuttons = document.querySelector('.nav-buttons_wrapper')
+  const navLinksList = document.querySelector('.cart-popup-links_center')
+  const closeNav = document.querySelector('#close-cart-popup')
+  const cartPopupItemsAnimated = document.getElementsByClassName(
+    'cart-popup-links_list > *'
+  )
+  const openCartButton = navLinksList.querySelector('[function="open-cart"]')
+  const cart = document.querySelector('.cart-links_wrapper')
+
+  let tl = gsap.timeline({ paused: true })
+  tl.fromTo(
+    '.cart-popup-links_wrapper',
+    { width: '0%', height: '0%' },
+    {
+      width: '100%',
+      height: '600%',
+      ease: 'elastic(0.3,0.5)',
+      duration: 1.5,
+      onStart: () => {
+        navLinksList.style.display = 'flex'
+        navbuttons.style.zIndex = 1
+        navLinksList.style.zIndex = 2
+      },
+      onReverseComplete: () => {
+        navbuttons.style.zIndex = 2
+        navLinksList.style.zIndex = 1
+      },
+    }
+  )
+  tl.to(
+    '.cart-popup-background',
+    { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' },
+    '<'
+  )
+  tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
+  tl.from(
+    cartPopupItemsAnimated,
+    {
+      opacity: 0,
+      y: 50,
+      duration: duration,
+      ease: 'power2.out',
+      stagger: 0.1,
+    },
+    '<0.2'
+  )
+
+  function openNav() {
+    if (cart.attributes.cart_state.value == 'closed') {
+      tl.timeScale(2).play()
+    }
+  }
+
+  function closeNavFunction() {
+    tl.timeScale(2).reverse()
+  }
+
+  closeNav.addEventListener('click', closeNavFunction)
+  openCartButton.addEventListener('click', closeNavFunction)
+
+  // Check for clicks outside of menu to close it
+  document.addEventListener('click', function (event) {
+    // If the clicked element is not the specified element and not a descendant of it
+    if (!document.querySelector('.nav').contains(event.target)) {
+      closeNavFunction()
+    }
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeNavFunction()
+    }
+  })
+
+  // Return the functions
+  return { openNav, closeNavFunction }
+}
+
+// export const cartPopUpAnimation = () => {
+//   const duration = 0.3
+//   const navbuttons = document.querySelector('.nav-buttons_wrapper')
+//   const navLinksList = document.querySelector('.cart-popup-links_center')
+//   const closeNav = document.querySelector('#close-cart-popup')
+//   const cartPopupItemsAnimated = document.getElementsByClassName(
+//     'cart-popup-links_list > *'
+//   )
+//   const openCartButton = navLinksList.querySelector('[function="open-cart"]')
+//   const cart = document.querySelector('.cart-links_wrapper')
+
+//   //let tl = gsap.timeline({ paused: true })
+
+//   function openNav() {
+//     if (cart.attributes.cart_state.value == 'closed') {
+//       gsap.to(
+//         '.cart-popup-links_wrapper',
+//         { width: '0%', height: '0%' },
+//         {
+//           width: '100%',
+//           height: '600%',
+//           ease: 'elastic(0.3,0.5)',
+//           duration: 0.75,
+//           onStart: () => {
+//             navLinksList.style.display = 'flex'
+//             navbuttons.style.zIndex = 1
+//             navLinksList.style.zIndex = 2
+//           },
+//           onComplete: () => {
+//             cart.setAttribute('cart_state', 'open')
+//           },
+//         }
+//       )
+//       gsap.to('.cart-popup-background', {
+//         boxShadow: '0 2px 4px rgba(0, 0, 0, .1)',
+//       })
+//       gsap.to(
+//         '.nav-buttons_wrapper > *, .button.drop-shadow ',
+//         { opacity: 0 },
+//         '<'
+//       )
+//       gsap.from(cartPopupItemsAnimated, {
+//         opacity: 0,
+//         y: 50,
+//         duration: duration,
+//         ease: 'power2.out',
+//         stagger: 0.1,
+//       })
+//     }
+//   }
+
+//   function closeNavFunction() {
+//     console.log(cart.attributes.cart_state.value)
+//     if (cart.attributes.cart_state.value == 'open') {
+//       gsap.to('.cart-popup-links_wrapper', {
+//         width: '0%',
+//         height: '0%',
+//         ease: 'elastic(0.3,0.5)',
+//         duration: 0.75,
+//         // onStart: () => {
+//         //   navLinksList.style.display = 'flex'
+//         //   navbuttons.style.zIndex = 2
+//         //   navLinksList.style.zIndex = 1
+//         // },
+//         // onComplete: () => {
+//         //   cart.setAttribute('cart_state', 'closed')
+//         // },
+//         // onReverseComplete: () => {
+//         //   navbuttons.style.zIndex = 2
+//         //   navLinksList.style.zIndex = 1
+//         // },
+//       })
+//       // gsap.to('.cart-popup-background', {
+//       //   boxShadow: '0 2px 4px rgba(0, 0, 0, .1)',
+//       // })
+//       // gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 })
+//       // gsap.from(cartPopupItemsAnimated, {
+//       //   opacity: 0,
+//       //   y: 50,
+//       //   duration: duration,
+//       //   ease: 'power2.out',
+//       //   stagger: 0.1,
+//       // })
+//     }
+//   }
+
+//   closeNav.addEventListener('click', closeNavFunction)
+//   openCartButton.addEventListener('click', closeNavFunction)
+
+//   // Check for clicks outside of menu to close it
+//   document.addEventListener('click', function (event) {
+//     // If the clicked element is not the specified element and not a descendant of it
+//     if (!document.querySelector('.nav').contains(event.target)) {
+//       closeNavFunction()
+//     }
+//   })
+//   document.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape') {
+//       closeNavFunction()
+//     }
+//   })
+
+//   // Return the functions
+//   return { openNav, closeNavFunction }
+// }
+
+export const cartAnimation = () => {
+  const navbuttons = document.querySelector('.nav-buttons_wrapper')
+  const navLinksList = document.querySelector('.cart-links_center')
+  const hamburger = document.querySelector('#cart-button')
+  const closeNav = document.querySelector('#close-cart')
+  const cart = document.querySelector('.cart-links_wrapper')
+  cart.setAttribute('cart_state', 'closed')
+
+  function openNav() {
+    const cartItems = document
+      .querySelector('.cart-items_layout')
+      .querySelectorAll('.cart-item')
+    const itemsHeight = 90 * cartItems.length
+    const cartHeight = 280 + itemsHeight + 'px'
+
+    //height of main element
+    gsap.fromTo(
+      cart,
+      { width: '0%', height: '0%' },
+      {
+        width: '100%',
+        height: cartHeight,
+        ease: 'elastic(0.3,0.5)',
+        duration: 0.75,
+        onStart: () => {
+          navLinksList.style.display = 'flex'
+          navbuttons.style.zIndex = 1
+          navLinksList.style.zIndex = 2
+          cart.setAttribute('cart_state', 'open')
+        },
+        onReverseComplete: () => {
+          navbuttons.style.zIndex = 2
+          navLinksList.style.zIndex = 1
+          cart.setAttribute('cart_state', 'closed')
+        },
+      }
+    )
+    //hide menu
+    gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 })
+  }
+
+  function updateCartHeight() {
+    const cartItems = document
+      .querySelector('.cart-items_layout')
+      .querySelectorAll('.cart-item')
+    const itemsHeight = 90 * cartItems.length
+    const cartHeight = 280 + itemsHeight + 'px'
+
+    //height of main element
+    gsap.to(cart, {
+      width: '100%',
+      height: cartHeight,
+      ease: 'elastic(0.3,0.5)',
+      duration: 0.75,
+    })
+  }
+
+  function closeNavFunction() {
+    const cart = document.querySelector('.cart-links_wrapper')
+    gsap.to(cart, {
+      width: '0%',
+      height: '0%',
+      ease: 'elastic(0.3,0.5)',
+      duration: 0.75,
+      onComplete: () => {
+        navLinksList.style.display = 'none'
+        navbuttons.style.zIndex = 2
+        navLinksList.style.zIndex = 1
+        cart.setAttribute('cart_state', 'closed')
+      },
+    })
+    gsap.to('.cart-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' })
+    gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 1 })
+  }
+
+  hamburger.addEventListener('click', openNav)
+  closeNav.addEventListener('click', closeNavFunction)
+
+  // Check for clicks outside of menu to close it
+  document.addEventListener('click', function (event) {
+    // If the clicked element is not the specified element and not a descendant of it
+    if (!document.querySelector('.nav').contains(event.target)) {
+      closeNavFunction()
+    }
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeNavFunction()
+    }
+  })
+
+  // Return the functions
+  return { openNav, closeNavFunction, updateCartHeight }
+}
+
+const createCartItem = (cartDataItem, newItem, cart, data) => {
+  //check if newly added product already exists in the cart or not
+  const cartTest = Array.from(cart.children).find((element) => {
+    return element.attributes.product_id.value == cartDataItem.id
+  })
+
+  //if it exists, update quantity
+  if (cartTest) {
+    cartTest.querySelector('[cart-item="quantity"]').textContent =
+      cartDataItem.quantity
+    cartTest.querySelector('[cart-item="quantity"]').textContent =
+      cartDataItem.quantity
+    cartTest.querySelector('[cart-item="price"]').textContent =
+      '£' + (cartDataItem.final_line_price / 100).toFixed(2)
+  }
+  // If not, add as new line product
+  else {
+    newItem.style.display = 'flex'
+    newItem.querySelector('[cart-item="quantity"]').textContent =
+      cartDataItem.quantity
+    newItem.querySelector('[cart-item="title"]').textContent =
+      cartDataItem.product_title
+    newItem.querySelector('[cart-item="price"]').textContent =
+      '£' + (cartDataItem.final_line_price / 100).toFixed(2)
+    newItem.setAttribute('product_id', cartDataItem.id)
+    cart.appendChild(newItem)
+  }
+  document.querySelector('[cart="total"]').textContent =
+    '£' + (data.items_subtotal_price / 100).toFixed(2)
+}
+
+function handleQuantityChange(e) {
+  const cartElement = e.currentTarget.closest('.cart-item')
+  if (e.currentTarget.children[0].getAttribute('quantity-button') === 'add') {
+    addToCart(cartElement.attributes.product_id.value, 1)
+  } else {
+    decreaseQuantity(cartElement.attributes.product_id.value)
+  }
+}
+
+export const quantityButtons = () => {
+  const cartItems = document
+    .querySelector('.cart-items_layout')
+    .querySelectorAll('.cart-item')
+
+  cartItems.forEach((cartElement) => {
+    cartElement
+      .querySelectorAll('.quantity-button_link')
+      .forEach((linkElement) => {
+        // Remove existing event listeners to prevent duplicates
+        linkElement.removeEventListener('click', handleQuantityChange)
+
+        // Add the event listener
+        linkElement.addEventListener('click', handleQuantityChange)
+      })
+  })
+}
+
+export const loadCart = () => {
+  const cart = document.querySelector('.cart-items_layout')
+  const cartItemTemplate = document.querySelector('.cart-item')
+  const cartQuantity = document.querySelector('[cart="quantity"]')
+
+  fetch(window.Shopify.routes.root + 'cart.js')
+    .then((response) => response.json())
+    .then((data) => {
+      // Clear the cart only if it needs to be updated
+      if (cart.children.length !== data.items.length) {
+        cart.textContent = ''
+      }
+
+      data.items.forEach((element) => {
+        const newItem = cartItemTemplate.cloneNode(true)
+        createCartItem(element, newItem, cart, data)
+      })
+      console.log(data.items)
+      if (data.items.length === 0 && cart.children.length > 0) {
+        console.log('test')
+        document.querySelector('[cart="total"]').textContent =
+          '£' + data.total_price.toFixed(2)
+      }
+
+      if (data.items.length === 0) {
+        document.querySelector('[cart="total"]').textContent = '£0.00'
+      }
+      cartAnimation().updateCartHeight()
+
+      cartQuantity.textContent = data.item_count
+      cartItemTemplate.parentNode.style.display = 'none'
+      quantityButtons()
+    })
+}
+
+export const decreaseQuantity = (variantId) => {
+  var cartContents = fetch(window.Shopify.routes.root + 'cart.js')
+    .then((response) => response.json())
+    .then((cart) => {
+      // Find the line item ID for the item you want to subtract
+
+      const lineItemId = cart.items.find(
+        (item) => item.variant_id == variantId
+      ).key // Replace variantId with the actual variant ID
+
+      // Calculate the new quantity
+      let newQuantity =
+        cart.items.find((item) => item.key == lineItemId).quantity - 1
+      newQuantity = Math.max(newQuantity, 0) // Ensures the quantity doesn't go below zero
+
+      // Update the cart
+      return fetch('/cart/change.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: lineItemId,
+          quantity: newQuantity,
+        }),
+      })
+    })
+    .then((response) => response.json())
+    .then(() => {
+      loadCart()
+    })
+    .catch((error) => console.error('Error:', error))
+  cartContents
+}
+
+// Define addToCart function
+export function addToCart(variantId, quantity) {
+  return fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      items: [
+        {
+          id: variantId,
+          quantity: quantity,
+        },
+      ],
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      loadCart()
+      cartPopUpItemInfo(data)
+      cartPopUpAnimation().openNav()
+      // setTimeout(() => {
+      //   cartPopUpAnimation().closeNavFunction()
+      // }, 2000)
+      return data
+    })
+    .catch((error) => {
+      console.error('Error adding item:', error)
+    })
+}
+
+// Define clearCart function
+export function clearCart() {
+  return fetch(window.Shopify.routes.root + 'cart/clear.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      loadCart()
+      return data
+    })
+    .catch((error) => {
+      console.error('Error clearing cart:', error)
+    })
+}
+
+export const siteWideCartButtons = () => {
+  // Attach event listeners
+  const addToCartButtons = document.querySelectorAll(
+    '.add-to-cart_button, .is-card-add-to-cart'
+  )
+  addToCartButtons.forEach((element) => {
+    element.addEventListener('click', () => {
+      const productID = element.attributes.cartitemid.value
+      addToCart(productID, 1) // Replace with dynamic variantId and quantity as needed
+    })
+  })
+
+  const clearCartButton = document.querySelector('#clear-cart')
+  if (clearCartButton) {
+    clearCartButton.addEventListener('click', () => {
+      clearCart()
+    })
+  }
+}
+
+export const openCart = () => {
+  const openCartLinks = document.querySelectorAll("[function='open-cart'")
+  openCartLinks.forEach((element) => {
+    element.addEventListener('click', () => {
+      cartAnimation().openNav()
     })
   })
 }

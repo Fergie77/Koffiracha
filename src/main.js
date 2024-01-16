@@ -13,22 +13,34 @@ import {
   igSlider,
   productLinkHover,
   accordionToggle,
+  cartAnimation,
+  loadCart,
+  openCart,
+  siteWideCartButtons,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
 barba.init({})
 pageTransition()
 navAnimation()
+cartAnimation()
 navSwapping()
 buttonAnimation()
+openCart()
+siteWideCartButtons()
+loadCart()
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
+    siteWideCartButtons()
+    //loadCart()
     if (data.next.namespace == 'home') {
       floatingBottle()
       roundingImageElement()
       storySliderSlideIn()
-      igSlider()
+      setTimeout(() => {
+        igSlider()
+      }, 1000)
       scrollingText()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
