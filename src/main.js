@@ -17,6 +17,7 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
+  sliderLoadAnimation,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
@@ -27,7 +28,6 @@ cartAnimation()
 navSwapping()
 buttonAnimation()
 openCart()
-siteWideCartButtons()
 loadCart()
 
 barba.hooks.afterEnter((data) => {
@@ -35,6 +35,7 @@ barba.hooks.afterEnter((data) => {
     siteWideCartButtons()
     //loadCart()
     if (data.next.namespace == 'home') {
+      sliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
       storySliderSlideIn()

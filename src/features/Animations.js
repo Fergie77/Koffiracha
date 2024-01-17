@@ -105,13 +105,24 @@ export const roundingImageElement = () => {
 
   tl.to(roundingElement, {
     borderRadius: 20,
-    marginLeft: '5rem',
-    marginRight: '5rem',
+    //marginLeft: '7rem',
+    //marginRight: '7rem',
+    //scale: 0.9,
   })
+  tl.to(
+    roundingElement.parentNode,
+    {
+      //borderRadius: 20,
+      //marginLeft: '7rem',
+      //marginRight: '7rem',
+      scale: 0.9,
+    },
+    '<'
+  )
   tl.to(
     roundingElement.querySelector('.header30_background-image'),
     {
-      scale: 1.1,
+      scale: 1.15,
     },
     '<'
   )
@@ -578,8 +589,11 @@ export const accordionToggle = () => {
   const accordion = document.querySelectorAll('.accordion1_top')
 
   const toggleAnimation = (element, dropdown) => {
-    // Determine the new height based on the current height
-    const newHeight = dropdown.style.height === 'auto' ? 0 : 'auto'
+    // Determine if the dropdown is currently open
+    const isOpen = gsap.getProperty(dropdown, 'height') !== 0
+
+    // Determine the new height based on whether the dropdown is open
+    const newHeight = isOpen ? 0 : 'auto'
 
     // Apply the animation with GSAP to the new height
     gsap.to(dropdown, { height: newHeight, ease: 'power2.out' })
@@ -587,10 +601,10 @@ export const accordionToggle = () => {
 
   accordion.forEach((element) => {
     // Initially set the height to 0
-    gsap.set(element.nextSibling, { height: 0 })
+    gsap.set(element.nextElementSibling, { height: 0 })
 
     element.addEventListener('click', () => {
-      toggleAnimation(element, element.nextSibling)
+      toggleAnimation(element, element.nextElementSibling)
     })
   })
 }
@@ -683,6 +697,22 @@ export const cartPopUpAnimation = () => {
   const openCartButton = navLinksList.querySelector('[function="open-cart"]')
   const cart = document.querySelector('.cart-links_wrapper')
 
+  function handleMenuCloseButton(event) {
+    // If the clicked element is not the specified element and not a descendant of it
+    if (!document.querySelector('.nav').contains(event.currentTarget)) {
+      document.removeEventListener('keydown', handleMenuCloseOutside)
+      document.removeEventListener('click', handleMenuCloseButton)
+      closeNavFunction()
+    }
+  }
+  function handleMenuCloseOutside(e) {
+    if (e.key === 'Escape') {
+      document.removeEventListener('keydown', handleMenuCloseOutside)
+      document.removeEventListener('click', handleMenuCloseButton)
+      closeNavFunction()
+    }
+  }
+
   let tl = gsap.timeline({ paused: true })
   tl.fromTo(
     '.cart-popup-links_wrapper',
@@ -696,6 +726,9 @@ export const cartPopUpAnimation = () => {
         navLinksList.style.display = 'flex'
         navbuttons.style.zIndex = 1
         navLinksList.style.zIndex = 2
+        // Check for clicks outside of menu to close it
+        document.addEventListener('click', handleMenuCloseButton)
+        document.addEventListener('keydown', handleMenuCloseOutside)
       },
       onReverseComplete: () => {
         navbuttons.style.zIndex = 2
@@ -729,133 +762,15 @@ export const cartPopUpAnimation = () => {
 
   function closeNavFunction() {
     tl.timeScale(2).reverse()
+    addToCartAnimation().playAnimation()
   }
 
-  closeNav.addEventListener('click', closeNavFunction)
+  closeNav.addEventListener('click', handleMenuCloseButton)
   openCartButton.addEventListener('click', closeNavFunction)
-
-  // Check for clicks outside of menu to close it
-  document.addEventListener('click', function (event) {
-    // If the clicked element is not the specified element and not a descendant of it
-    if (!document.querySelector('.nav').contains(event.target)) {
-      closeNavFunction()
-    }
-  })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeNavFunction()
-    }
-  })
 
   // Return the functions
   return { openNav, closeNavFunction }
 }
-
-// export const cartPopUpAnimation = () => {
-//   const duration = 0.3
-//   const navbuttons = document.querySelector('.nav-buttons_wrapper')
-//   const navLinksList = document.querySelector('.cart-popup-links_center')
-//   const closeNav = document.querySelector('#close-cart-popup')
-//   const cartPopupItemsAnimated = document.getElementsByClassName(
-//     'cart-popup-links_list > *'
-//   )
-//   const openCartButton = navLinksList.querySelector('[function="open-cart"]')
-//   const cart = document.querySelector('.cart-links_wrapper')
-
-//   //let tl = gsap.timeline({ paused: true })
-
-//   function openNav() {
-//     if (cart.attributes.cart_state.value == 'closed') {
-//       gsap.to(
-//         '.cart-popup-links_wrapper',
-//         { width: '0%', height: '0%' },
-//         {
-//           width: '100%',
-//           height: '600%',
-//           ease: 'elastic(0.3,0.5)',
-//           duration: 0.75,
-//           onStart: () => {
-//             navLinksList.style.display = 'flex'
-//             navbuttons.style.zIndex = 1
-//             navLinksList.style.zIndex = 2
-//           },
-//           onComplete: () => {
-//             cart.setAttribute('cart_state', 'open')
-//           },
-//         }
-//       )
-//       gsap.to('.cart-popup-background', {
-//         boxShadow: '0 2px 4px rgba(0, 0, 0, .1)',
-//       })
-//       gsap.to(
-//         '.nav-buttons_wrapper > *, .button.drop-shadow ',
-//         { opacity: 0 },
-//         '<'
-//       )
-//       gsap.from(cartPopupItemsAnimated, {
-//         opacity: 0,
-//         y: 50,
-//         duration: duration,
-//         ease: 'power2.out',
-//         stagger: 0.1,
-//       })
-//     }
-//   }
-
-//   function closeNavFunction() {
-//     console.log(cart.attributes.cart_state.value)
-//     if (cart.attributes.cart_state.value == 'open') {
-//       gsap.to('.cart-popup-links_wrapper', {
-//         width: '0%',
-//         height: '0%',
-//         ease: 'elastic(0.3,0.5)',
-//         duration: 0.75,
-//         // onStart: () => {
-//         //   navLinksList.style.display = 'flex'
-//         //   navbuttons.style.zIndex = 2
-//         //   navLinksList.style.zIndex = 1
-//         // },
-//         // onComplete: () => {
-//         //   cart.setAttribute('cart_state', 'closed')
-//         // },
-//         // onReverseComplete: () => {
-//         //   navbuttons.style.zIndex = 2
-//         //   navLinksList.style.zIndex = 1
-//         // },
-//       })
-//       // gsap.to('.cart-popup-background', {
-//       //   boxShadow: '0 2px 4px rgba(0, 0, 0, .1)',
-//       // })
-//       // gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 })
-//       // gsap.from(cartPopupItemsAnimated, {
-//       //   opacity: 0,
-//       //   y: 50,
-//       //   duration: duration,
-//       //   ease: 'power2.out',
-//       //   stagger: 0.1,
-//       // })
-//     }
-//   }
-
-//   closeNav.addEventListener('click', closeNavFunction)
-//   openCartButton.addEventListener('click', closeNavFunction)
-
-//   // Check for clicks outside of menu to close it
-//   document.addEventListener('click', function (event) {
-//     // If the clicked element is not the specified element and not a descendant of it
-//     if (!document.querySelector('.nav').contains(event.target)) {
-//       closeNavFunction()
-//     }
-//   })
-//   document.addEventListener('keydown', (e) => {
-//     if (e.key === 'Escape') {
-//       closeNavFunction()
-//     }
-//   })
-
-//   // Return the functions
-//   return { openNav, closeNavFunction }
-// }
 
 export const cartAnimation = () => {
   const navbuttons = document.querySelector('.nav-buttons_wrapper')
@@ -886,6 +801,18 @@ export const cartAnimation = () => {
           navbuttons.style.zIndex = 1
           navLinksList.style.zIndex = 2
           cart.setAttribute('cart_state', 'open')
+          // Check for clicks outside of menu to close it
+          document.addEventListener('click', function (event) {
+            // If the clicked element is not the specified element and not a descendant of it
+            if (!document.querySelector('.nav').contains(event.target)) {
+              closeNavFunction()
+            }
+          })
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              closeNavFunction()
+            }
+          })
         },
         onReverseComplete: () => {
           navbuttons.style.zIndex = 2
@@ -934,19 +861,6 @@ export const cartAnimation = () => {
 
   hamburger.addEventListener('click', openNav)
   closeNav.addEventListener('click', closeNavFunction)
-
-  // Check for clicks outside of menu to close it
-  document.addEventListener('click', function (event) {
-    // If the clicked element is not the specified element and not a descendant of it
-    if (!document.querySelector('.nav').contains(event.target)) {
-      closeNavFunction()
-    }
-  })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeNavFunction()
-    }
-  })
 
   // Return the functions
   return { openNav, closeNavFunction, updateCartHeight }
@@ -1027,9 +941,8 @@ export const loadCart = () => {
         const newItem = cartItemTemplate.cloneNode(true)
         createCartItem(element, newItem, cart, data)
       })
-      console.log(data.items)
+
       if (data.items.length === 0 && cart.children.length > 0) {
-        console.log('test')
         document.querySelector('[cart="total"]').textContent =
           '£' + data.total_price.toFixed(2)
       }
@@ -1080,6 +993,50 @@ export const decreaseQuantity = (variantId) => {
   cartContents
 }
 
+const addToCartAnimation = () => {
+  const container = document.querySelector('.cart-add-lottie')
+
+  function createAnimation() {
+    return Lottie.loadAnimation({
+      container: container,
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HEART_ICON_BLACK.json',
+    })
+  }
+
+  let animation = createAnimation()
+
+  function playAnimation() {
+    if (animation) {
+      animation.destroy() // Destroy the current animation
+    }
+    animation = createAnimation() // Recreate the animation
+    gsap.set(container, {
+      scale: 1,
+    })
+    gsap.to(container, {
+      delay: 0.5,
+      opacity: 1,
+      onStart: () => {
+        animation.play()
+      },
+      onComplete: () => {
+        setTimeout(() => {
+          gsap.to(container, {
+            scale: 0.3,
+            opacity: 0,
+            ease: 'power4.out',
+          })
+        }, 500)
+      },
+    })
+  }
+
+  return { playAnimation }
+}
+
 // Define addToCart function
 export function addToCart(variantId, quantity) {
   return fetch(window.Shopify.routes.root + 'cart/add.js', {
@@ -1100,10 +1057,8 @@ export function addToCart(variantId, quantity) {
     .then((data) => {
       loadCart()
       cartPopUpItemInfo(data)
+
       cartPopUpAnimation().openNav()
-      // setTimeout(() => {
-      //   cartPopUpAnimation().closeNavFunction()
-      // }, 2000)
       return data
     })
     .catch((error) => {
@@ -1155,5 +1110,40 @@ export const openCart = () => {
     element.addEventListener('click', () => {
       cartAnimation().openNav()
     })
+  })
+}
+
+export const sliderLoadAnimation = () => {
+  const slider = document.querySelector('.testimonial15_mask')
+  const slideElements = slider.children[0].querySelector(
+    '.testimonial15_content'
+  ).children
+  const easeInOutCubicBezier = (t) => {
+    if (t === 0) return 0
+    if (t === 1) return 1
+    if (t < 0.5) {
+      // Adjust these values to approximate the first half of the cubic-bezier curve
+      return 4 * t * t * t
+    } else {
+      // Adjust these values to approximate the second half of the cubic-bezier curve
+      const f = 2 * t - 2
+      return 0.5 * f * f * f + 1
+    }
+  }
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: slider,
+      start: 'top 75%',
+      end: 'bottom center',
+    },
+  })
+
+  tl.from(slideElements, {
+    x: 300,
+    opacity: 0,
+    stagger: 0.2,
+    ease: easeInOutCubicBezier,
+    duration: 1,
   })
 }
