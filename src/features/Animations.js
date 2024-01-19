@@ -461,7 +461,9 @@ export const pageTransition = () => {
       originalHeight / viewportHeight
     )
 
-    container.style.transform = `scale(${scaleFactor})`
+    if (container) {
+      container.style.transform = `scale(${scaleFactor})`
+    }
   }
   resizePageTransition()
 }
@@ -695,21 +697,39 @@ export const cartPopUpAnimation = () => {
     'cart-popup-links_list > *'
   )
   const openCartButton = navLinksList.querySelector('[function="open-cart"]')
+
   const cart = document.querySelector('.cart-links_wrapper')
 
-  function handleMenuCloseButton(event) {
+  function handleMenuCloseButton(e) {
     // If the clicked element is not the specified element and not a descendant of it
-    if (!document.querySelector('.nav').contains(event.currentTarget)) {
+    if (document.querySelector('.nav').contains(e.target)) {
+      closeNav.removeEventListener('click', handleMenuCloseButton)
       document.removeEventListener('keydown', handleMenuCloseOutside)
-      document.removeEventListener('click', handleMenuCloseButton)
-      closeNavFunction()
+      document.removeEventListener('click', handleMenuCloseOutside)
+      closePopupFunction()
+      addToCartAnimation().playAnimation()
     }
   }
   function handleMenuCloseOutside(e) {
-    if (e.key === 'Escape') {
+    // If the clicked element is not the specified element and not a descendant of it
+    if (
+      e.type === 'click' &&
+      !document.querySelector('.nav').contains(e.target)
+    ) {
       document.removeEventListener('keydown', handleMenuCloseOutside)
-      document.removeEventListener('click', handleMenuCloseButton)
-      closeNavFunction()
+      document.removeEventListener('click', handleMenuCloseOutside)
+      closeNav.removeEventListener('click', handleMenuCloseButton)
+      closePopupFunction()
+      addToCartAnimation().playAnimation()
+      openCartButton.removeEventListener('click', closePopupFunction)
+    }
+    if (e.type === 'keydown' && e.key === 'Escape') {
+      document.removeEventListener('keydown', handleMenuCloseOutside)
+      document.removeEventListener('click', handleMenuCloseOutside)
+      closeNav.removeEventListener('click', handleMenuCloseButton)
+      closePopupFunction()
+      addToCartAnimation().playAnimation()
+      openCartButton.removeEventListener('click', closePopupFunction)
     }
   }
 
@@ -727,8 +747,10 @@ export const cartPopUpAnimation = () => {
         navbuttons.style.zIndex = 1
         navLinksList.style.zIndex = 2
         // Check for clicks outside of menu to close it
-        document.addEventListener('click', handleMenuCloseButton)
+        document.addEventListener('click', handleMenuCloseOutside)
         document.addEventListener('keydown', handleMenuCloseOutside)
+        closeNav.addEventListener('click', handleMenuCloseButton)
+        openCartButton.addEventListener('click', closePopupFunction)
       },
       onReverseComplete: () => {
         navbuttons.style.zIndex = 2
@@ -760,22 +782,18 @@ export const cartPopUpAnimation = () => {
     }
   }
 
-  function closeNavFunction() {
+  function closePopupFunction() {
     tl.timeScale(2).reverse()
-    addToCartAnimation().playAnimation()
   }
 
-  closeNav.addEventListener('click', handleMenuCloseButton)
-  openCartButton.addEventListener('click', closeNavFunction)
-
   // Return the functions
-  return { openNav, closeNavFunction }
+  return { openNav, closePopupFunction }
 }
 
 export const cartAnimation = () => {
   const navbuttons = document.querySelector('.nav-buttons_wrapper')
   const navLinksList = document.querySelector('.cart-links_center')
-  const hamburger = document.querySelector('#cart-button')
+  const cartButton = document.querySelector('#cart-button')
   const closeNav = document.querySelector('#close-cart')
   const cart = document.querySelector('.cart-links_wrapper')
   cart.setAttribute('cart_state', 'closed')
@@ -802,17 +820,8 @@ export const cartAnimation = () => {
           navLinksList.style.zIndex = 2
           cart.setAttribute('cart_state', 'open')
           // Check for clicks outside of menu to close it
-          document.addEventListener('click', function (event) {
-            // If the clicked element is not the specified element and not a descendant of it
-            if (!document.querySelector('.nav').contains(event.target)) {
-              closeNavFunction()
-            }
-          })
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-              closeNavFunction()
-            }
-          })
+          document.addEventListener('click', closeCartFunction)
+          document.addEventListener('keydown', closeCartFunction)
         },
         onReverseComplete: () => {
           navbuttons.style.zIndex = 2
@@ -841,29 +850,38 @@ export const cartAnimation = () => {
     })
   }
 
-  function closeNavFunction() {
-    const cart = document.querySelector('.cart-links_wrapper')
-    gsap.to(cart, {
-      width: '0%',
-      height: '0%',
-      ease: 'elastic(0.3,0.5)',
-      duration: 0.75,
-      onComplete: () => {
-        navLinksList.style.display = 'none'
-        navbuttons.style.zIndex = 2
-        navLinksList.style.zIndex = 1
-        cart.setAttribute('cart_state', 'closed')
-      },
-    })
-    gsap.to('.cart-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' })
-    gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 1 })
+  function closeCartFunction(event) {
+    if (
+      (event.type === 'click' &&
+        !document.querySelector('.nav').contains(event.target)) ||
+      (event.type === 'keydown' && event.key === 'Escape')
+    ) {
+      console.log('added')
+      const cart = document.querySelector('.cart-links_wrapper')
+      gsap.to(cart, {
+        width: '0%',
+        height: '0%',
+        ease: 'elastic(0.3,0.5)',
+        duration: 0.75,
+        onComplete: () => {
+          navLinksList.style.display = 'none'
+          navbuttons.style.zIndex = 2
+          navLinksList.style.zIndex = 1
+          cart.setAttribute('cart_state', 'closed')
+        },
+      })
+      gsap.to('.cart-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' })
+      gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 1 })
+      document.removeEventListener('click', closeCartFunction)
+      document.removeEventListener('keydown', closeCartFunction)
+    }
   }
 
-  hamburger.addEventListener('click', openNav)
-  closeNav.addEventListener('click', closeNavFunction)
+  cartButton.addEventListener('click', openNav)
+  closeNav.addEventListener('click', closeCartFunction)
 
   // Return the functions
-  return { openNav, closeNavFunction, updateCartHeight }
+  return { openNav, closeCartFunction, updateCartHeight }
 }
 
 const createCartItem = (cartDataItem, newItem, cart, data) => {
@@ -1145,5 +1163,50 @@ export const sliderLoadAnimation = () => {
     stagger: 0.2,
     ease: easeInOutCubicBezier,
     duration: 1,
+  })
+}
+
+export const recipeCardAnimation = () => {
+  const recipeCards = document.querySelectorAll('.gallery3_card-link')
+
+  recipeCards.forEach((card) => {
+    const container = card.querySelector('.gallery3_card-lottie')
+
+    const lottie = Lottie.loadAnimation({
+      container: container,
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
+    })
+
+    const image = card.querySelector('.gallery3_image')
+
+    const hoverIn = () => {
+      gsap.to(image, {
+        scale: 1.1,
+        duration: 0.64,
+        ease: 'back.out',
+      })
+    }
+
+    const hoverOut = () => {
+      gsap.to(image, {
+        scale: 1,
+        duration: 0.64,
+        ease: 'expo.out',
+      })
+    }
+
+    card.addEventListener('mouseover', () => {
+      lottie.setDirection(1)
+      lottie.play()
+      hoverIn()
+    })
+    card.addEventListener('mouseleave', () => {
+      lottie.setDirection(-1)
+      lottie.play()
+      hoverOut()
+    })
   })
 }

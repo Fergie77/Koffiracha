@@ -18,10 +18,12 @@ import {
   openCart,
   siteWideCartButtons,
   sliderLoadAnimation,
+  recipeCardAnimation,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
 barba.init({})
+
 pageTransition()
 navAnimation()
 cartAnimation()
@@ -49,6 +51,13 @@ barba.hooks.afterEnter((data) => {
     } else if (data.next.namespace == 'product') {
       scrollingText()
       accordionToggle()
+      setTimeout(() => {
+        recipeCardAnimation()
+      }, 3000)
+    } else if (data.next.namespace == 'recipes') {
+      scrollingText()
+      accordionToggle()
+      recipeCardAnimation()
     }
   }, 10)
 
