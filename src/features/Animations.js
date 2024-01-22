@@ -822,11 +822,13 @@ export const cartAnimation = () => {
           // Check for clicks outside of menu to close it
           document.addEventListener('click', closeCartFunction)
           document.addEventListener('keydown', closeCartFunction)
+          closeNav.addEventListener('click', closeCartFunction)
         },
         onReverseComplete: () => {
           navbuttons.style.zIndex = 2
           navLinksList.style.zIndex = 1
           cart.setAttribute('cart_state', 'closed')
+          //closeNav.removeEventListener('click', closeCartFunction)
         },
       }
     )
@@ -854,9 +856,11 @@ export const cartAnimation = () => {
     if (
       (event.type === 'click' &&
         !document.querySelector('.nav').contains(event.target)) ||
-      (event.type === 'keydown' && event.key === 'Escape')
+      (event.type === 'keydown' && event.key === 'Escape') ||
+      (event.currentTarget &&
+        event.currentTarget.getAttribute &&
+        event.currentTarget.getAttribute('id') === 'close-cart')
     ) {
-      console.log('added')
       const cart = document.querySelector('.cart-links_wrapper')
       gsap.to(cart, {
         width: '0%',
@@ -871,17 +875,21 @@ export const cartAnimation = () => {
         },
       })
       gsap.to('.cart-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' })
-      gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 1 })
+      gsap.to(
+        '.nav-buttons_wrapper > #hamburger, .nav-buttons_wrapper > .middle-button_wrapper, .nav-buttons_wrapper > #cart-button, .button.drop-shadow ',
+        { opacity: 1 }
+      )
       document.removeEventListener('click', closeCartFunction)
       document.removeEventListener('keydown', closeCartFunction)
     }
   }
-
-  cartButton.addEventListener('click', openNav)
-  closeNav.addEventListener('click', closeCartFunction)
+  function addListeners() {
+    cartButton.addEventListener('click', openNav)
+    closeNav.addEventListener('click', closeCartFunction)
+  }
 
   // Return the functions
-  return { openNav, closeCartFunction, updateCartHeight }
+  return { openNav, closeCartFunction, updateCartHeight, addListeners }
 }
 
 const createCartItem = (cartDataItem, newItem, cart, data) => {
@@ -1047,6 +1055,7 @@ const addToCartAnimation = () => {
             opacity: 0,
             ease: 'power4.out',
           })
+          console.log('finished')
         }, 500)
       },
     })
@@ -1124,9 +1133,11 @@ export const siteWideCartButtons = () => {
 
 export const openCart = () => {
   const openCartLinks = document.querySelectorAll("[function='open-cart'")
+  const cartAnimationRef = cartAnimation()
+  cartAnimationRef.addListeners()
   openCartLinks.forEach((element) => {
     element.addEventListener('click', () => {
-      cartAnimation().openNav()
+      cartAnimationRef.openNav()
     })
   })
 }
@@ -1208,5 +1219,72 @@ export const recipeCardAnimation = () => {
       lottie.play()
       hoverOut()
     })
+  })
+}
+
+export const filtersDropdownAnimation = () => {
+  const filtersToggleButton = document.querySelector('#toggle-filter-dropdown')
+  const dropdownList = filtersToggleButton.nextElementSibling
+
+  var isOpen = false
+
+  gsap.set(dropdownList.children, {
+    y: 50,
+    opacity: 0,
+    stagger: 0.1,
+  })
+
+  gsap.set(dropdownList, {
+    height: '0',
+    opacity: 0,
+  })
+
+  const openDropdown = () => {
+    gsap.to(dropdownList, {
+      height: 'auto',
+      opacity: 1,
+      duration: 0.75,
+      ease: 'elastic(0.3,0.5)',
+      onStart: () => {
+        isOpen = true
+      },
+    })
+    gsap.to(dropdownList.children, {
+      y: 0,
+      opacity: 1,
+      stagger: 0.1,
+    })
+  }
+  const closeDropdown = () => {
+    gsap.to(dropdownList, {
+      height: '0',
+      opacity: 0,
+      ease: 'elastic(0.3,0.5)',
+      duration: 0.75,
+      onStart: () => {
+        isOpen = false
+      },
+    })
+    gsap.to(dropdownList.children, {
+      y: 50,
+      opacity: 0,
+      stagger: 0.1,
+    })
+  }
+
+  const toggleDropdown = () => {
+    if (!isOpen) {
+      openDropdown()
+    }
+    if (isOpen) {
+      closeDropdown()
+    }
+  }
+
+  filtersToggleButton.addEventListener('click', toggleDropdown)
+  document.addEventListener('click', (event) => {
+    if (isOpen && !filtersToggleButton.parentNode.contains(event.target)) {
+      closeDropdown()
+    }
   })
 }

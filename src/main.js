@@ -13,12 +13,12 @@ import {
   igSlider,
   productLinkHover,
   accordionToggle,
-  cartAnimation,
-  loadCart,
+  //loadCart,
   openCart,
   siteWideCartButtons,
   sliderLoadAnimation,
   recipeCardAnimation,
+  filtersDropdownAnimation,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
@@ -26,16 +26,16 @@ barba.init({})
 
 pageTransition()
 navAnimation()
-cartAnimation()
+
 navSwapping()
 buttonAnimation()
 openCart()
-loadCart()
+//loadCart()
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     siteWideCartButtons()
-    //loadCart()
+
     if (data.next.namespace == 'home') {
       sliderLoadAnimation()
       floatingBottle()
@@ -48,6 +48,7 @@ barba.hooks.afterEnter((data) => {
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       igSlider()
+      filtersDropdownAnimation()
     } else if (data.next.namespace == 'product') {
       scrollingText()
       accordionToggle()
@@ -62,6 +63,28 @@ barba.hooks.afterEnter((data) => {
   }, 10)
 
   scaleUpAnimation()
+})
+
+barba.hooks.enter(() => {
+  window.fsAttributes = window.fsAttributes || []
+  window.fsAttributes.push([
+    'cmsfilter',
+    () => {
+      window.fsAttributes.cmsfilter.init()
+    },
+  ])
+  window.fsAttributes.push([
+    'cmsselect',
+    () => {
+      window.fsAttributes.cmsselect.init()
+    },
+  ])
+  window.fsAttributes.push([
+    'selectcustom',
+    () => {
+      window.fsAttributes.selectcustom.init()
+    },
+  ])
 })
 
 const lenis = new Lenis()
