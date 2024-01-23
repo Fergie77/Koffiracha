@@ -1,6 +1,0 @@
-{% capture snippet_content %}{% include '__default-template' %}{% endcapture %}
-{% if snippet_check contains "Liquid error" %}
-    {{ content_for_layout }}
-{% else %}
-  {{ snippet_content }}
-{% endif %}
