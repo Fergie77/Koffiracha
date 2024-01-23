@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 import { Flip } from 'gsap/all'
 import KeenSlider from 'keen-slider'
 import Lottie from 'lottie-web'
+import SplitType from 'split-type'
 
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
@@ -100,21 +101,18 @@ export const roundingImageElement = () => {
       start: 'top 75%',
       end: 'bottom center',
       scrub: 2,
+      onEnter: () => {
+        pourPourPour().playAnimation()
+      },
     },
   })
 
   tl.to(roundingElement, {
     borderRadius: 20,
-    //marginLeft: '7rem',
-    //marginRight: '7rem',
-    //scale: 0.9,
   })
   tl.to(
     roundingElement.parentNode,
     {
-      //borderRadius: 20,
-      //marginLeft: '7rem',
-      //marginRight: '7rem',
       scale: 0.9,
     },
     '<'
@@ -1287,4 +1285,62 @@ export const filtersDropdownAnimation = () => {
       closeDropdown()
     }
   })
+}
+
+export const instagramSlider = () => {
+  const slider = document.querySelector('.instagram_component')
+  const slides = slider.children
+
+  const tl = gsap.timeline({ repeat: -1 })
+
+  tl.to(slides, {
+    x: '-101%',
+    duration: 10,
+    ease: 'linear',
+    //paused: true,
+  })
+
+  tl.play()
+}
+
+export const pourPourPour = () => {
+  const cubicBezierEasing = (t) => {
+    const P1 = [0.005763688760806916, 0.9452054794520548]
+    const P2 = [0.9985590778097982, 0.9360730593607306]
+    return (
+      (1 - t) ** 3 * 0.0 +
+      3 * (1 - t) ** 2 * t * P1[1] +
+      3 * (1 - t) * t ** 2 * P2[1] +
+      t ** 3 * 1.0
+    )
+  }
+
+  const text = new SplitType('#pourpourpour')
+
+  gsap.set(text.lines[0], { y: '100%' })
+  gsap.set(text.lines[2], { y: '-100%' })
+
+  const playAnimation = () => {
+    console.log(text.elements)
+    gsap.to(text.elements, {
+      scale: 1.2,
+      delay: 0.25,
+      duration: 0.5,
+      ease: cubicBezierEasing,
+    })
+    gsap.to(text.lines[0], {
+      y: '0%',
+      duration: 0.5,
+      delay: 0.25,
+      ease: cubicBezierEasing,
+    })
+    gsap.to(text.lines[2], {
+      y: '0%',
+      duration: 0.5,
+      delay: 0.25,
+      ease: cubicBezierEasing,
+    })
+  }
+
+  return { playAnimation }
 }

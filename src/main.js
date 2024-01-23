@@ -13,12 +13,14 @@ import {
   igSlider,
   productLinkHover,
   accordionToggle,
-  //loadCart,
+  loadCart,
   openCart,
   siteWideCartButtons,
   sliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
+  instagramSlider,
+  pourPourPour,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
@@ -30,7 +32,7 @@ navAnimation()
 navSwapping()
 buttonAnimation()
 openCart()
-//loadCart()
+loadCart()
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
@@ -41,9 +43,8 @@ barba.hooks.afterEnter((data) => {
       floatingBottle()
       roundingImageElement()
       storySliderSlideIn()
-      setTimeout(() => {
-        igSlider()
-      }, 1000)
+      instagramSlider()
+      pourPourPour()
       scrollingText()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
