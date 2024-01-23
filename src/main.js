@@ -50,6 +50,7 @@ barba.hooks.afterEnter((data) => {
       productLinkHover()
       igSlider()
       filtersDropdownAnimation()
+      instagramSlider()
     } else if (data.next.namespace == 'product') {
       scrollingText()
       accordionToggle()
@@ -60,6 +61,7 @@ barba.hooks.afterEnter((data) => {
       scrollingText()
       accordionToggle()
       recipeCardAnimation()
+      instagramSlider()
     }
   }, 10)
 

@@ -1,0 +1,54 @@
+
+                  <div class="w-layout-grid layout1_component" href="{{ section.settings.product }}">
+                    <div class="layout1_image-wrapper"><img src="{{ 'koffiracha_03_veggies_test_jenna_gang_23_11_16_690.webp' | asset_url }}" loading="lazy" alt="" class="layout1_image"></div>
+                    <div class="layout1_image-wrapper"><img src="{{ '0_0300.webp' | asset_url }}" loading="lazy" alt="" class="layout1_image is-product-image"></div>
+                    <div class="layout1_content">
+                      <div class="product-reference-code hide">{% assign product_handle = section.settings.product | split: '/' | last %}</div>
+                      <div class="product-reference-code hide">{% assign product = all_products[product_handle] %}</div>
+                      <div class="product-reference-code hide">{% assign productID = product.variants[0].id %}</div>
+                      <div class="product-listing_ratings-layout">
+                        <div><img src="{{ 'star-solid_black_32px.svg' | asset_url }}" loading="lazy" alt="" class="product-listing_star"><img src="{{ 'star-solid_black_32px.svg' | asset_url }}" loading="lazy" alt="" class="product-listing_star"><img src="{{ 'star-solid_black_32px.svg' | asset_url }}" loading="lazy" alt="" class="product-listing_star"><img src="{{ 'star-solid_black_32px.svg' | asset_url }}" loading="lazy" alt="" class="product-listing_star"><img src="{{ 'star-solid_black_32px.svg' | asset_url }}" loading="lazy" alt="" class="product-listing_star"></div>
+                        <div class="text-size-medium text-weight-medium">{{ 'tn14522506' | t }}</div>
+                      </div>
+                      <div class="spacer-small"></div>
+                      <div class="product-listing_heading-layout">
+                        <div>
+                          <h2 class="heading-style-h4 text-style-allcaps text-weight-medium">{{ product.title }}</h2>
+                          <div class="text-size-regular text-style-allcaps">{{ 'tc44ab88' | t }}</div>
+                        </div>
+                        <div>
+                          <div class="heading-style-h4 text-weight-medium">{{ product.price | money }}</div>
+                          <div class="text-size-regular">{{ 't3fd91493' | t }}</div>
+                        </div>
+                      </div>
+                      <div class="spacer-small"></div>
+                      <div class="button-group">
+                        <a href="#" class="add-to-cart_button w-button" cartitemid="{{productID}}">{{ 'tn26af42fa' | t }}</a>
+                        <div id="clear-cart">{{ 't4795ed53' | t }}</div>
+                      </div>
+                      <div class="spacer-small"></div>
+                      <p class="text-size-medium">{{ 't5aa6108' | t }}</p>
+                      <div class="spacer-small"></div>
+                      <div class="chillies-rating_layout">
+                        <div id="w-node-_4524f2d8-6ea9-c8b6-07f9-5b60eab5484f-eab54822" class="chillies-rating_text">{{ 't249834' | t }}</div><img src="{{ 'chilli-solid_black_32px.svg' | asset_url }}" loading="lazy" alt=""><img src="{{ 'chilli-line_black_32px.svg' | asset_url }}" loading="lazy" alt=""><img src="{{ 'chilli-line_black_32px.svg' | asset_url }}" loading="lazy" alt=""><img src="{{ 'chilli-line_black_32px.svg' | asset_url }}" loading="lazy" alt="">
+                        <div id="w-node-_4524f2d8-6ea9-c8b6-07f9-5b60eab54855-eab54822" class="chillies-rating_text">{{ 't11c2d' | t }}</div>
+                      </div>
+                    </div>
+                  </div>
+                
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');</script>
+        
+{% schema %}
+{
+  "name": "Featured Product",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "url",
+      "id": "product",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}

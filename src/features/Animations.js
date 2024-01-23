@@ -1321,7 +1321,6 @@ export const pourPourPour = () => {
   gsap.set(text.lines[2], { y: '-100%' })
 
   const playAnimation = () => {
-    console.log(text.elements)
     gsap.to(text.elements, {
       scale: 1.2,
       delay: 0.25,

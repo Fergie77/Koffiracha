@@ -1,0 +1,39 @@
+{% capture listItems %}
+{% for item in collections[settings.collection_shop].products limit: settings.collection_shop_limit %}
+<div role="listitem" class="w-dyn-item">
+                        <div class="blog1_item">
+                          <div class="gallery3_product-link text-color-black">
+                            <div class="gallery3_card-content is-top-padding-larger">
+                              {%- render "categories",item: item -%}
+                              <a href="{{ item.url }}" class="product-link w-inline-block"><img loading="lazy" src="{{ item.featured_image | img_url: 'master' }}" alt="{{ item.featured_image.alt }}" class="product-link_image" data-commerce-type="variation-image" srcset="{{ item.featured_image | img_url: '1920x' }} 1920w,{{ item.featured_image | img_url: '1600x' }} 1600w,{{ item.featured_image | img_url: '1366x' }} 1366w,{{ item.featured_image | img_url: '1024x' }} 1024w,{{ item.featured_image | img_url: '768x' }} 768w,{{ item.featured_image | img_url: '640x' }} 640w"></a>
+                              <a href="{{ item.url }}" class="product-link w-inline-block">
+                                <div class="card_price">£9.00</div>
+                              </a>
+                              <a href="{{ item.url }}" class="product-link w-inline-block">
+                                <div class="button is-card-item">
+                                  <div class="animating-text-size">{{ item.title }}</div>
+                                </div>
+                              </a>
+                              <a href="#" class="button is-card-add-to-cart w-inline-block" cartitemid="{{item.variants[0].id}}">
+                                <div class="pseudo-quantity-selector_wrapper">
+                                  <div class="circular-button">-</div>
+                                  <div>1</div>
+                                  <div class="circular-button">+</div>
+                                </div>
+                                <div>Add to bag</div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+{%- endfor -%}
+{% endcapture %}
+{% assign items_length = listItems | strip | size %}
+<div fs-cmsfilter-element="list" class="w-dyn-list" udy-collection="product">
+                    {%- unless items_length == 0 -%}<div role="list" class="blog1_list is-4-col w-dyn-items">
+                      {{ listItems }}
+                    </div>{%- endunless -%}
+                    {%- if items_length == 0 -%}<div class="w-dyn-empty">
+                      <div>No items found.</div>
+                    </div>{%- endif -%}
+                  </div>
