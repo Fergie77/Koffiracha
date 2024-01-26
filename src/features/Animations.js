@@ -47,9 +47,9 @@ export const buttonAnimation = () => {
           duration: 1.5,
         })
         gsap.to('.hamburger-line', {
-          background: '#f0fe53',
+          background: 'var(--colour--yellow)',
           ease: 'power4.out',
-          duration: 1.5,
+          duration: 0,
         })
         gsap.to(element.querySelector('.button-text_mover'), {
           y: -40,
@@ -64,9 +64,9 @@ export const buttonAnimation = () => {
           duration: 1.5,
         })
         gsap.to('.hamburger-line', {
-          background: 'black',
+          background: 'var(--colour--black)',
           ease: 'power4.out',
-          duration: 1.5,
+          duration: 0,
         })
         gsap.to(element.querySelector('.button-text_mover'), {
           y: 0,
@@ -266,7 +266,7 @@ export const floatingBottle = () => {
       },
       frame: 0,
       duration: 1,
-      ease: 'none',
+      ease: 'expo.inOut',
       onUpdate: function () {
         const roundedIndex = Math.round(this.progress() * 300)
         const mappedIndex = mapToRange(roundedIndex)
@@ -454,11 +454,12 @@ export const pageTransition = () => {
     const originalHeight = 1080
 
     // Calculate the scale factor
-    let scaleFactor = Math.max(
+    let scaleFactor = Math.min(
       originalWidth / viewportWidth,
       originalHeight / viewportHeight
     )
 
+    scaleFactor = 1.2661195779601406
     if (container) {
       container.style.transform = `scale(${scaleFactor})`
     }
@@ -482,30 +483,6 @@ export const scrollingText = () => {
 
     tl.repeat(-1)
   })
-}
-
-export const igSlider = () => {
-  const sliderEl = document.querySelector("[keen-slider='true']")
-  var animation = { duration: 15000, easing: (t) => t }
-  var slider = new KeenSlider(sliderEl, {
-    loop: true,
-    renderMode: 'performance',
-    slides: {
-      perView: 4,
-      //origin: 'center',
-      spacing: 40,
-    },
-    created(s) {
-      s.moveToIdx(5, true, animation)
-    },
-    updated(s) {
-      s.moveToIdx(s.track.details.abs + 5, true, animation)
-    },
-    animationEnded(s) {
-      s.moveToIdx(s.track.details.abs + 5, true, animation)
-    },
-  })
-  slider
 }
 
 export const productLinkHover = () => {
@@ -953,33 +930,51 @@ export const loadCart = () => {
   const cartItemTemplate = document.querySelector('.cart-item')
   const cartQuantity = document.querySelector('[cart="quantity"]')
 
-  fetch(window.Shopify.routes.root + 'cart.js')
-    .then((response) => response.json())
-    .then((data) => {
-      // Clear the cart only if it needs to be updated
-      if (cart.children.length !== data.items.length) {
-        cart.textContent = ''
-      }
+  const cartIcon = document.querySelector('.cls-1')
 
-      data.items.forEach((element) => {
-        const newItem = cartItemTemplate.cloneNode(true)
-        createCartItem(element, newItem, cart, data)
+  const cartIconFull =
+    'M26.6074,15.0137c-.0547-.5488-.5303-.9307-1.0947-.8955-.5498.0547-.9502.5449-.8955,1.0947l1.0869,10.8818c.0498.4922-.1064.9658-.4385,1.332-.332.3672-.7871.5693-1.2822.5693h-15.9668c-.4951,0-.9502-.2021-1.2822-.5693-.332-.3662-.4883-.8398-.4385-1.332l1.4512-14.5371c.0889-.8877.8291-1.5576,1.7217-1.5576h1.5371v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h5.9883v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2.0012c.0021,0,.0038.0012.0059.0012.5522,0,1-.4478,1-1s-.4478-1-1-1c-.0021,0-.0038.0012-.0059.0012v-1.6887c0-2.7539-2.2402-4.9941-4.9941-4.9941s-4.9941,2.2402-4.9941,4.9941v1.6875h-1.5371c-1.9248,0-3.5205,1.4434-3.7119,3.3584l-1.4512,14.5371c-.1045,1.0459.2393,2.0938.9453,2.873.7051.7803,1.7139,1.2275,2.7656,1.2275h15.9668c1.0518,0,2.0605-.4473,2.7656-1.2275.7061-.7793,1.0498-1.8271.9453-2.873l-1.0869-10.8818ZM13.0059,6.3125c0-1.6514,1.3428-2.9941,2.9941-2.9941s2.9941,1.3428,2.9941,2.9941v1.6875h-5.9883v-1.6875Z'
+  const cartIconEmpty =
+    'M26.2432,11.3584c-.1914-1.915-1.7871-3.3584-3.7119-3.3584h-1.5371v-1.6875c0-2.7539-2.2402-4.9941-4.9941-4.9941s-4.9941,2.2402-4.9941,4.9941v1.6875h-1.5371c-1.9248,0-3.5205,1.4434-3.7119,3.3584l-1.4512,14.5371c-.1045,1.0459.2393,2.0938.9453,2.873.7051.7803,1.7139,1.2275,2.7656,1.2275h15.9668c1.0518,0,2.0605-.4473,2.7656-1.2275.7061-.7793,1.0498-1.8271.9453-2.873l-1.4512-14.5371ZM13.0059,6.3125c0-1.6514,1.3428-2.9941,2.9941-2.9941s2.9941,1.3428,2.9941,2.9941v1.6875h-5.9883v-1.6875ZM25.2656,27.4268c-.332.3672-.7871.5693-1.2822.5693h-15.9668c-.4951,0-.9502-.2021-1.2822-.5693-.332-.3662-.4883-.8398-.4385-1.332l1.4512-14.5371c.0889-.8877.8291-1.5576,1.7217-1.5576h1.5371v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h5.9883v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h1.5371c.8926,0,1.6328.6699,1.7217,1.5576l1.4512,14.5371c.0498.4922-.1064.9658-.4385,1.332Z'
+  const cartIconCircle = document.querySelector('.cls-2')
+
+  if (window.Shopify && window.Shopify.routes) {
+    fetch(window.Shopify.routes.root + 'cart.js')
+      .then((response) => response.json())
+      .then((data) => {
+        // Clear the cart only if it needs to be updated
+        if (cart.children.length !== data.items.length) {
+          cart.textContent = ''
+
+          cartIcon.setAttribute('d', cartIconEmpty)
+          cartIconCircle.style.display = 'none'
+        }
+
+        data.items.forEach((element) => {
+          const newItem = cartItemTemplate.cloneNode(true)
+          createCartItem(element, newItem, cart, data)
+        })
+
+        if (data.items.length > 0) {
+          cartIcon.setAttribute('d', cartIconFull)
+          cartIconCircle.style.display = 'block'
+        }
+
+        if (data.items.length === 0 && cart.children.length > 0) {
+          document.querySelector('[cart="total"]').textContent =
+            '£' + data.total_price.toFixed(2)
+        }
+
+        if (data.items.length === 0) {
+          document.querySelector('[cart="total"]').textContent = '£0.00'
+        }
+        cartAnimation().updateCartHeight()
+
+        cartQuantity.textContent = data.item_count
+        cartItemTemplate.parentNode.style.display = 'none'
+        quantityButtons()
       })
-
-      if (data.items.length === 0 && cart.children.length > 0) {
-        document.querySelector('[cart="total"]').textContent =
-          '£' + data.total_price.toFixed(2)
-      }
-
-      if (data.items.length === 0) {
-        document.querySelector('[cart="total"]').textContent = '£0.00'
-      }
-      cartAnimation().updateCartHeight()
-
-      cartQuantity.textContent = data.item_count
-      cartItemTemplate.parentNode.style.display = 'none'
-      quantityButtons()
-    })
+  }
 }
 
 export const decreaseQuantity = (variantId) => {
@@ -1053,7 +1048,6 @@ const addToCartAnimation = () => {
             opacity: 0,
             ease: 'power4.out',
           })
-          console.log('finished')
         }, 500)
       },
     })
@@ -1110,22 +1104,23 @@ export function clearCart() {
 }
 
 export const siteWideCartButtons = () => {
+  const addCartButtonListener = (e) => {
+    const productID = e.currentTarget.attributes.cartitemid.value
+    addToCart(productID, 1) // Replace with dynamic variantId and quantity as needed
+  }
+
   // Attach event listeners
   const addToCartButtons = document.querySelectorAll(
-    '.add-to-cart_button, .is-card-add-to-cart'
+    '.add-to-cart_button, .is-card-add-to-cart, [cartitemid]'
   )
   addToCartButtons.forEach((element) => {
-    element.addEventListener('click', () => {
-      const productID = element.attributes.cartitemid.value
-      addToCart(productID, 1) // Replace with dynamic variantId and quantity as needed
-    })
+    element.removeEventListener('click', addCartButtonListener)
+    element.addEventListener('click', addCartButtonListener)
   })
 
   const clearCartButton = document.querySelector('#clear-cart')
   if (clearCartButton) {
-    clearCartButton.addEventListener('click', () => {
-      clearCart()
-    })
+    clearCartButton.addEventListener('click', clearCart)
   }
 }
 
@@ -1342,4 +1337,54 @@ export const pourPourPour = () => {
   }
 
   return { playAnimation }
+}
+
+export const homepageHeroTextAnimation = () => {
+  const cubicBezierEasing = (t) => {
+    const P1 = [0.005763688760806916, 0.9452054794520548]
+    const P2 = [0.9985590778097982, 0.9360730593607306]
+    return (
+      (1 - t) ** 3 * 0.0 +
+      3 * (1 - t) ** 2 * t * P1[1] +
+      3 * (1 - t) * t ** 2 * P2[1] +
+      t ** 3 * 1.0
+    )
+  }
+  const text = new SplitType('.splt')
+
+  text.lines.forEach((element, index) => {
+    element.style.overflow = 'hidden'
+    gsap.set(element, { y: '-40px' })
+    gsap.set(element.firstChild, { y: '40px' })
+    gsap.from(element.firstChild, {
+      y: '300px',
+      ease: cubicBezierEasing,
+      delay: 0.5 + index / 10,
+    })
+  })
+}
+
+export const mobileProductSlider = () => {
+  function checkScreenSize() {
+    // Your JavaScript code for screens under 767px
+    const slider = new KeenSlider('.blog1_list', {
+      loop: true,
+      slides: {
+        perView: 1.2,
+        origin: 'center',
+      },
+    })
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      slider
+    } else {
+      // Optional: Your JavaScript code for screens over 767px
+      slider.destroy()
+    }
+  }
+
+  // Run the function on initial load
+  checkScreenSize()
+
+  // Add an event listener that runs the function when the window is resized
+  window.addEventListener('resize', checkScreenSize)
 }

@@ -10,7 +10,6 @@ import {
   scaleUpAnimation,
   storySliderSlideIn,
   scrollingText,
-  igSlider,
   productLinkHover,
   accordionToggle,
   loadCart,
@@ -21,6 +20,8 @@ import {
   filtersDropdownAnimation,
   instagramSlider,
   pourPourPour,
+  homepageHeroTextAnimation,
+  mobileProductSlider,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
@@ -46,9 +47,10 @@ barba.hooks.afterEnter((data) => {
       instagramSlider()
       pourPourPour()
       scrollingText()
+      homepageHeroTextAnimation()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
-      igSlider()
+      mobileProductSlider()
       filtersDropdownAnimation()
       instagramSlider()
     } else if (data.next.namespace == 'product') {
@@ -90,7 +92,7 @@ barba.hooks.enter(() => {
   ])
 })
 
-const lenis = new Lenis()
+const lenis = new Lenis({ lerp: 0.2 })
 
 lenis.on('scroll', () => {})
 
