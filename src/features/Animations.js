@@ -165,10 +165,10 @@ export const floatingBottle = () => {
         'start',
         componentEl.getAttribute('tr-scrollflip-staggerdirection')
       ),
-      scaleSetting = attr(
-        false,
-        componentEl.getAttribute('tr-scrollflip-scale')
-      ),
+      // scaleSetting = attr(
+      //   false,
+      //   componentEl.getAttribute('tr-scrollflip-scale')
+      // ),
       breakpointSetting = attr(
         0,
         componentEl.getAttribute('tr-scrollflip-breakpoint')
@@ -195,7 +195,7 @@ export const floatingBottle = () => {
       timeline.add(
         Flip.from(state, {
           targets: targetEl,
-          scale: scaleSetting,
+          scale: true,
           stagger: {
             amount: staggerSpeedSetting,
             from: staggerDirectionSetting,
@@ -599,7 +599,7 @@ export const navAnimation = () => {
     { width: '0%', height: '0%' },
     {
       width: '100%',
-      height: '800%',
+      height: '650%',
       ease: 'elastic(0.3,0.5)',
       duration: 1.5,
       onStart: () => {
@@ -751,7 +751,11 @@ export const cartPopUpAnimation = () => {
     '<0.2'
   )
 
-  function openNav() {
+  function openNav(quantity) {
+    const popup = document.querySelector('[popup=price]')
+    const popupText = popup.textContent.split('£')
+
+    popup.textContent = '£' + (parseFloat(popupText[1]) * quantity).toFixed(2)
     if (cart.attributes.cart_state.value == 'closed') {
       tl.timeScale(2).play()
     }
@@ -1076,8 +1080,7 @@ export function addToCart(variantId, quantity) {
     .then((data) => {
       loadCart()
       cartPopUpItemInfo(data)
-
-      cartPopUpAnimation().openNav()
+      cartPopUpAnimation().openNav(quantity)
       return data
     })
     .catch((error) => {
@@ -1387,4 +1390,34 @@ export const mobileProductSlider = () => {
 
   // Add an event listener that runs the function when the window is resized
   window.addEventListener('resize', checkScreenSize)
+}
+
+export const featuredProductAddToCart = () => {
+  const featuredAddToCartButton = document.querySelectorAll(
+    '[featuredCartItemID]'
+  )
+
+  featuredAddToCartButton.forEach((element) => {
+    const productID = element.getAttribute('featuredcartitemid')
+    var quantity = element.parentNode.querySelector('[cart-item=quantity]')
+
+    const quantityUp = element.parentNode.querySelector('[quantity-button=add]')
+
+    const quantityDown = element.parentNode.querySelector(
+      '[quantity-button=subtract]'
+    )
+
+    element.addEventListener('click', () => {
+      addToCart(productID, quantity.textContent)
+    })
+
+    quantityUp.addEventListener('click', () => {
+      quantity.textContent = parseInt(quantity.textContent) + 1
+    })
+    quantityDown.addEventListener('click', () => {
+      if (parseInt(quantity.textContent) > 1) {
+        quantity.textContent = parseInt(quantity.textContent) - 1
+      }
+    })
+  })
 }

@@ -22,6 +22,7 @@ import {
   pourPourPour,
   homepageHeroTextAnimation,
   mobileProductSlider,
+  featuredProductAddToCart,
 } from './features/Animations'
 import { navSwapping } from './features/NavbarSwapping'
 
@@ -38,6 +39,7 @@ loadCart()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     siteWideCartButtons()
+    featuredProductAddToCart()
 
     if (data.next.namespace == 'home') {
       sliderLoadAnimation()

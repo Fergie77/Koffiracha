@@ -15,7 +15,7 @@ export const navSwapping = () => {
     trigger: '[scroll-trigger="buy-now"]',
     start: 'top bottom',
     end: 'bottom bottom',
-    markers: true,
+
     onEnter: () => {
       // This code will be executed when the scroll trigger is entered
       gsap.to('.middle-button_wrapper .button-text', {
