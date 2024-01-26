@@ -60,7 +60,11 @@ export const navSwapping = () => {
       })
     },
   })
+}
 
+let footerScrollTrigger = null
+
+export const footerColourSwap = () => {
   // Function to swap the values of two CSS variables for a specific element
   function swapCSSVariables(parentSelector, var1, var2) {
     // Select the parent element
@@ -82,16 +86,28 @@ export const navSwapping = () => {
     parentElement.style.setProperty(var2, var1Value)
   }
 
-  // Add a ScrollTrigger for the animation
-  ScrollTrigger.create({
-    trigger: '[scroll-trigger="footer"]',
-    start: 'bottom bottom',
-    end: 'bottom bottom',
-    onEnter: () => {
-      swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
-    },
-    onLeaveBack: () => {
-      swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
-    },
-  })
+  // Only create a new ScrollTrigger if it doesn't already exist
+  if (!footerScrollTrigger) {
+    footerScrollTrigger = ScrollTrigger.create({
+      trigger: '[scroll-trigger="footer"]',
+      start: 'bottom bottom',
+      end: 'bottom bottom',
+      onEnter: () => {
+        swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
+      },
+      onLeaveBack: () => {
+        swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
+      },
+    })
+  }
+}
+
+// Function to disable the ScrollTrigger
+export const disableFooterColourSwap = () => {
+  if (footerScrollTrigger) {
+    //footerScrollTrigger.disable();
+    // Optionally, you can also kill the trigger if you don't plan to re-enable it later
+    footerScrollTrigger.kill()
+    footerScrollTrigger = null
+  }
 }

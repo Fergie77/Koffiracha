@@ -24,14 +24,17 @@ import {
   mobileProductSlider,
   featuredProductAddToCart,
 } from './features/Animations'
-import { navSwapping } from './features/NavbarSwapping'
+import {
+  disableFooterColourSwap,
+  footerColourSwap,
+  navSwapping,
+} from './features/NavbarSwapping'
 
 barba.init({})
 
 pageTransition()
 navAnimation()
 
-navSwapping()
 buttonAnimation()
 openCart()
 loadCart()
@@ -40,7 +43,9 @@ barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     siteWideCartButtons()
     featuredProductAddToCart()
-
+    navSwapping()
+    disableFooterColourSwap()
+    footerColourSwap()
     if (data.next.namespace == 'home') {
       sliderLoadAnimation()
       floatingBottle()
