@@ -1,5 +1,5 @@
 import barba from '@barba/core'
-import Lenis from '@studio-freight/lenis'
+//import Lenis from '@studio-freight/lenis'
 
 import {
   buttonAnimation,
@@ -26,6 +26,7 @@ import {
   pourLottieAnimations,
   hugeTextSplitAnimation,
   recipeSlider,
+  recipeModal,
 } from './features/Animations'
 import { hugeTextScaling, shareRecipe } from './features/Functionality'
 import {
@@ -82,6 +83,7 @@ barba.hooks.afterEnter((data) => {
       recipeCardAnimation()
       instagramSlider()
       shareRecipe()
+      recipeModal()
     }
   }, 10)
 
@@ -110,13 +112,13 @@ barba.hooks.enter(() => {
   ])
 })
 
-const lenis = new Lenis({ lerp: 0.2 })
+//const lenis = new Lenis({ lerp: 0.2 })
 
-lenis.on('scroll', () => {})
+//lenis.on('scroll', () => {})
 
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
+// function raf(time) {
+//   lenis.raf(time)
+//   requestAnimationFrame(raf)
+// }
 
-requestAnimationFrame(raf)
+// requestAnimationFrame(raf)

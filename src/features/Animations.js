@@ -6,6 +6,8 @@ import KeenSlider from 'keen-slider'
 import Lottie from 'lottie-web'
 import SplitType from 'split-type'
 
+import { appendUrl, enableScrolling, stopScrolling } from './Functionality'
+
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
   const smallbutton = document.querySelectorAll("[gsap-button-2='true']")
@@ -1704,4 +1706,85 @@ export const recipeSlider = () => {
     )
   }
   addKeenSlider()
+}
+
+export const recipeModal = () => {
+  const recipeCards = document.querySelectorAll('.blog1_item')
+
+  const currentURL = window.location.href
+  const url = new URL(currentURL)
+
+  const searchParams = url.searchParams
+
+  const toggleModal = (e) => {
+    const modal = e.currentTarget.nextElementSibling
+    const modalInfo = modal.querySelector('.section_layout3')
+    const modalBackground = modal.querySelector('.recipe-modal_background')
+    const close = modal.querySelector('[recipe-modal="close"]')
+    const modalLink = e.currentTarget.getAttribute('recipe-slug')
+
+    if (!searchParams.has('modalToOpen')) {
+      appendUrl(modalLink)
+    }
+
+    const tl = gsap.timeline({ paused: true })
+    tl.set(modal, {
+      display: 'none',
+    })
+    tl.set(modalInfo, {
+      opacity: 0,
+    })
+    tl.set(modalBackground, {
+      scaleY: 0,
+    })
+
+    tl.to(
+      modal,
+      {
+        display: 'block',
+      },
+      '<'
+    )
+
+    tl.to(
+      modalBackground,
+      {
+        scaleY: 1,
+        duration: 1,
+        ease: 'expo.inOut',
+      },
+      '<'
+    )
+    tl.to(
+      modalInfo,
+      {
+        opacity: 1,
+        onStart: stopScrolling,
+        onComplete: () => {
+          close.addEventListener('click', () => {
+            tl.reverse()
+          })
+        },
+        onReverseComplete: () => {
+          close.removeEventListener('click', tl.reverse())
+          enableScrolling()
+          appendUrl('', true)
+        },
+      },
+      '<0.5'
+    )
+
+    tl.play()
+  }
+
+  recipeCards.forEach((card) => {
+    card.addEventListener('click', toggleModal)
+  })
+
+  if (searchParams.has('modalToOpen')) {
+    const slug = searchParams.get('modalToOpen')
+
+    const item = document.querySelector('[recipe-slug="' + slug + '"]')
+    item.click()
+  }
 }

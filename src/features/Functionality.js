@@ -109,3 +109,41 @@ export const shareRecipe = () => {
     })
   })
 }
+
+export const stopScrolling = () => {
+  //Disable scrolling
+  document.body.style.overflow = 'hidden'
+}
+
+export const enableScrolling = () => {
+  // Enable scrolling
+  document.body.style.overflow = '' // or '' to revert to the default
+}
+
+export const appendUrl = (modal, removeExistingParams = false) => {
+  // Step 1: Get the current URL
+  const currentUrl = window.location.href
+
+  // Step 2: Create a URL object
+  const url = new URL(currentUrl)
+
+  // Step 3: Conditionally remove existing query parameters
+  if (removeExistingParams) {
+    // This clears all existing query parameters
+    const searchParams = new URLSearchParams()
+    if (modal) {
+      // Add back the specific parameter if modal is provided
+      searchParams.set('modalToOpen', modal)
+    }
+    url.search = searchParams.toString()
+  } else {
+    // This will add a new parameter or update the value if it already exists
+    url.searchParams.set('modalToOpen', modal)
+  }
+
+  // Step 4: Update the browser's URL without reloading the page
+  history.pushState({}, '', url)
+
+  // If you want to reload the page with the new URL, you could use:
+  // window.location.href = url;
+}
