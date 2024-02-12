@@ -61,7 +61,7 @@ export const hugeTextScaling = () => {
       )
     }
   }
-  //adjustTextSize()
+  adjustTextSize()
   // // Run the function when the document is fully loaded
   // document.addEventListener('DOMContentLoaded', adjustTextSize)
 
@@ -72,6 +72,20 @@ export const hugeTextScaling = () => {
 export const shareRecipe = () => {
   // Select all elements with the class 'share-icon_link'
   const shareButtons = document.querySelectorAll('.share-icon_link')
+
+  // Function to copy URL to clipboard
+  function copyUrlToClipboard(url) {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        console.log('URL copied to clipboard successfully!')
+        alert('URL copied to clipboard!')
+      })
+      .catch((err) => {
+        console.error('Failed to copy URL:', err)
+        alert('Failed to copy URL. Please try again.')
+      })
+  }
 
   // Add a click event listener to each button
   shareButtons.forEach((button) => {
@@ -89,9 +103,8 @@ export const shareRecipe = () => {
             console.error('Error sharing:', error)
           })
       } else {
-        alert(
-          'Sharing is not supported in your browser. Please copy the URL manually.'
-        )
+        // Fallback to copying the URL if sharing isn't supported
+        copyUrlToClipboard(window.location.href)
       }
     })
   })
