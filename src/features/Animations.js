@@ -101,14 +101,14 @@ export const roundingImageElement = () => {
       start: 'top 75%',
       end: 'bottom center',
       scrub: 2,
-      onEnter: () => {
-        pourPourPour().playAnimation()
-      },
+      // onEnter: () => {
+      //   pourPourPour().playAnimation()
+      // },
     },
   })
 
   tl.to(roundingElement, {
-    borderRadius: 20,
+    borderRadius: 36,
   })
   tl.to(
     roundingElement.parentNode,
@@ -120,7 +120,7 @@ export const roundingImageElement = () => {
   tl.to(
     roundingElement.querySelector('.header30_background-image'),
     {
-      scale: 1.15,
+      scale: 1.05,
     },
     '<'
   )
@@ -136,6 +136,7 @@ export const floatingBottle = () => {
     if (!isNaN(attrVal) && defaultValType === 'number') return +attrVal
     return defaultVal
   }
+
   gsap.registerPlugin(Flip)
   ScrollTrigger.normalizeScroll(true)
 
@@ -147,12 +148,15 @@ export const floatingBottle = () => {
         "[tr-scrollflip-element='target']"
       ),
       scrubStartEl = componentEl.querySelector('[tr-scrollflip-scrubstart]'),
-      scrubEndEl = componentEl.querySelector('[tr-scrollflip-scrubend]')
+      scrubEndEl = componentEl.querySelector('[tr-scrollflip-scrubend]'),
+      canvas = componentEl.querySelector('[element="animated-bottle"]') // Select canvas within the component
 
-    let startSetting = attr(
-        'top top',
-        scrubStartEl.getAttribute('tr-scrollflip-scrubstart')
-      ),
+    if (!canvas) return // Skip if no canvas found in the current component
+
+    let // startSetting = attr(
+      //     'top top',
+      //     scrubStartEl.getAttribute('tr-scrollflip-scrubstart')
+      //   ),
       endSetting = attr(
         'bottom bottom',
         scrubEndEl.getAttribute('tr-scrollflip-scrubend')
@@ -165,10 +169,6 @@ export const floatingBottle = () => {
         'start',
         componentEl.getAttribute('tr-scrollflip-staggerdirection')
       ),
-      // scaleSetting = attr(
-      //   false,
-      //   componentEl.getAttribute('tr-scrollflip-scale')
-      // ),
       breakpointSetting = attr(
         0,
         componentEl.getAttribute('tr-scrollflip-breakpoint')
@@ -186,7 +186,7 @@ export const floatingBottle = () => {
         scrollTrigger: {
           trigger: scrubStartEl,
           endTrigger: scrubEndEl,
-          start: startSetting,
+          start: 'top top-=300px',
           end: endSetting,
           scrub: 1,
         },
@@ -204,10 +204,7 @@ export const floatingBottle = () => {
       )
     })
 
-    const canvas = document.getElementById('hero-lightpass')
-
     const context = canvas.getContext('2d')
-
     const frameCount = 300
     const currentFrame = (index) =>
       `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
@@ -219,21 +216,8 @@ export const floatingBottle = () => {
     canvas.height = 1050
 
     const images = []
-
-    //this figures out which index to give to the currentFrame, based on the index from frameCount
-    function mapToRange(num) {
-      // Calculate the percentage of num in the range 0-100
-      const percentage = num / 100
-
-      // Map the percentage to the range 0-51
-      const result = percentage * 100
-
-      // Round the result to the nearest integer
-      return Math.round(result)
-    }
-
     const preloadImages = () => {
-      for (let i = 1; i < frameCount; i++) {
+      for (let i = 1; i < frameCount + 1; i++) {
         const img = new Image()
         img.src = currentFrame(i)
         images.push(img)
@@ -256,48 +240,76 @@ export const floatingBottle = () => {
 
     preloadImages()
 
-    gsap.to(canvas, {
-      scrollTrigger: {
-        trigger: scrubStartEl,
-        endTrigger: scrubEndEl,
-        start: startSetting,
-        end: endSetting,
-        scrub: 2,
-      },
-      frame: 0,
-      duration: 1,
-      ease: 'expo.inOut',
-      onUpdate: function () {
-        const roundedIndex = Math.round(this.progress() * 300)
-        const mappedIndex = mapToRange(roundedIndex)
-        if (mappedIndex <= 0) {
-          updateImage(0)
-        } else if (mappedIndex >= 298) {
-          updateImage(298)
-        } else {
-          updateImage(mappedIndex)
-        }
-      },
-    })
+    gsap.to(
+      {},
+      {
+        scrollTrigger: {
+          trigger: scrubStartEl,
+          endTrigger: scrubEndEl,
+          start: 'top top-=300px',
+          end: endSetting,
+          scrub: 2,
+        },
+        frame: 0,
+        duration: 1,
+        ease: 'expo.inOut',
+        onUpdate: function () {
+          const progress = this.progress()
+          const index = Math.floor(progress * (frameCount - 1))
+          updateImage(index)
+        },
+      }
+    )
   }
 
   document
     .querySelectorAll("[tr-scrollflip-element='component']")
-    .forEach(function (componentEl, index) {
+    .forEach((componentEl, index) => {
       createTimeline(componentEl, index)
 
       let resizeTimer
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', () => {
         clearTimeout(resizeTimer)
-        resizeTimer = setTimeout(function () {
+        resizeTimer = setTimeout(() => {
           createTimeline(componentEl, index)
         }, 250)
       })
     })
 }
 
+export const pourLottieAnimations = () => {
+  let containers = document.querySelectorAll('.pour_background-animation')
+
+  if (containers) {
+    containers.forEach((container) => {
+      let lottieAnim = Lottie.loadAnimation({
+        container: container,
+        renderer: 'canvas',
+        loop: false,
+        autoplay: false,
+        path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE.json',
+      })
+      //lottieAnim.play()
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 50%',
+          end: 'bottom center',
+          onEnter: () => {
+            lottieAnim.play()
+          },
+        },
+      })
+
+      tl
+    })
+  }
+}
+
 export const storySliderSlideIn = () => {
   const arrow = document.querySelector('[story-slider = "arrow"]')
+  const close = document.querySelector('[story-slider = "close"]')
   const slider = document.querySelector('[story-slider = "slider"]')
   const background = document.querySelector('[story-slider = "background"]')
   const easing = 'expo.inOut'
@@ -313,6 +325,10 @@ export const storySliderSlideIn = () => {
       : 1 - 0.5 * Math.pow(2, -20 * t + 10)
   }
 
+  gsap.set(close, {
+    opacity: 0,
+  })
+
   const slideIn = () => {
     gsap.to(slider, {
       x: 0,
@@ -321,9 +337,12 @@ export const storySliderSlideIn = () => {
       onStart: removeListeners,
     })
     gsap.to(background, {
-      x: '-50%',
+      x: '-40%',
       ease: easing,
       duration: duration,
+    })
+    gsap.to(close, {
+      opacity: 1,
     })
   }
   const slideOut = () => {
@@ -336,6 +355,9 @@ export const storySliderSlideIn = () => {
       x: '0%',
       ease: easing,
       duration: duration,
+    })
+    gsap.to(close, {
+      opacity: 0,
     })
   }
   const slideInSlightly = () => {
@@ -384,17 +406,85 @@ export const storySliderSlideIn = () => {
       })
     }
 
+    function WheelControls(slider) {
+      var touchTimeout
+      var position
+      var wheelActive
+
+      function dispatch(e, name) {
+        position.x -= e.deltaX
+        position.y -= e.deltaY
+        slider.container.dispatchEvent(
+          new CustomEvent(name, {
+            detail: {
+              x: position.x,
+              y: position.y,
+            },
+          })
+        )
+      }
+
+      function wheelStart(e) {
+        position = {
+          x: e.pageX,
+          y: e.pageY,
+        }
+        dispatch(e, 'ksDragStart')
+      }
+
+      function wheel(e) {
+        dispatch(e, 'ksDrag')
+      }
+
+      function wheelEnd(e) {
+        dispatch(e, 'ksDragEnd')
+      }
+
+      function eventWheel(e) {
+        e.preventDefault()
+        if (!wheelActive) {
+          wheelStart(e)
+          wheelActive = true
+        }
+        wheel(e)
+        clearTimeout(touchTimeout)
+        touchTimeout = setTimeout(() => {
+          wheelActive = false
+          wheelEnd(e)
+        }, 50)
+      }
+
+      slider.on('created', () => {
+        slider.container.addEventListener('wheel', eventWheel, {
+          passive: false,
+        })
+      })
+    }
+
+    const ifWheelFirst = (slider) => {
+      setTimeout(() => {
+        slider.on('slideChanged', () => {
+          console.log(slider.track.details.abs)
+          if (!firstClick && slider.track.details.abs > 1) {
+            firstClick = true
+            slideIn()
+          }
+        })
+      }, 100)
+    }
+
     var slider = new KeenSlider(
       '.story-slider_wrapper',
       {
         loop: false,
         rubberband: false,
+        selector: '.story-slide',
         slides: {
           perView: 4,
-          spacing: 20,
+          //spacing: 24,
         },
       },
-      [ArrowButton, revertSlider]
+      [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
     )
     slider
   }
@@ -571,14 +661,27 @@ export const accordionToggle = () => {
 
     // Determine the new height based on whether the dropdown is open
     const newHeight = isOpen ? 0 : 'auto'
+    const xRotate = isOpen ? 0 : 45
 
     // Apply the animation with GSAP to the new height
-    gsap.to(dropdown, { height: newHeight, ease: 'power2.out' })
+    gsap.to(dropdown, {
+      height: newHeight,
+      ease: 'power2.out',
+    })
+
+    gsap.to(element.querySelector('.accordion1_icon'), {
+      rotateZ: xRotate,
+      ease: 'power2.out',
+    })
   }
 
   accordion.forEach((element) => {
     // Initially set the height to 0
-    gsap.set(element.nextElementSibling, { height: 0 })
+    if (!element.getAttribute('start-open')) {
+      gsap.set(element.nextElementSibling, { height: 0 })
+    } else {
+      gsap.set(element.querySelector('.accordion1_icon'), { rotateZ: 45 })
+    }
 
     element.addEventListener('click', () => {
       toggleAnimation(element, element.nextElementSibling)
@@ -663,111 +766,111 @@ const cartPopUpItemInfo = (data) => {
   popupPrice.textContent = '£' + (data.items[0].price / 100).toFixed(2)
 }
 
-export const cartPopUpAnimation = () => {
-  const duration = 0.6
-  const navbuttons = document.querySelector('.nav-buttons_wrapper')
-  const navLinksList = document.querySelector('.cart-popup-links_center')
-  const closeNav = document.querySelector('#close-cart-popup')
-  const cartPopupItemsAnimated = document.getElementsByClassName(
-    'cart-popup-links_list > *'
-  )
-  const openCartButton = navLinksList.querySelector('[function="open-cart"]')
+// export const cartPopUpAnimation = () => {
+//   const duration = 0.6
+//   const navbuttons = document.querySelector('.nav-buttons_wrapper')
+//   const navLinksList = document.querySelector('.cart-popup-links_center')
+//   const closeNav = document.querySelector('#close-cart-popup')
+//   const cartPopupItemsAnimated = document.getElementsByClassName(
+//     'cart-popup-links_list > *'
+//   )
+//   const openCartButton = navLinksList.querySelector('[function="open-cart"]')
 
-  const cart = document.querySelector('.cart-links_wrapper')
+//   const cart = document.querySelector('.cart-links_wrapper')
 
-  function handleMenuCloseButton(e) {
-    // If the clicked element is not the specified element and not a descendant of it
-    if (document.querySelector('.nav').contains(e.target)) {
-      closeNav.removeEventListener('click', handleMenuCloseButton)
-      document.removeEventListener('keydown', handleMenuCloseOutside)
-      document.removeEventListener('click', handleMenuCloseOutside)
-      closePopupFunction()
-      addToCartAnimation().playAnimation()
-    }
-  }
-  function handleMenuCloseOutside(e) {
-    // If the clicked element is not the specified element and not a descendant of it
-    if (
-      e.type === 'click' &&
-      !document.querySelector('.nav').contains(e.target)
-    ) {
-      document.removeEventListener('keydown', handleMenuCloseOutside)
-      document.removeEventListener('click', handleMenuCloseOutside)
-      closeNav.removeEventListener('click', handleMenuCloseButton)
-      closePopupFunction()
-      addToCartAnimation().playAnimation()
-      openCartButton.removeEventListener('click', closePopupFunction)
-    }
-    if (e.type === 'keydown' && e.key === 'Escape') {
-      document.removeEventListener('keydown', handleMenuCloseOutside)
-      document.removeEventListener('click', handleMenuCloseOutside)
-      closeNav.removeEventListener('click', handleMenuCloseButton)
-      closePopupFunction()
-      addToCartAnimation().playAnimation()
-      openCartButton.removeEventListener('click', closePopupFunction)
-    }
-  }
+//   function handleMenuCloseButton(e) {
+//     // If the clicked element is not the specified element and not a descendant of it
+//     if (document.querySelector('.nav').contains(e.target)) {
+//       closeNav.removeEventListener('click', handleMenuCloseButton)
+//       document.removeEventListener('keydown', handleMenuCloseOutside)
+//       document.removeEventListener('click', handleMenuCloseOutside)
+//       closePopupFunction()
+//       addToCartAnimation().playAnimation()
+//     }
+//   }
+//   function handleMenuCloseOutside(e) {
+//     // If the clicked element is not the specified element and not a descendant of it
+//     if (
+//       e.type === 'click' &&
+//       !document.querySelector('.nav').contains(e.target)
+//     ) {
+//       document.removeEventListener('keydown', handleMenuCloseOutside)
+//       document.removeEventListener('click', handleMenuCloseOutside)
+//       closeNav.removeEventListener('click', handleMenuCloseButton)
+//       closePopupFunction()
+//       addToCartAnimation().playAnimation()
+//       openCartButton.removeEventListener('click', closePopupFunction)
+//     }
+//     if (e.type === 'keydown' && e.key === 'Escape') {
+//       document.removeEventListener('keydown', handleMenuCloseOutside)
+//       document.removeEventListener('click', handleMenuCloseOutside)
+//       closeNav.removeEventListener('click', handleMenuCloseButton)
+//       closePopupFunction()
+//       addToCartAnimation().playAnimation()
+//       openCartButton.removeEventListener('click', closePopupFunction)
+//     }
+//   }
 
-  let tl = gsap.timeline({ paused: true })
-  tl.fromTo(
-    '.cart-popup-links_wrapper',
-    { width: '0%', height: '0%' },
-    {
-      width: '100%',
-      height: '600%',
-      ease: 'elastic(0.3,0.5)',
-      duration: 1.5,
-      onStart: () => {
-        navLinksList.style.display = 'flex'
-        navbuttons.style.zIndex = 1
-        navLinksList.style.zIndex = 2
-        // Check for clicks outside of menu to close it
-        document.addEventListener('click', handleMenuCloseOutside)
-        document.addEventListener('keydown', handleMenuCloseOutside)
-        closeNav.addEventListener('click', handleMenuCloseButton)
-        openCartButton.addEventListener('click', closePopupFunction)
-      },
-      onReverseComplete: () => {
-        navbuttons.style.zIndex = 2
-        navLinksList.style.zIndex = 1
-      },
-    }
-  )
-  tl.to(
-    '.cart-popup-background',
-    { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' },
-    '<'
-  )
-  tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
-  tl.from(
-    cartPopupItemsAnimated,
-    {
-      opacity: 0,
-      y: 50,
-      duration: duration,
-      ease: 'power2.out',
-      stagger: 0.1,
-    },
-    '<0.2'
-  )
+//   let tl = gsap.timeline({ paused: true })
+//   tl.fromTo(
+//     '.cart-popup-links_wrapper',
+//     { width: '0%', height: '0%' },
+//     {
+//       width: '100%',
+//       height: '600%',
+//       ease: 'elastic(0.3,0.5)',
+//       duration: 1.5,
+//       onStart: () => {
+//         navLinksList.style.display = 'flex'
+//         navbuttons.style.zIndex = 1
+//         navLinksList.style.zIndex = 2
+//         // Check for clicks outside of menu to close it
+//         document.addEventListener('click', handleMenuCloseOutside)
+//         document.addEventListener('keydown', handleMenuCloseOutside)
+//         closeNav.addEventListener('click', handleMenuCloseButton)
+//         openCartButton.addEventListener('click', closePopupFunction)
+//       },
+//       onReverseComplete: () => {
+//         navbuttons.style.zIndex = 2
+//         navLinksList.style.zIndex = 1
+//       },
+//     }
+//   )
+//   tl.to(
+//     '.cart-popup-background',
+//     { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' },
+//     '<'
+//   )
+//   tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
+//   tl.from(
+//     cartPopupItemsAnimated,
+//     {
+//       opacity: 0,
+//       y: 50,
+//       duration: duration,
+//       ease: 'power2.out',
+//       stagger: 0.1,
+//     },
+//     '<0.2'
+//   )
 
-  function openNav(quantity) {
-    const popup = document.querySelector('[popup=price]')
-    const popupText = popup.textContent.split('£')
+//   function openNav(quantity) {
+//     const popup = document.querySelector('[popup=price]')
+//     const popupText = popup.textContent.split('£')
 
-    popup.textContent = '£' + (parseFloat(popupText[1]) * quantity).toFixed(2)
-    if (cart.attributes.cart_state.value == 'closed') {
-      tl.timeScale(2).play()
-    }
-  }
+//     popup.textContent = '£' + (parseFloat(popupText[1]) * quantity).toFixed(2)
+//     if (cart.attributes.cart_state.value == 'closed') {
+//       tl.timeScale(2).play()
+//     }
+//   }
 
-  function closePopupFunction() {
-    tl.timeScale(2).reverse()
-  }
+//   function closePopupFunction() {
+//     tl.timeScale(2).reverse()
+//   }
 
-  // Return the functions
-  return { openNav, closePopupFunction }
-}
+//   // Return the functions
+//   return { openNav, closePopupFunction }
+// }
 
 export const cartAnimation = () => {
   const navbuttons = document.querySelector('.nav-buttons_wrapper')
@@ -884,7 +987,7 @@ const createCartItem = (cartDataItem, newItem, cart, data) => {
     cartTest.querySelector('[cart-item="quantity"]').textContent =
       cartDataItem.quantity
     cartTest.querySelector('[cart-item="price"]').textContent =
-      '£' + (cartDataItem.final_line_price / 100).toFixed(2)
+      '£' + (cartDataItem.final_price / 100).toFixed(2)
   }
   // If not, add as new line product
   else {
@@ -894,7 +997,7 @@ const createCartItem = (cartDataItem, newItem, cart, data) => {
     newItem.querySelector('[cart-item="title"]').textContent =
       cartDataItem.product_title
     newItem.querySelector('[cart-item="price"]').textContent =
-      '£' + (cartDataItem.final_line_price / 100).toFixed(2)
+      '£' + (cartDataItem.final_price / 100).toFixed(2)
     newItem.setAttribute('product_id', cartDataItem.id)
     cart.appendChild(newItem)
   }
@@ -905,7 +1008,7 @@ const createCartItem = (cartDataItem, newItem, cart, data) => {
 function handleQuantityChange(e) {
   const cartElement = e.currentTarget.closest('.cart-item')
   if (e.currentTarget.children[0].getAttribute('quantity-button') === 'add') {
-    addToCart(cartElement.attributes.product_id.value, 1)
+    addToCart(cartElement.attributes.product_id.value, 1, false)
   } else {
     decreaseQuantity(cartElement.attributes.product_id.value)
   }
@@ -1016,52 +1119,52 @@ export const decreaseQuantity = (variantId) => {
   cartContents
 }
 
-const addToCartAnimation = () => {
-  const container = document.querySelector('.cart-add-lottie')
+// const addToCartAnimation = () => {
+//   const container = document.querySelector('.cart-add-lottie')
 
-  function createAnimation() {
-    return Lottie.loadAnimation({
-      container: container,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HEART_ICON_BLACK.json',
-    })
-  }
+//   function createAnimation() {
+//     return Lottie.loadAnimation({
+//       container: container,
+//       renderer: 'svg',
+//       loop: false,
+//       autoplay: false,
+//       path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HEART_ICON_BLACK.json',
+//     })
+//   }
 
-  let animation = createAnimation()
+//   let animation = createAnimation()
 
-  function playAnimation() {
-    if (animation) {
-      animation.destroy() // Destroy the current animation
-    }
-    animation = createAnimation() // Recreate the animation
-    gsap.set(container, {
-      scale: 1,
-    })
-    gsap.to(container, {
-      delay: 0.5,
-      opacity: 1,
-      onStart: () => {
-        animation.play()
-      },
-      onComplete: () => {
-        setTimeout(() => {
-          gsap.to(container, {
-            scale: 0.3,
-            opacity: 0,
-            ease: 'power4.out',
-          })
-        }, 500)
-      },
-    })
-  }
+//   function playAnimation() {
+//     if (animation) {
+//       animation.destroy() // Destroy the current animation
+//     }
+//     animation = createAnimation() // Recreate the animation
+//     gsap.set(container, {
+//       scale: 1,
+//     })
+//     gsap.to(container, {
+//       delay: 0.5,
+//       opacity: 1,
+//       onStart: () => {
+//         animation.play()
+//       },
+//       onComplete: () => {
+//         setTimeout(() => {
+//           gsap.to(container, {
+//             scale: 0.3,
+//             opacity: 0,
+//             ease: 'power4.out',
+//           })
+//         }, 500)
+//       },
+//     })
+//   }
 
-  return { playAnimation }
-}
+//   return { playAnimation }
+// }
 
 // Define addToCart function
-export function addToCart(variantId, quantity) {
+export function addToCart(variantId, quantity, openCart) {
   return fetch(window.Shopify.routes.root + 'cart/add.js', {
     method: 'POST',
     headers: {
@@ -1079,8 +1182,13 @@ export function addToCart(variantId, quantity) {
     .then((response) => response.json())
     .then((data) => {
       loadCart()
+      console.log(data)
       cartPopUpItemInfo(data)
-      cartPopUpAnimation().openNav(quantity)
+      //cartPopUpAnimation().openNav(quantity)
+      if (openCart) {
+        cartAnimation().openNav()
+      }
+
       return data
     })
     .catch((error) => {
@@ -1109,7 +1217,7 @@ export function clearCart() {
 export const siteWideCartButtons = () => {
   const addCartButtonListener = (e) => {
     const productID = e.currentTarget.attributes.cartitemid.value
-    addToCart(productID, 1) // Replace with dynamic variantId and quantity as needed
+    addToCart(productID, 1, true) // Replace with dynamic variantId and quantity as needed
   }
 
   // Attach event listeners
@@ -1139,38 +1247,86 @@ export const openCart = () => {
 }
 
 export const sliderLoadAnimation = () => {
-  const slider = document.querySelector('.testimonial15_mask')
-  const slideElements = slider.children[0].querySelector(
-    '.testimonial15_content'
-  ).children
-  const easeInOutCubicBezier = (t) => {
-    if (t === 0) return 0
-    if (t === 1) return 1
-    if (t < 0.5) {
-      // Adjust these values to approximate the first half of the cubic-bezier curve
-      return 4 * t * t * t
-    } else {
-      // Adjust these values to approximate the second half of the cubic-bezier curve
-      const f = 2 * t - 2
-      return 0.5 * f * f * f + 1
+  function WheelControls(slider) {
+    var touchTimeout
+    var position
+    var wheelActive
+
+    function dispatch(e, name) {
+      position.x -= e.deltaX
+      position.y -= e.deltaY
+      slider.container.dispatchEvent(
+        new CustomEvent(name, {
+          detail: {
+            x: position.x,
+            y: position.y,
+          },
+        })
+      )
     }
+
+    function wheelStart(e) {
+      position = {
+        x: e.pageX,
+        y: e.pageY,
+      }
+      dispatch(e, 'ksDragStart')
+    }
+
+    function wheel(e) {
+      dispatch(e, 'ksDrag')
+    }
+
+    function wheelEnd(e) {
+      dispatch(e, 'ksDragEnd')
+    }
+
+    function eventWheel(e) {
+      e.preventDefault()
+      if (!wheelActive) {
+        wheelStart(e)
+        wheelActive = true
+      }
+      wheel(e)
+      clearTimeout(touchTimeout)
+      touchTimeout = setTimeout(() => {
+        wheelActive = false
+        wheelEnd(e)
+      }, 50)
+    }
+
+    slider.on('created', () => {
+      slider.container.addEventListener('wheel', eventWheel, {
+        passive: false,
+      })
+    })
   }
+  const sliderRef = document.querySelector('.section_testimonial')
+  const selector = '.testimonial-card'
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: slider,
-      start: 'top 75%',
-      end: 'bottom center',
-    },
-  })
+  const arrow = sliderRef.querySelector('[testimonial-slider = "arrow"]')
 
-  tl.from(slideElements, {
-    x: 300,
-    opacity: 0,
-    stagger: 0.2,
-    ease: easeInOutCubicBezier,
-    duration: 1,
-  })
+  const addKeenSlider = () => {
+    const ArrowButton = () => {
+      arrow.addEventListener('click', () => {
+        slider.next()
+      })
+    }
+
+    const slider = new KeenSlider(
+      sliderRef,
+      {
+        selector: selector,
+        slides: {
+          perView: 2.5,
+          spacing: 45,
+        },
+        loop: true,
+      },
+      [WheelControls, ArrowButton]
+    )
+  }
+  addKeenSlider()
 }
 
 export const recipeCardAnimation = () => {
@@ -1221,6 +1377,7 @@ export const recipeCardAnimation = () => {
 export const filtersDropdownAnimation = () => {
   const filtersToggleButton = document.querySelector('#toggle-filter-dropdown')
   const dropdownList = filtersToggleButton.nextElementSibling
+  const dropdownIcon = document.querySelector('.filter-dropdown_icon')
 
   var isOpen = false
 
@@ -1238,6 +1395,8 @@ export const filtersDropdownAnimation = () => {
   const openDropdown = () => {
     gsap.to(dropdownList, {
       height: 'auto',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, .1)',
+      borderRadius: '18px',
       opacity: 1,
       duration: 0.75,
       ease: 'elastic(0.3,0.5)',
@@ -1249,6 +1408,10 @@ export const filtersDropdownAnimation = () => {
       y: 0,
       opacity: 1,
       stagger: 0.1,
+    })
+    gsap.to(dropdownIcon, {
+      rotateZ: 45,
+      ease: 'elastic(0.3,0.5)',
     })
   }
   const closeDropdown = () => {
@@ -1265,6 +1428,10 @@ export const filtersDropdownAnimation = () => {
       y: 50,
       opacity: 0,
       stagger: 0.1,
+    })
+    gsap.to(dropdownIcon, {
+      rotateZ: 0,
+      ease: 'elastic(0.3,0.5)',
     })
   }
 
@@ -1293,7 +1460,7 @@ export const instagramSlider = () => {
 
   tl.to(slides, {
     x: '-101%',
-    duration: 10,
+    duration: 15,
     ease: 'linear',
     //paused: true,
   })
@@ -1392,32 +1559,149 @@ export const mobileProductSlider = () => {
   window.addEventListener('resize', checkScreenSize)
 }
 
-export const featuredProductAddToCart = () => {
-  const featuredAddToCartButton = document.querySelectorAll(
-    '[featuredCartItemID]'
-  )
+// export const featuredProductAddToCart = () => {
+//   const featuredAddToCartButton = document.querySelectorAll(
+//     '[featuredCartItemID]'
+//   )
 
-  featuredAddToCartButton.forEach((element) => {
-    const productID = element.getAttribute('featuredcartitemid')
-    var quantity = element.parentNode.querySelector('[cart-item=quantity]')
+//   featuredAddToCartButton.forEach((element) => {
+//     const productID = element.getAttribute('featuredcartitemid')
+//     var quantity = element.parentNode.querySelector('[cart-item=quantity]')
 
-    const quantityUp = element.parentNode.querySelector('[quantity-button=add]')
+//     const quantityUp = element.parentNode.querySelector('[quantity-button=add]')
 
-    const quantityDown = element.parentNode.querySelector(
-      '[quantity-button=subtract]'
+//     const quantityDown = element.parentNode.querySelector(
+//       '[quantity-button=subtract]'
+//     )
+
+//     element.addEventListener('click', () => {
+//       addToCart(productID, quantity.textContent)
+//     })
+
+//     quantityUp.addEventListener('click', () => {
+//       quantity.textContent = parseInt(quantity.textContent) + 1
+//     })
+//     quantityDown.addEventListener('click', () => {
+//       if (parseInt(quantity.textContent) > 1) {
+//         quantity.textContent = parseInt(quantity.textContent) - 1
+//       }
+//     })
+//   })
+// }
+
+export const hugeTextSplitAnimation = () => {
+  const cubicBezierEasing = (t) => {
+    const P1 = [0.005763688760806916, 0.9452054794520548]
+    const P2 = [0.9985590778097982, 0.9360730593607306]
+    return (
+      (1 - t) ** 3 * 0.0 +
+      3 * (1 - t) ** 2 * t * P1[1] +
+      3 * (1 - t) * t ** 2 * P2[1] +
+      t ** 3 * 1.0
     )
+  }
 
-    element.addEventListener('click', () => {
-      addToCart(productID, quantity.textContent)
-    })
+  const hugeText = document.querySelectorAll('[animation="split-text"]')
 
-    quantityUp.addEventListener('click', () => {
-      quantity.textContent = parseInt(quantity.textContent) + 1
+  hugeText.forEach((element) => {
+    const splitText = new SplitType(element)
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: splitText.elements,
+        start: 'top 20%',
+        end: 'bottom bottom',
+      },
+      defaults: {
+        ease: cubicBezierEasing,
+      },
     })
-    quantityDown.addEventListener('click', () => {
-      if (parseInt(quantity.textContent) > 1) {
-        quantity.textContent = parseInt(quantity.textContent) - 1
-      }
-    })
+    tl.from(splitText.lines[0], { y: '150%', opacity: 0 }, '<')
+    tl.from(splitText.lines[1], { y: '50%', opacity: 0 }, '<')
+    tl.from(splitText.lines[2], { y: '-50%', opacity: 0 }, '<')
+    tl.from(splitText.lines[3], { y: '-150%', opacity: 0 }, '<')
   })
+}
+
+export const recipeSlider = () => {
+  function WheelControls(slider) {
+    var touchTimeout
+    var position
+    var wheelActive
+
+    function dispatch(e, name) {
+      position.x -= e.deltaX
+      position.y -= e.deltaY
+      slider.container.dispatchEvent(
+        new CustomEvent(name, {
+          detail: {
+            x: position.x,
+            y: position.y,
+          },
+        })
+      )
+    }
+
+    function wheelStart(e) {
+      position = {
+        x: e.pageX,
+        y: e.pageY,
+      }
+      dispatch(e, 'ksDragStart')
+    }
+
+    function wheel(e) {
+      dispatch(e, 'ksDrag')
+    }
+
+    function wheelEnd(e) {
+      dispatch(e, 'ksDragEnd')
+    }
+
+    function eventWheel(e) {
+      e.preventDefault()
+      if (!wheelActive) {
+        wheelStart(e)
+        wheelActive = true
+      }
+      wheel(e)
+      clearTimeout(touchTimeout)
+      touchTimeout = setTimeout(() => {
+        wheelActive = false
+        wheelEnd(e)
+      }, 50)
+    }
+
+    slider.on('created', () => {
+      slider.container.addEventListener('wheel', eventWheel, {
+        passive: false,
+      })
+    })
+  }
+  const sliderRef = document.querySelector('.gallery3_component')
+  const selector = '.gallery3_card-link'
+
+  const arrow = sliderRef.querySelector('[recipe-slider = "arrow"]')
+
+  const addKeenSlider = () => {
+    const ArrowButton = () => {
+      arrow.addEventListener('click', () => {
+        slider.next()
+      })
+    }
+
+    const slider = new KeenSlider(
+      sliderRef,
+      {
+        selector: selector,
+        slides: {
+          perView: 3.1,
+          spacing: 24,
+        },
+        loop: true,
+      },
+      [WheelControls, ArrowButton]
+    )
+  }
+  addKeenSlider()
 }

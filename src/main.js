@@ -20,10 +20,14 @@ import {
   filtersDropdownAnimation,
   instagramSlider,
   pourPourPour,
-  homepageHeroTextAnimation,
+  //homepageHeroTextAnimation,
   mobileProductSlider,
-  featuredProductAddToCart,
+  //featuredProductAddToCart,
+  pourLottieAnimations,
+  hugeTextSplitAnimation,
+  recipeSlider,
 } from './features/Animations'
+import { hugeTextScaling, shareRecipe } from './features/Functionality'
 import {
   disableFooterColourSwap,
   footerColourSwap,
@@ -42,11 +46,13 @@ loadCart()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     siteWideCartButtons()
-    featuredProductAddToCart()
+    //featuredProductAddToCart()
     navSwapping()
     disableFooterColourSwap()
     footerColourSwap()
+    hugeTextScaling()
     if (data.next.namespace == 'home') {
+      pourLottieAnimations()
       sliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
@@ -54,23 +60,28 @@ barba.hooks.afterEnter((data) => {
       instagramSlider()
       pourPourPour()
       scrollingText()
-      homepageHeroTextAnimation()
+      hugeTextSplitAnimation()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
       filtersDropdownAnimation()
-      instagramSlider()
+
+      pourLottieAnimations()
+      roundingImageElement()
     } else if (data.next.namespace == 'product') {
       scrollingText()
       accordionToggle()
       setTimeout(() => {
         recipeCardAnimation()
-      }, 3000)
+      }, 1000)
+      recipeSlider()
+      pourLottieAnimations()
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       accordionToggle()
       recipeCardAnimation()
       instagramSlider()
+      shareRecipe()
     }
   }, 10)
 
