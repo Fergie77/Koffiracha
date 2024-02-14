@@ -4,7 +4,6 @@ export const hugeTextScaling = () => {
     const textElement = container.querySelector('.huge-text') // Replace '.text' with your text element's selector
 
     let desiredWidth = container.offsetWidth - 60 // Get the container's current width
-    console.log(container)
     let currentFontSize = parseInt(
       window.getComputedStyle(textElement, null).getPropertyValue('font-size'),
       10
@@ -118,6 +117,7 @@ export const stopScrolling = () => {
 export const enableScrolling = () => {
   // Enable scrolling
   document.body.style.overflow = '' // or '' to revert to the default
+  // Use lenis as needed
 }
 
 export const appendUrl = (modal, removeExistingParams = false) => {

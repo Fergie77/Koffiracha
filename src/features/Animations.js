@@ -7,6 +7,7 @@ import Lottie from 'lottie-web'
 import SplitType from 'split-type'
 
 import { appendUrl, enableScrolling, stopScrolling } from './Functionality'
+import { footerColourSwap } from './NavbarSwapping'
 
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
@@ -49,7 +50,7 @@ export const buttonAnimation = () => {
           duration: 1.5,
         })
         gsap.to('.hamburger-line', {
-          background: 'var(--colour--yellow)',
+          background: 'var(--colour--white)',
           ease: 'power4.out',
           duration: 0,
         })
@@ -284,27 +285,50 @@ export const pourLottieAnimations = () => {
 
   if (containers) {
     containers.forEach((container) => {
-      let lottieAnim = Lottie.loadAnimation({
-        container: container,
-        renderer: 'canvas',
-        loop: false,
-        autoplay: false,
-        path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE.json',
-      })
-      //lottieAnim.play()
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: 'top 50%',
-          end: 'bottom center',
-          onEnter: () => {
-            lottieAnim.play()
+      const lottieColour = container.getAttribute('lottie-colour')
+      if (lottieColour != 'red') {
+        let lottieAnim = Lottie.loadAnimation({
+          container: container,
+          renderer: 'canvas',
+          loop: false,
+          autoplay: false,
+          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE.json',
+        })
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 50%',
+            end: 'bottom center',
+            onEnter: () => {
+              lottieAnim.play()
+            },
           },
-        },
-      })
+        })
 
-      tl
+        tl
+      } else {
+        let lottieAnim = Lottie.loadAnimation({
+          container: container,
+          renderer: 'canvas',
+          loop: false,
+          autoplay: false,
+          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_NEON_FLAME.json?v=1707826086',
+        })
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 50%',
+            end: 'bottom center',
+            onEnter: () => {
+              lottieAnim.play()
+            },
+          },
+        })
+
+        tl
+      }
+
+      //lottieAnim.play()
     })
   }
 }
@@ -504,7 +528,7 @@ export const pageTransition = () => {
     autoplay: false,
     path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/657b1db7e1bbc3dc8b91e5eb_KOFF%20PAGE%20LOADER%203.json',
   })
-
+  //const footerSwap = footerColourSwap()
   barba.preventRunning = true
 
   barba.hooks.enter((data) => {
@@ -520,6 +544,10 @@ export const pageTransition = () => {
           lottieAnim.goToAndPlay(0, true)
           var event = new Event('click')
           hamburger.dispatchEvent(event)
+
+          // footerSwap.setNewColour('.nav', '--colour--black', '#ffffff')
+          // footerSwap.setNewColour('.nav', '--colour--yellow', '#31261D')
+          // footerSwap.setNewColour('.nav', '--colour--white', '#31261D')
         },
       }
     )
@@ -590,6 +618,7 @@ export const productLinkHover = () => {
     const nameButtonText = nameButtonElement.querySelector(
       '.animating-text-size'
     )
+
     if (!imageElement || !addToCartElement || !nameButtonElement) {
       console.warn('No image element found for', element)
       return
@@ -1335,14 +1364,32 @@ export const recipeCardAnimation = () => {
   const recipeCards = document.querySelectorAll('.gallery3_card-link')
 
   recipeCards.forEach((card) => {
-    const container = card.querySelector('.gallery3_card-lottie')
+    const container = card.querySelectorAll('.gallery3_card-lottie')
 
-    const lottie = Lottie.loadAnimation({
-      container: container,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
+    let lottie = null
+
+    container.forEach((element) => {
+      const lottieColour = element.getAttribute('lottie-colour')
+
+      if (!element.classList.contains('w-condition-invisible')) {
+        if (lottieColour != 'red' || lottieColour == null) {
+          lottie = Lottie.loadAnimation({
+            container: element,
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
+          })
+        } else {
+          lottie = Lottie.loadAnimation({
+            container: element,
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION_NEON_FLAME.json',
+          })
+        }
+      }
     })
 
     const image = card.querySelector('.gallery3_image')
@@ -1723,9 +1770,7 @@ export const recipeModal = () => {
     const close = modal.querySelector('[recipe-modal="close"]')
     const modalLink = e.currentTarget.getAttribute('recipe-slug')
 
-    if (!searchParams.has('modalToOpen')) {
-      appendUrl(modalLink)
-    }
+    appendUrl(modalLink)
 
     const tl = gsap.timeline({ paused: true })
     tl.set(modal, {
@@ -1759,7 +1804,14 @@ export const recipeModal = () => {
       modalInfo,
       {
         opacity: 1,
-        onStart: stopScrolling,
+        onStart: () => {
+          stopScrolling()
+          footerColourSwap().swapCSSVariables(
+            '.nav',
+            '--colour--black',
+            '--colour--yellow'
+          )
+        },
         onComplete: () => {
           close.addEventListener('click', () => {
             tl.reverse()
@@ -1769,6 +1821,11 @@ export const recipeModal = () => {
           close.removeEventListener('click', tl.reverse())
           enableScrolling()
           appendUrl('', true)
+          footerColourSwap().swapCSSVariables(
+            '.nav',
+            '--colour--black',
+            '--colour--yellow'
+          )
         },
       },
       '<0.5'

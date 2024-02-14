@@ -20,80 +20,96 @@ export const navSwapping = () => {
     '[scroll-trigger="add-to-cart"]'
   )
 
-  exploreTriggers.forEach((element) => {
-    // Add a ScrollTrigger for the animation
-    ScrollTrigger.create({
-      trigger: element,
-      start: 'top bottom',
-      end: 'bottom bottom',
+  if (exploreTriggers && exploreTriggers.length > 0) {
+    exploreTriggers.forEach((element) => {
+      // Add a ScrollTrigger for the animation
+      ScrollTrigger.create({
+        trigger: element,
+        start: 'top bottom',
+        end: 'bottom bottom',
 
-      onEnter: () => {
-        // This code will be executed when the scroll trigger is entered
-        gsap.to('.middle-button_wrapper .button-text', {
-          y: (i, el) => {
-            el.textContent = 'Explore Sauces'
-            el.closest('a').setAttribute('href', '/pages/shop')
-            el.closest('a').removeEventListener('click', addCartButtonListener)
-          },
-        })
-      },
-      onEnterBack: () => {
-        // This code will be executed when the scroll trigger is entered
-        gsap.to('.middle-button_wrapper .button-text', {
-          y: (i, el) => {
-            el.textContent = 'Explore Sauces'
-            el.closest('a').setAttribute('href', '/pages/shop')
-            el.closest('a').removeEventListener('click', addCartButtonListener)
-          },
-        })
-      },
+        onEnter: () => {
+          // This code will be executed when the scroll trigger is entered
+          gsap.to('.middle-button_wrapper .button-text', {
+            y: (i, el) => {
+              el.textContent = 'Explore Sauces'
+              el.closest('a').setAttribute('href', '/pages/shop')
+              el.closest('a').removeEventListener(
+                'click',
+                addCartButtonListener
+              )
+            },
+          })
+        },
+        onEnterBack: () => {
+          // This code will be executed when the scroll trigger is entered
+          gsap.to('.middle-button_wrapper .button-text', {
+            y: (i, el) => {
+              el.textContent = 'Explore Sauces'
+              el.closest('a').setAttribute('href', '/pages/shop')
+              el.closest('a').removeEventListener(
+                'click',
+                addCartButtonListener
+              )
+            },
+          })
+        },
+      })
     })
-  })
+  }
 
   const addCartButtonListener = (e) => {
     const productID = e.currentTarget.attributes.cartitemid.value
     addToCart(productID, 1, true) // Replace with dynamic variantId and quantity as needed
   }
 
-  addToCartTriggers.forEach((element) => {
-    const productID = element
-      .querySelector('.product-id-code')
-      .getAttribute('featuredcartitemid')
+  if (addToCartTriggers && addToCartTriggers.length > 0) {
+    addToCartTriggers.forEach((element) => {
+      const productID = element
+        .querySelector('.product-id-code')
+        .getAttribute('featuredcartitemid')
+      console.log(productID)
+      // Add a ScrollTrigger for the animation
+      ScrollTrigger.create({
+        trigger: element,
+        start: 'top bottom',
+        end: 'bottom bottom',
 
-    // Add a ScrollTrigger for the animation
-    ScrollTrigger.create({
-      trigger: element,
-      start: 'top bottom',
-      end: 'bottom bottom',
-
-      onEnter: () => {
-        // This code will be executed when the scroll trigger is entered
-        gsap.to('.middle-button_wrapper .button-text', {
-          y: (i, el) => {
-            el.textContent = 'Add to Cart'
-            el.closest('a').setAttribute('cartitemid', productID)
-            el.closest('a').setAttribute('href', '#')
-            el.closest('a').removeEventListener('click', addCartButtonListener)
-            el.closest('a').addEventListener('click', addCartButtonListener)
-            //siteWideCartButtons()
-          },
-        })
-      },
-      onEnterBack: () => {
-        // This code will be executed when the scroll trigger is entered
-        gsap.to('.middle-button_wrapper .button-text', {
-          y: (i, el) => {
-            el.textContent = 'Add to Cart'
-            el.closest('a').setAttribute('cartitemid', productID)
-            el.closest('a').setAttribute('href', '#')
-            el.closest('a').removeEventListener('click', addCartButtonListener)
-            el.closest('a').addEventListener('click', addCartButtonListener)
-            //siteWideCartButtons()
-          },
-        })
-      },
+        onEnter: () => {
+          // This code will be executed when the scroll trigger is entered
+          gsap.to('.middle-button_wrapper .button-text', {
+            y: (i, el) => {
+              el.textContent = 'Add to Cart'
+              el.closest('a').setAttribute('cartitemid', productID)
+              el.closest('a').setAttribute('href', '#')
+              el.closest('a').removeEventListener(
+                'click',
+                addCartButtonListener
+              )
+              el.closest('a').addEventListener('click', addCartButtonListener)
+              //siteWideCartButtons()
+            },
+          })
+        },
+        onEnterBack: () => {
+          // This code will be executed when the scroll trigger is entered
+          gsap.to('.middle-button_wrapper .button-text', {
+            y: (i, el) => {
+              el.textContent = 'Add to Cart'
+              el.closest('a').setAttribute('cartitemid', productID)
+              el.closest('a').setAttribute('href', '#')
+              el.closest('a').removeEventListener(
+                'click',
+                addCartButtonListener
+              )
+              el.closest('a').addEventListener('click', addCartButtonListener)
+              //siteWideCartButtons()
+            },
+          })
+        },
+      })
     })
-  })
+  }
 }
 
 let footerScrollTrigger = null
@@ -120,6 +136,12 @@ export const footerColourSwap = () => {
     parentElement.style.setProperty(var2, var1Value)
   }
 
+  function setNewColour(parentSelector, var1, var2) {
+    // Select the parent element
+    const parentElement = document.querySelector(parentSelector)
+    parentElement.style.setProperty(var1, var2)
+  }
+
   // Only create a new ScrollTrigger if it doesn't already exist
   if (!footerScrollTrigger) {
     footerScrollTrigger = ScrollTrigger.create({
@@ -127,13 +149,19 @@ export const footerColourSwap = () => {
       start: 'bottom bottom',
       end: 'bottom bottom',
       onEnter: () => {
-        swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
+        setNewColour('.nav', '--colour--black', '#ffffff')
+        setNewColour('.nav', '--colour--yellow', '#31261D')
+        setNewColour('.nav', '--colour--white', '#31261D')
       },
       onLeaveBack: () => {
-        swapCSSVariables('.nav', '--colour--black', '--colour--yellow')
+        setNewColour('.nav', '--colour--black', '#31261D')
+        setNewColour('.nav', '--colour--yellow', '#E6FE52')
+        setNewColour('.nav', '--colour--white', '#ffffff')
       },
     })
   }
+
+  return { swapCSSVariables, setNewColour }
 }
 
 // Function to disable the ScrollTrigger

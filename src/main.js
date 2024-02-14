@@ -1,5 +1,4 @@
 import barba from '@barba/core'
-//import Lenis from '@studio-freight/lenis'
 
 import {
   buttonAnimation,
@@ -34,6 +33,7 @@ import {
   footerColourSwap,
   navSwapping,
 } from './features/NavbarSwapping'
+import lenis from './lenisInstance'
 
 barba.init({})
 
@@ -51,7 +51,7 @@ barba.hooks.afterEnter((data) => {
     navSwapping()
     disableFooterColourSwap()
     footerColourSwap()
-    hugeTextScaling()
+
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       sliderLoadAnimation()
@@ -62,6 +62,7 @@ barba.hooks.afterEnter((data) => {
       pourPourPour()
       scrollingText()
       hugeTextSplitAnimation()
+      hugeTextScaling()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
@@ -112,13 +113,14 @@ barba.hooks.enter(() => {
   ])
 })
 
-//const lenis = new Lenis({ lerp: 0.2 })
+// Use lenis as needed
+lenis.on('scroll', () => {
+  // Your code here
+})
 
-//lenis.on('scroll', () => {})
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
 
-// function raf(time) {
-//   lenis.raf(time)
-//   requestAnimationFrame(raf)
-// }
-
-// requestAnimationFrame(raf)
+requestAnimationFrame(raf)
