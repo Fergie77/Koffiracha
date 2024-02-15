@@ -1,3 +1,5 @@
+import { closeNavFunction } from './Animations'
+
 export const hugeTextScaling = () => {
   function adjustTextSize() {
     const container = document.querySelector('.footer3_heading-wrapper') // Replace '.container' with your container's selector
@@ -146,4 +148,27 @@ export const appendUrl = (modal, removeExistingParams = false) => {
 
   // If you want to reload the page with the new URL, you could use:
   // window.location.href = url;
+}
+
+export const openChat = () => {
+  const pseudoChatButton = document.querySelector('[element=chat-button]')
+
+  setTimeout(() => {
+    const iframe = document.querySelector('#chat-button')
+
+    const hideButton = () => {
+      iframe.style.display = 'none'
+    }
+
+    const button = iframe.contentDocument
+      .querySelector('#mountHere')
+      .querySelector('button')
+    iframe.style.display = 'none'
+    pseudoChatButton.addEventListener('click', () => {
+      button.click()
+      iframe.style.display = 'block'
+      button.addEventListener('click', hideButton)
+      closeNavFunction()
+    })
+  }, 500)
 }

@@ -490,7 +490,6 @@ export const storySliderSlideIn = () => {
     const ifWheelFirst = (slider) => {
       setTimeout(() => {
         slider.on('slideChanged', () => {
-          console.log(slider.track.details.abs)
           if (!firstClick && slider.track.details.abs > 1) {
             firstClick = true
             slideIn()
@@ -506,7 +505,7 @@ export const storySliderSlideIn = () => {
         rubberband: false,
         selector: '.story-slide',
         slides: {
-          perView: 4,
+          perView: 3.5,
           //spacing: 24,
         },
       },
@@ -720,72 +719,81 @@ export const accordionToggle = () => {
   })
 }
 
+// Assuming gsap is already imported
+const duration = 0.6
+let tl
+
+const initTimeline = () => {
+  if (!tl) {
+    const navbuttons = document.querySelector('.nav-buttons_wrapper')
+    const navLinksList = document.querySelector('.nav-links_center')
+
+    tl = gsap.timeline({ paused: true })
+    tl.fromTo(
+      '.nav-links_wrapper',
+      { width: '0%', height: '0%' },
+      {
+        width: '100%',
+        height: '650%',
+        ease: 'elastic(0.3,0.5)',
+        duration: 1.5,
+        onStart: () => {
+          navLinksList.style.display = 'flex'
+          navbuttons.style.zIndex = 1
+          navLinksList.style.zIndex = 2
+        },
+        onReverseComplete: () => {
+          navbuttons.style.zIndex = 2
+          navLinksList.style.zIndex = 1
+        },
+      }
+    )
+    tl.to('.nav-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' }, '<')
+    tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
+    tl.from(
+      '.nav-links_list > *',
+      {
+        opacity: 0,
+        y: 50,
+        duration: duration,
+        ease: 'power2.out',
+        stagger: 0.1,
+      },
+      '<0.2'
+    )
+  }
+}
+
+export const openNav = () => {
+  initTimeline()
+  tl.timeScale(2).play()
+}
+
+export const closeNavFunction = () => {
+  initTimeline()
+  tl.timeScale(2).reverse()
+}
+
 export const navAnimation = () => {
-  const duration = 0.6
-  const navbuttons = document.querySelector('.nav-buttons_wrapper')
-  const navLinksList = document.querySelector('.nav-links_center')
+  initTimeline()
   const hamburger = document.querySelector('#hamburger')
   const closeNav = document.querySelector('#close-nav')
-
-  let tl = gsap.timeline({ paused: true })
-  tl.fromTo(
-    '.nav-links_wrapper',
-    { width: '0%', height: '0%' },
-    {
-      width: '100%',
-      height: '650%',
-      ease: 'elastic(0.3,0.5)',
-      duration: 1.5,
-      onStart: () => {
-        navLinksList.style.display = 'flex'
-        navbuttons.style.zIndex = 1
-        navLinksList.style.zIndex = 2
-      },
-      onReverseComplete: () => {
-        navbuttons.style.zIndex = 2
-        navLinksList.style.zIndex = 1
-      },
-    }
-  )
-  tl.to('.nav-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' }, '<')
-  tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
-  tl.from(
-    '.nav-links_list > *',
-    {
-      opacity: 0,
-      y: 50,
-      duration: duration,
-      ease: 'power2.out',
-      stagger: 0.1,
-    },
-    '<0.2'
-  )
-
-  function openNav() {
-    tl.timeScale(2).play()
-  }
-
-  function closeNavFunction() {
-    tl.timeScale(2).reverse()
-  }
 
   hamburger.addEventListener('click', openNav)
   closeNav.addEventListener('click', closeNavFunction)
 
-  // Check for clicks outside of menu to close it
   document.addEventListener('click', function (event) {
-    // If the clicked element is not the specified element and not a descendant of it
     if (!document.querySelector('.nav').contains(event.target)) {
       closeNavFunction()
     }
   })
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeNavFunction()
     }
   })
 
-  // Return the functions
   return { openNav, closeNavFunction }
 }
 
@@ -946,7 +954,7 @@ export const cartAnimation = () => {
       }
     )
     //hide menu
-    gsap.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 })
+    gsap.to('.nav-buttons_wrapper > * ', { opacity: 0 })
   }
 
   function updateCartHeight() {
@@ -989,7 +997,7 @@ export const cartAnimation = () => {
       })
       gsap.to('.cart-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' })
       gsap.to(
-        '.nav-buttons_wrapper > #hamburger, .nav-buttons_wrapper > .middle-button_wrapper, .nav-buttons_wrapper > #cart-button, .button.drop-shadow ',
+        '.nav-buttons_wrapper > #hamburger, .nav-buttons_wrapper > .middle-button_wrapper, .nav-buttons_wrapper > #cart-button, .button-drop-shadow ',
         { opacity: 1 }
       )
       document.removeEventListener('click', closeCartFunction)
@@ -1068,13 +1076,13 @@ export const loadCart = () => {
   const cartItemTemplate = document.querySelector('.cart-item')
   const cartQuantity = document.querySelector('[cart="quantity"]')
 
-  const cartIcon = document.querySelector('.cls-1')
+  const cartIcon = document.querySelector('.cart-icon-2')
 
   const cartIconFull =
     'M26.6074,15.0137c-.0547-.5488-.5303-.9307-1.0947-.8955-.5498.0547-.9502.5449-.8955,1.0947l1.0869,10.8818c.0498.4922-.1064.9658-.4385,1.332-.332.3672-.7871.5693-1.2822.5693h-15.9668c-.4951,0-.9502-.2021-1.2822-.5693-.332-.3662-.4883-.8398-.4385-1.332l1.4512-14.5371c.0889-.8877.8291-1.5576,1.7217-1.5576h1.5371v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h5.9883v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2.0012c.0021,0,.0038.0012.0059.0012.5522,0,1-.4478,1-1s-.4478-1-1-1c-.0021,0-.0038.0012-.0059.0012v-1.6887c0-2.7539-2.2402-4.9941-4.9941-4.9941s-4.9941,2.2402-4.9941,4.9941v1.6875h-1.5371c-1.9248,0-3.5205,1.4434-3.7119,3.3584l-1.4512,14.5371c-.1045,1.0459.2393,2.0938.9453,2.873.7051.7803,1.7139,1.2275,2.7656,1.2275h15.9668c1.0518,0,2.0605-.4473,2.7656-1.2275.7061-.7793,1.0498-1.8271.9453-2.873l-1.0869-10.8818ZM13.0059,6.3125c0-1.6514,1.3428-2.9941,2.9941-2.9941s2.9941,1.3428,2.9941,2.9941v1.6875h-5.9883v-1.6875Z'
   const cartIconEmpty =
     'M26.2432,11.3584c-.1914-1.915-1.7871-3.3584-3.7119-3.3584h-1.5371v-1.6875c0-2.7539-2.2402-4.9941-4.9941-4.9941s-4.9941,2.2402-4.9941,4.9941v1.6875h-1.5371c-1.9248,0-3.5205,1.4434-3.7119,3.3584l-1.4512,14.5371c-.1045,1.0459.2393,2.0938.9453,2.873.7051.7803,1.7139,1.2275,2.7656,1.2275h15.9668c1.0518,0,2.0605-.4473,2.7656-1.2275.7061-.7793,1.0498-1.8271.9453-2.873l-1.4512-14.5371ZM13.0059,6.3125c0-1.6514,1.3428-2.9941,2.9941-2.9941s2.9941,1.3428,2.9941,2.9941v1.6875h-5.9883v-1.6875ZM25.2656,27.4268c-.332.3672-.7871.5693-1.2822.5693h-15.9668c-.4951,0-.9502-.2021-1.2822-.5693-.332-.3662-.4883-.8398-.4385-1.332l1.4512-14.5371c.0889-.8877.8291-1.5576,1.7217-1.5576h1.5371v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h5.9883v2c0,.5527.4473,1,1,1s1-.4473,1-1v-2h1.5371c.8926,0,1.6328.6699,1.7217,1.5576l1.4512,14.5371c.0498.4922-.1064.9658-.4385,1.332Z'
-  const cartIconCircle = document.querySelector('.cls-2')
+  const cartIconCircle = document.querySelector('.cart-icon-circle')
 
   if (window.Shopify && window.Shopify.routes) {
     fetch(window.Shopify.routes.root + 'cart.js')
@@ -1213,7 +1221,6 @@ export function addToCart(variantId, quantity, openCart) {
     .then((response) => response.json())
     .then((data) => {
       loadCart()
-      console.log(data)
       cartPopUpItemInfo(data)
       //cartPopUpAnimation().openNav(quantity)
       if (openCart) {

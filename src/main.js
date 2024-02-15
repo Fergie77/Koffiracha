@@ -27,7 +27,11 @@ import {
   recipeSlider,
   recipeModal,
 } from './features/Animations'
-import { hugeTextScaling, shareRecipe } from './features/Functionality'
+import {
+  hugeTextScaling,
+  openChat,
+  shareRecipe,
+} from './features/Functionality'
 import {
   disableFooterColourSwap,
   footerColourSwap,
@@ -35,11 +39,13 @@ import {
 } from './features/NavbarSwapping'
 import lenis from './lenisInstance'
 
-barba.init({})
+barba.init({
+  prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
+})
 
 pageTransition()
 navAnimation()
-
+openChat()
 buttonAnimation()
 openCart()
 loadCart()

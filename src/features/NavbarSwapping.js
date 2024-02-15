@@ -23,38 +23,40 @@ export const navSwapping = () => {
   if (exploreTriggers && exploreTriggers.length > 0) {
     exploreTriggers.forEach((element) => {
       // Add a ScrollTrigger for the animation
-      ScrollTrigger.create({
-        trigger: element,
-        start: 'top bottom',
-        end: 'bottom bottom',
+      setTimeout(() => {
+        ScrollTrigger.create({
+          trigger: element,
+          start: 'top bottom',
+          end: 'bottom bottom',
 
-        onEnter: () => {
-          // This code will be executed when the scroll trigger is entered
-          gsap.to('.middle-button_wrapper .button-text', {
-            y: (i, el) => {
-              el.textContent = 'Explore Sauces'
-              el.closest('a').setAttribute('href', '/pages/shop')
-              el.closest('a').removeEventListener(
-                'click',
-                addCartButtonListener
-              )
-            },
-          })
-        },
-        onEnterBack: () => {
-          // This code will be executed when the scroll trigger is entered
-          gsap.to('.middle-button_wrapper .button-text', {
-            y: (i, el) => {
-              el.textContent = 'Explore Sauces'
-              el.closest('a').setAttribute('href', '/pages/shop')
-              el.closest('a').removeEventListener(
-                'click',
-                addCartButtonListener
-              )
-            },
-          })
-        },
-      })
+          onEnter: () => {
+            // This code will be executed when the scroll trigger is entered
+            gsap.to('.middle-button_wrapper .button-text', {
+              y: (i, el) => {
+                el.textContent = 'Explore Sauces'
+                el.closest('a').setAttribute('href', '/pages/shop')
+                el.closest('a').removeEventListener(
+                  'click',
+                  addCartButtonListener
+                )
+              },
+            })
+          },
+          onEnterBack: () => {
+            // This code will be executed when the scroll trigger is entered
+            gsap.to('.middle-button_wrapper .button-text', {
+              y: (i, el) => {
+                el.textContent = 'Explore Sauces'
+                el.closest('a').setAttribute('href', '/pages/shop')
+                el.closest('a').removeEventListener(
+                  'click',
+                  addCartButtonListener
+                )
+              },
+            })
+          },
+        })
+      }, 1000)
     })
   }
 
@@ -68,46 +70,48 @@ export const navSwapping = () => {
       const productID = element
         .querySelector('.product-id-code')
         .getAttribute('featuredcartitemid')
-      console.log(productID)
-      // Add a ScrollTrigger for the animation
-      ScrollTrigger.create({
-        trigger: element,
-        start: 'top bottom',
-        end: 'bottom bottom',
 
-        onEnter: () => {
-          // This code will be executed when the scroll trigger is entered
-          gsap.to('.middle-button_wrapper .button-text', {
-            y: (i, el) => {
-              el.textContent = 'Add to Cart'
-              el.closest('a').setAttribute('cartitemid', productID)
-              el.closest('a').setAttribute('href', '#')
-              el.closest('a').removeEventListener(
-                'click',
-                addCartButtonListener
-              )
-              el.closest('a').addEventListener('click', addCartButtonListener)
-              //siteWideCartButtons()
-            },
-          })
-        },
-        onEnterBack: () => {
-          // This code will be executed when the scroll trigger is entered
-          gsap.to('.middle-button_wrapper .button-text', {
-            y: (i, el) => {
-              el.textContent = 'Add to Cart'
-              el.closest('a').setAttribute('cartitemid', productID)
-              el.closest('a').setAttribute('href', '#')
-              el.closest('a').removeEventListener(
-                'click',
-                addCartButtonListener
-              )
-              el.closest('a').addEventListener('click', addCartButtonListener)
-              //siteWideCartButtons()
-            },
-          })
-        },
-      })
+      // Add a ScrollTrigger for the animation
+      setTimeout(() => {
+        ScrollTrigger.create({
+          trigger: element,
+          start: 'top bottom',
+          end: 'bottom bottom',
+
+          onEnter: () => {
+            // This code will be executed when the scroll trigger is entered
+            gsap.to('.middle-button_wrapper .button-text', {
+              y: (i, el) => {
+                el.textContent = 'Add to Cart'
+                el.closest('a').setAttribute('cartitemid', productID)
+                el.closest('a').setAttribute('href', '#')
+                el.closest('a').removeEventListener(
+                  'click',
+                  addCartButtonListener
+                )
+                el.closest('a').addEventListener('click', addCartButtonListener)
+                //siteWideCartButtons()
+              },
+            })
+          },
+          onEnterBack: () => {
+            // This code will be executed when the scroll trigger is entered
+            gsap.to('.middle-button_wrapper .button-text', {
+              y: (i, el) => {
+                el.textContent = 'Add to Cart'
+                el.closest('a').setAttribute('cartitemid', productID)
+                el.closest('a').setAttribute('href', '#')
+                el.closest('a').removeEventListener(
+                  'click',
+                  addCartButtonListener
+                )
+                el.closest('a').addEventListener('click', addCartButtonListener)
+                //siteWideCartButtons()
+              },
+            })
+          },
+        })
+      }, 1000)
     })
   }
 }
