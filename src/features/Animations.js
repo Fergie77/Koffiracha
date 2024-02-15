@@ -1356,7 +1356,7 @@ export const sliderLoadAnimation = () => {
       {
         selector: selector,
         slides: {
-          perView: 2.5,
+          perView: 2.7,
           spacing: 45,
         },
         loop: true,
