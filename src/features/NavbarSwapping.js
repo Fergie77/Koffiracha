@@ -134,7 +134,7 @@ export const footerColourSwap = () => {
         trigger: '[scroll-trigger="footer"]',
         start: 'bottom bottom',
         end: 'bottom bottom',
-        markers: true,
+
         onEnter: () => {
           setNewColour('.nav', '--colour--black', '#ffffff')
           setNewColour('.nav', '--colour--yellow', '#31261D')
