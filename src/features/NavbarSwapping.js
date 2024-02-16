@@ -7,7 +7,7 @@ import { addToCart } from './Animations'
 
 export const navSwapping = () => {
   gsap.registerPlugin(ScrollTrigger)
-
+  ScrollTrigger.killAll()
   // const featuredProduct = document
   //   .querySelector('[cartitemid]')
   //   ?.getAttribute('cartitemid')
@@ -118,54 +118,50 @@ export const navSwapping = () => {
 
 let footerScrollTrigger = null
 
+function setNewColour(parentSelector, var1, var2) {
+  // Select the parent element
+  const parentElement = document.querySelector(parentSelector)
+  parentElement.style.setProperty(var1, var2)
+}
+
 export const footerColourSwap = () => {
-  // Function to swap the values of two CSS variables for a specific element
-  function swapCSSVariables(parentSelector, var1, var2) {
-    // Select the parent element
-    const parentElement = document.querySelector(parentSelector)
+  ScrollTrigger.killAll()
 
-    // Check if parent element exists
-    if (!parentElement) {
-      console.error('Parent element not found')
-      return
+  setTimeout(() => {
+    // Only create a new ScrollTrigger if it doesn't already exist
+    if (!footerScrollTrigger) {
+      footerScrollTrigger = ScrollTrigger.create({
+        trigger: '[scroll-trigger="footer"]',
+        start: 'bottom bottom',
+        end: 'bottom bottom',
+        markers: true,
+        onEnter: () => {
+          setNewColour('.nav', '--colour--black', '#ffffff')
+          setNewColour('.nav', '--colour--yellow', '#31261D')
+          setNewColour('.nav', '--colour--white', '#31261D')
+        },
+        onLeaveBack: () => {
+          setNewColour('.nav', '--colour--black', '#31261D')
+          setNewColour('.nav', '--colour--yellow', '#E6FE52')
+          setNewColour('.nav', '--colour--white', '#ffffff')
+        },
+      })
     }
+  }, 100)
 
-    // Retrieve the current values of the CSS variables from the parent element
-    const style = getComputedStyle(parentElement)
-    const var1Value = style.getPropertyValue(var1).trim()
-    const var2Value = style.getPropertyValue(var2).trim()
+  return { setNewColour }
+}
 
-    // Swap the CSS variable values on the parent element
-    parentElement.style.setProperty(var1, var2Value)
-    parentElement.style.setProperty(var2, var1Value)
+export const setNavColourManual = (colour) => {
+  if (colour == 'yellow') {
+    setNewColour('.nav', '--colour--black', '#31261D')
+    setNewColour('.nav', '--colour--yellow', '#E6FE52')
+    setNewColour('.nav', '--colour--white', '#ffffff')
+  } else if (colour == 'black') {
+    setNewColour('.nav', '--colour--black', '#ffffff')
+    setNewColour('.nav', '--colour--yellow', '#31261D')
+    setNewColour('.nav', '--colour--white', '#31261D')
   }
-
-  function setNewColour(parentSelector, var1, var2) {
-    // Select the parent element
-    const parentElement = document.querySelector(parentSelector)
-    parentElement.style.setProperty(var1, var2)
-  }
-
-  // Only create a new ScrollTrigger if it doesn't already exist
-  if (!footerScrollTrigger) {
-    footerScrollTrigger = ScrollTrigger.create({
-      trigger: '[scroll-trigger="footer"]',
-      start: 'bottom bottom',
-      end: 'bottom bottom',
-      onEnter: () => {
-        setNewColour('.nav', '--colour--black', '#ffffff')
-        setNewColour('.nav', '--colour--yellow', '#31261D')
-        setNewColour('.nav', '--colour--white', '#31261D')
-      },
-      onLeaveBack: () => {
-        setNewColour('.nav', '--colour--black', '#31261D')
-        setNewColour('.nav', '--colour--yellow', '#E6FE52')
-        setNewColour('.nav', '--colour--white', '#ffffff')
-      },
-    })
-  }
-
-  return { swapCSSVariables, setNewColour }
 }
 
 // Function to disable the ScrollTrigger

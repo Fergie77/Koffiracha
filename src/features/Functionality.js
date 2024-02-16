@@ -170,5 +170,5 @@ export const openChat = () => {
       button.addEventListener('click', hideButton)
       closeNavFunction()
     })
-  }, 500)
+  }, 1000)
 }

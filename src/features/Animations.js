@@ -373,7 +373,7 @@ export const storySliderSlideIn = () => {
   }
   const slideOut = () => {
     gsap.to(slider, {
-      x: '60%',
+      x: '67%',
       ease: easing,
       duration: duration,
     })

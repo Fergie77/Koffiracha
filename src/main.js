@@ -36,6 +36,7 @@ import {
   disableFooterColourSwap,
   footerColourSwap,
   navSwapping,
+  setNavColourManual,
 } from './features/NavbarSwapping'
 import lenis from './lenisInstance'
 
@@ -57,7 +58,7 @@ barba.hooks.afterEnter((data) => {
     navSwapping()
     disableFooterColourSwap()
     footerColourSwap()
-
+    setNavColourManual('yellow')
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       sliderLoadAnimation()
