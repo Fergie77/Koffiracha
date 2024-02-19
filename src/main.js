@@ -47,7 +47,6 @@ barba.init({
 pageTransition()
 navAnimation()
 
-buttonAnimation()
 openCart()
 loadCart()
 
@@ -55,6 +54,7 @@ barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     openChat()
     siteWideCartButtons()
+    buttonAnimation()
     //featuredProductAddToCart()
     navSwapping()
     disableFooterColourSwap()
