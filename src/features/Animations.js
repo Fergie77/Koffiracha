@@ -12,6 +12,7 @@ import { footerColourSwap } from './NavbarSwapping'
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
   const smallbutton = document.querySelectorAll("[gsap-button-2='true']")
+  const cartButton = document.querySelector('[gsap-button-cart=true]')
 
   button.forEach((element) => {
     if (element.querySelector('.hover-effect-background')) {
@@ -49,15 +50,10 @@ export const buttonAnimation = () => {
           ease: 'power4.out',
           duration: 1.5,
         })
-        gsap.to('.hamburger-line', {
+        gsap.to(element.querySelectorAll('.hamburger-line'), {
           background: 'var(--colour--white)',
           ease: 'power4.out',
           duration: 0,
-        })
-        gsap.to(element.querySelector('.button-text_mover'), {
-          y: -40,
-          ease: 'power4.out',
-          duration: 1,
         })
       })
       element.addEventListener('mouseleave', () => {
@@ -71,14 +67,37 @@ export const buttonAnimation = () => {
           ease: 'power4.out',
           duration: 0,
         })
-        gsap.to(element.querySelector('.button-text_mover'), {
-          y: 0,
-          ease: 'power4.out',
-          duration: 1,
-        })
       })
     }
   })
+
+  if (cartButton.querySelector('.hover-effect-background')) {
+    cartButton.addEventListener('mouseenter', () => {
+      gsap.to(cartButton.querySelector('.hover-effect-background'), {
+        y: 150,
+        ease: 'power4.out',
+        duration: 1.5,
+      })
+
+      gsap.to(cartButton.children[0], {
+        color: 'var(--colour--white)',
+        ease: 'power4.out',
+        duration: 0,
+      })
+    })
+    cartButton.addEventListener('mouseleave', () => {
+      gsap.to(cartButton.querySelector('.hover-effect-background'), {
+        y: -20,
+        ease: 'power4.out',
+        duration: 1.5,
+      })
+      gsap.to(cartButton.children[0], {
+        color: 'var(--colour--black)',
+        ease: 'power4.out',
+        duration: 0,
+      })
+    })
+  }
 }
 
 export const scaleUpAnimation = () => {
@@ -209,12 +228,19 @@ export const floatingBottle = () => {
 
     const context = canvas.getContext('2d')
     const frameCount = 300
-    const animationID = canvas.getAttribute('title').toString()
-    console.log(animationID)
-    const currentFrame = (index) =>
-      `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
-        .toString()
-        .padStart(4, '0')}.webp`
+    const animationID = canvas?.getAttribute('title')?.toString()
+    let currentFrame = null
+    if (animationID) {
+      currentFrame = (index) =>
+        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
+          .toString()
+          .padStart(4, '0')}.webp`
+    } else {
+      currentFrame = (index) =>
+        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
+          .toString()
+          .padStart(4, '0')}.webp`
+    }
 
     // Set canvas dimensions
     canvas.width = 900
