@@ -209,11 +209,13 @@ export const floatingBottle = () => {
 
     const context = canvas.getContext('2d')
     const frameCount = 300
+    //const animationID = canvas.getAttribute('title')
     const currentFrame = (index) =>
-      `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
+      `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/chilli-fire/0_${index
         .toString()
         .padStart(4, '0')}.webp`
 
+    console.log(currentFrame)
     // Set canvas dimensions
     canvas.width = 900
     canvas.height = 1050
