@@ -46,13 +46,14 @@ barba.init({
 
 pageTransition()
 navAnimation()
-openChat()
+
 buttonAnimation()
 openCart()
 loadCart()
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
+    openChat()
     siteWideCartButtons()
     //featuredProductAddToCart()
     navSwapping()

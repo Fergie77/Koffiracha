@@ -153,22 +153,88 @@ export const appendUrl = (modal, removeExistingParams = false) => {
 export const openChat = () => {
   const pseudoChatButton = document.querySelector('[element=chat-button]')
 
-  setTimeout(() => {
-    const iframe = document.querySelector('#chat-button')
+  // Function to be called when the specific element is added
+  function onElementAdded(element) {
+    // Monitor this element for additions of child elements
+    observeChildAdditions(element)
+  }
 
-    const hideButton = () => {
-      iframe.style.display = 'none'
-    }
+  // Function to observe child additions to the gorgias-chat-container
+  function observeChildAdditions(element) {
+    const childObserver = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            // Check if the added node is an element (optional: check for specific child ID or class)
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const iframe = node.children[0]
 
-    const button = iframe.contentDocument
-      .querySelector('#mountHere')
-      .querySelector('button')
-    iframe.style.display = 'none'
-    pseudoChatButton.addEventListener('click', () => {
-      button.click()
-      iframe.style.display = 'block'
-      button.addEventListener('click', hideButton)
-      closeNavFunction()
+              const hideButton = () => {
+                iframe.style.display = 'none'
+              }
+
+              iframe.addEventListener('load', () => {
+                setTimeout(() => {
+                  const button =
+                    iframe.contentDocument.querySelector('#mountHere')
+                      .firstChild.firstChild
+
+                  pseudoChatButton.addEventListener('click', () => {
+                    button.click()
+                    iframe.style.display = 'block'
+                    button.addEventListener('click', hideButton)
+                    closeNavFunction()
+                  })
+                }, 1000)
+
+                iframe.style.display = 'none'
+                childObserver.disconnect()
+              })
+
+              // Execute any code in response to the child element addition here
+            }
+          })
+        }
+      }
     })
-  }, 1000)
+
+    // Start observing the element for child additions
+    childObserver.observe(element, {
+      childList: true, // Observe direct children additions
+      // Optionally, observe subtree for all descendants
+      // subtree: true,
+    })
+
+    // Remember to eventually disconnect the observer to avoid memory leaks
+    // childObserver.disconnect();
+  }
+
+  // Create an observer instance linked to a callback function
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          // Check if the added node is the element we're looking for
+          if (
+            node.nodeType === Node.ELEMENT_NODE &&
+            node.id === 'gorgias-chat-container'
+          ) {
+            onElementAdded(node)
+            // Optional: disconnect the main observer if you only need to track the first addition
+            observer.disconnect()
+          }
+        })
+      }
+    }
+  })
+
+  // Start observing the document body for configured mutations
+  observer.observe(document.body, {
+    childList: true, // Observe direct children additions/removals
+    subtree: true, // Observe all descendants
+  })
+
+  // You can place observer.disconnect() where appropriate to stop observing when no longer needed
+
+  setTimeout(() => {}, 1000)
 }
