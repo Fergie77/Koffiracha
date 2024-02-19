@@ -60,6 +60,7 @@ barba.hooks.afterEnter((data) => {
     disableFooterColourSwap()
     footerColourSwap()
     setNavColourManual('yellow')
+    hugeTextScaling()
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       sliderLoadAnimation()
@@ -70,7 +71,6 @@ barba.hooks.afterEnter((data) => {
       pourPourPour()
       scrollingText()
       hugeTextSplitAnimation()
-      hugeTextScaling()
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
