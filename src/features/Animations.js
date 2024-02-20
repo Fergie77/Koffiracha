@@ -179,10 +179,12 @@ export const floatingBottle = () => {
       //     'top top',
       //     scrubStartEl.getAttribute('tr-scrollflip-scrubstart')
       //   ),
-      endSetting = attr(
-        'bottom bottom',
-        scrubEndEl.getAttribute('tr-scrollflip-scrubend')
-      ),
+      // endSetting = attr(
+      //   'bottom bottom',
+      //   scrubEndEl.getAttribute('tr-scrollflip-scrubend')
+      // ),
+      startSetting = 'top top-=400px',
+      endSetting = 'bottom bottom-=200px',
       staggerSpeedSetting = attr(
         0,
         componentEl.getAttribute('tr-scrollflip-staggerspeed')
@@ -208,7 +210,7 @@ export const floatingBottle = () => {
         scrollTrigger: {
           trigger: scrubStartEl,
           endTrigger: scrubEndEl,
-          start: 'top top-=300px',
+          start: startSetting,
           end: endSetting,
           scrub: 1,
         },
@@ -277,7 +279,7 @@ export const floatingBottle = () => {
         scrollTrigger: {
           trigger: scrubStartEl,
           endTrigger: scrubEndEl,
-          start: 'top top-=300px',
+          start: startSetting,
           end: endSetting,
           scrub: 2,
         },
@@ -1693,7 +1695,7 @@ export const hugeTextSplitAnimation = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: splitText.elements,
-        start: 'top 20%',
+        start: 'top top',
         end: 'bottom bottom',
       },
       defaults: {
