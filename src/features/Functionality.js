@@ -247,7 +247,8 @@ export const recipeFilters = () => {
   cards.forEach((element) => {
     let cardFilter = Array.from(
       element.querySelector('.filters_wrapper').childNodes
-    )
+    ).slice(1) // This skips the first child node
+
     cardFilter.forEach((childElement) => {
       const textContent = childElement.textContent.trim()
       // Check if the object already exists in the array
