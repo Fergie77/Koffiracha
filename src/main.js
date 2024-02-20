@@ -30,6 +30,7 @@ import {
 import {
   hugeTextScaling,
   openChat,
+  recipeFilters,
   shareRecipe,
 } from './features/Functionality'
 import {
@@ -93,6 +94,8 @@ barba.hooks.afterEnter((data) => {
       instagramSlider()
       shareRecipe()
       recipeModal()
+      filtersDropdownAnimation()
+      recipeFilters()
     }
   }, 10)
 

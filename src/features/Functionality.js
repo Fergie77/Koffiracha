@@ -238,3 +238,39 @@ export const openChat = () => {
 
   setTimeout(() => {}, 1000)
 }
+
+export const recipeFilters = () => {
+  const cards = document.querySelectorAll('.gallery3_card-link')
+
+  let filters = [{ text: 'All' }] // Initialize filters as an array with an object for 'All'
+
+  cards.forEach((element) => {
+    let cardFilter = Array.from(
+      element.querySelector('.filters_wrapper').childNodes
+    )
+    cardFilter.forEach((childElement) => {
+      const textContent = childElement.textContent.trim()
+      // Check if the object already exists in the array
+      const isDuplicate = filters.find((filter) => filter.text === textContent)
+      // If the object does not exist, push it into the array
+      if (!isDuplicate) {
+        filters.push({ text: textContent })
+      }
+    })
+  })
+
+  console.log(filters)
+
+  // Get the select element by its ID
+  const selectField = document.getElementById('field')
+
+  // Clear existing options in the select field
+  selectField.innerHTML = ''
+
+  filters.forEach((filter) => {
+    const option = document.createElement('option')
+    option.textContent = filter.text
+    option.value = filter.text
+    selectField.appendChild(option)
+  })
+}
