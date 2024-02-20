@@ -260,8 +260,6 @@ export const recipeFilters = () => {
     })
   })
 
-  console.log(filters)
-
   // Get the select element by its ID
   const selectField = document.getElementById('field')
 
