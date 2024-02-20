@@ -7,7 +7,7 @@ import Lottie from 'lottie-web'
 import SplitType from 'split-type'
 
 import { appendUrl, enableScrolling, stopScrolling } from './Functionality'
-import { footerColourSwap } from './NavbarSwapping'
+import { setNavColourManual } from './NavbarSwapping'
 
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
@@ -1841,11 +1841,7 @@ export const recipeModal = () => {
         opacity: 1,
         onStart: () => {
           stopScrolling()
-          footerColourSwap().swapCSSVariables(
-            '.nav',
-            '--colour--black',
-            '--colour--yellow'
-          )
+          setNavColourManual('black')
         },
         onComplete: () => {
           close.addEventListener('click', () => {
@@ -1856,11 +1852,7 @@ export const recipeModal = () => {
           close.removeEventListener('click', tl.reverse())
           enableScrolling()
           appendUrl('', true)
-          footerColourSwap().swapCSSVariables(
-            '.nav',
-            '--colour--black',
-            '--colour--yellow'
-          )
+          setNavColourManual('yellow')
         },
       },
       '<0.5'

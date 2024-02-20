@@ -16,9 +16,9 @@ export const navSwapping = () => {
     '[scroll-trigger="explore"]'
   )
 
-  const exploreRecipesTriggers = document.querySelectorAll(
-    '[scroll-trigger="explore-recipes"]'
-  )
+  // const exploreRecipesTriggers = document.querySelectorAll(
+  //   '[scroll-trigger="explore-recipes"]'
+  // )
 
   const addToCartTriggers = document.querySelectorAll(
     '[scroll-trigger="add-to-cart"]'
@@ -64,45 +64,45 @@ export const navSwapping = () => {
     })
   }
 
-  if (exploreRecipesTriggers && exploreRecipesTriggers.length > 0) {
-    exploreRecipesTriggers.forEach((element) => {
-      // Add a ScrollTrigger for the animation
-      setTimeout(() => {
-        ScrollTrigger.create({
-          trigger: element,
-          start: 'top bottom',
-          end: 'bottom bottom',
+  // if (exploreRecipesTriggers && exploreRecipesTriggers.length > 0) {
+  //   exploreRecipesTriggers.forEach((element) => {
+  //     // Add a ScrollTrigger for the animation
+  //     setTimeout(() => {
+  //       ScrollTrigger.create({
+  //         trigger: element,
+  //         start: 'top bottom',
+  //         end: 'bottom bottom',
 
-          onEnter: () => {
-            // This code will be executed when the scroll trigger is entered
-            gsap.to('.middle-button_wrapper .button-text', {
-              y: (i, el) => {
-                el.textContent = 'Explore Made 4 U'
-                el.closest('a').setAttribute('href', '/pages/recipes')
-                el.closest('a').removeEventListener(
-                  'click',
-                  addCartButtonListener
-                )
-              },
-            })
-          },
-          onEnterBack: () => {
-            // This code will be executed when the scroll trigger is entered
-            gsap.to('.middle-button_wrapper .button-text', {
-              y: (i, el) => {
-                el.textContent = 'Explore Made 4 U'
-                el.closest('a').setAttribute('href', '/pages/recipes')
-                el.closest('a').removeEventListener(
-                  'click',
-                  addCartButtonListener
-                )
-              },
-            })
-          },
-        })
-      }, 1000)
-    })
-  }
+  //         onEnter: () => {
+  //           // This code will be executed when the scroll trigger is entered
+  //           gsap.to('.middle-button_wrapper .button-text', {
+  //             y: (i, el) => {
+  //               el.textContent = 'Explore Made 4 U'
+  //               el.closest('a').setAttribute('href', '/pages/recipes')
+  //               el.closest('a').removeEventListener(
+  //                 'click',
+  //                 addCartButtonListener
+  //               )
+  //             },
+  //           })
+  //         },
+  //         onEnterBack: () => {
+  //           // This code will be executed when the scroll trigger is entered
+  //           gsap.to('.middle-button_wrapper .button-text', {
+  //             y: (i, el) => {
+  //               el.textContent = 'Explore Made 4 U'
+  //               el.closest('a').setAttribute('href', '/pages/recipes')
+  //               el.closest('a').removeEventListener(
+  //                 'click',
+  //                 addCartButtonListener
+  //               )
+  //             },
+  //           })
+  //         },
+  //       })
+  //     }, 1000)
+  //   })
+  // }
 
   const addCartButtonListener = (e) => {
     const productID = e.currentTarget.attributes.cartitemid.value

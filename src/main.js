@@ -31,6 +31,7 @@ import {
   hugeTextScaling,
   openChat,
   recipeFilters,
+  setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
@@ -50,7 +51,7 @@ navAnimation()
 
 openCart()
 loadCart()
-
+setCheckout()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     openChat()

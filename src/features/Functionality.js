@@ -273,3 +273,8 @@ export const recipeFilters = () => {
     selectField.appendChild(option)
   })
 }
+
+export const setCheckout = () => {
+  const checkoutButton = document.querySelector('#checkout-button')
+  checkoutButton.setAttribute('href', '/checkout')
+}
