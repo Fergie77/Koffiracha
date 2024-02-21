@@ -183,8 +183,8 @@ export const floatingBottle = () => {
       //   'bottom bottom',
       //   scrubEndEl.getAttribute('tr-scrollflip-scrubend')
       // ),
-      startSetting = 'top top-=400px',
-      endSetting = 'bottom bottom-=200px',
+      startSetting = 'top top-=500px',
+      endSetting = 'bottom bottom+=100px',
       staggerSpeedSetting = attr(
         0,
         componentEl.getAttribute('tr-scrollflip-staggerspeed')
@@ -385,12 +385,78 @@ export const storySliderSlideIn = () => {
     opacity: 0,
   })
 
+  function WheelControls(slider) {
+    let touchTimeout
+    let position = { x: 0, y: 0 }
+    let wheelActive = false
+
+    function dispatch(e, name) {
+      position.x -= e.deltaX
+      position.y -= e.deltaY
+      slider.container.dispatchEvent(
+        new CustomEvent(name, {
+          detail: { x: position.x, y: position.y },
+        })
+      )
+    }
+
+    function wheelStart(e) {
+      position = { x: e.pageX, y: e.pageY }
+      dispatch(e, 'ksDragStart')
+    }
+
+    function wheel(e) {
+      dispatch(e, 'ksDrag')
+    }
+
+    function wheelEnd(e) {
+      dispatch(e, 'ksDragEnd')
+    }
+
+    function eventWheel(e) {
+      e.preventDefault()
+      if (!wheelActive) {
+        wheelStart(e)
+        wheelActive = true
+      }
+      wheel(e)
+      clearTimeout(touchTimeout)
+      touchTimeout = setTimeout(() => {
+        wheelActive = false
+        wheelEnd(e)
+      }, 50)
+    }
+
+    slider.on('created', () => {
+      // Initially, do not add the event listener until explicitly activated
+    })
+
+    return {
+      activate() {
+        slider.container.addEventListener('wheel', eventWheel, {
+          passive: false,
+        })
+        wheelActive = true
+      },
+      deactivate() {
+        slider.container.removeEventListener('wheel', eventWheel, {
+          passive: false,
+        })
+        wheelActive = false
+      },
+    }
+  }
+
   const slideIn = () => {
     gsap.to(slider, {
       x: 0,
       ease: easing,
       duration: duration,
-      onStart: removeListeners,
+      onStart: () => {
+        removeListeners() // Correctly call the function
+        console.log(slider)
+        slider.plugins.WheelControls.activate() // Activate WheelControls through the slider instance
+      },
     })
     gsap.to(background, {
       x: '-40%',
@@ -462,71 +528,16 @@ export const storySliderSlideIn = () => {
       })
     }
 
-    function WheelControls(slider) {
-      var touchTimeout
-      var position
-      var wheelActive
-
-      function dispatch(e, name) {
-        position.x -= e.deltaX
-        position.y -= e.deltaY
-        slider.container.dispatchEvent(
-          new CustomEvent(name, {
-            detail: {
-              x: position.x,
-              y: position.y,
-            },
-          })
-        )
-      }
-
-      function wheelStart(e) {
-        position = {
-          x: e.pageX,
-          y: e.pageY,
-        }
-        dispatch(e, 'ksDragStart')
-      }
-
-      function wheel(e) {
-        dispatch(e, 'ksDrag')
-      }
-
-      function wheelEnd(e) {
-        dispatch(e, 'ksDragEnd')
-      }
-
-      function eventWheel(e) {
-        e.preventDefault()
-        if (!wheelActive) {
-          wheelStart(e)
-          wheelActive = true
-        }
-        wheel(e)
-        clearTimeout(touchTimeout)
-        touchTimeout = setTimeout(() => {
-          wheelActive = false
-          wheelEnd(e)
-        }, 50)
-      }
-
-      slider.on('created', () => {
-        slider.container.addEventListener('wheel', eventWheel, {
-          passive: false,
-        })
-      })
-    }
-
-    const ifWheelFirst = (slider) => {
-      setTimeout(() => {
-        slider.on('slideChanged', () => {
-          if (!firstClick && slider.track.details.abs > 1) {
-            firstClick = true
-            slideIn()
-          }
-        })
-      }, 100)
-    }
+    // const ifWheelFirst = (slider) => {
+    //   setTimeout(() => {
+    //     slider.on('slideChanged', () => {
+    //       if (!firstClick && slider.track.details.abs > 1) {
+    //         firstClick = true
+    //         slideIn()
+    //       }
+    //     })
+    //   }, 100)
+    // }
 
     var slider = new KeenSlider(
       '.story-slider_wrapper',
@@ -534,12 +545,9 @@ export const storySliderSlideIn = () => {
         loop: false,
         rubberband: false,
         selector: '.story-slide',
-        slides: {
-          perView: 3.5,
-          //spacing: 24,
-        },
+        slides: { perView: 3.5 },
       },
-      [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
+      [ArrowButton, revertSlider, WheelControls]
     )
     slider
   }

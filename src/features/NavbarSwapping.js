@@ -205,6 +205,9 @@ export const setNavColourManual = (colour) => {
     setNewColour('.nav', '--colour--black', '#ffffff')
     setNewColour('.nav', '--colour--yellow', '#31261D')
     setNewColour('.nav', '--colour--white', '#31261D')
+  } else if (colour == 'red') {
+    setNewColour('.nav', '--colour--black', '#31261D')
+    setNewColour('.nav', '--colour--yellow', '#FF6E65')
   }
 }
 
@@ -215,5 +218,12 @@ export const disableFooterColourSwap = () => {
     // Optionally, you can also kill the trigger if you don't plan to re-enable it later
     footerScrollTrigger.kill()
     footerScrollTrigger = null
+  }
+}
+
+export const checkIfRedProduct = () => {
+  const colour = document.querySelector('[lottie-colour]')
+  if (colour?.getAttribute('lottie-colour') == 'red') {
+    setNavColourManual('red')
   }
 }

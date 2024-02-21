@@ -35,6 +35,7 @@ import {
   shareRecipe,
 } from './features/Functionality'
 import {
+  checkIfRedProduct,
   disableFooterColourSwap,
   footerColourSwap,
   navSwapping,
@@ -81,6 +82,7 @@ barba.hooks.afterEnter((data) => {
       pourLottieAnimations()
       roundingImageElement()
     } else if (data.next.namespace == 'product') {
+      checkIfRedProduct()
       scrollingText()
       accordionToggle()
       setTimeout(() => {
