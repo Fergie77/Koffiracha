@@ -181,11 +181,11 @@ export const footerColourSwap = () => {
 
         onEnter: () => {
           setNewColour('.nav', '--colour--black', '#ffffff')
-          setNewColour('.nav', '--colour--yellow', '#31261D')
-          setNewColour('.nav', '--colour--white', '#31261D')
+          setNewColour('.nav', '--colour--yellow', '#000000')
+          setNewColour('.nav', '--colour--white', '#000000')
         },
         onLeaveBack: () => {
-          setNewColour('.nav', '--colour--black', '#31261D')
+          setNewColour('.nav', '--colour--black', '#000000')
           setNewColour('.nav', '--colour--yellow', '#E6FE52')
           setNewColour('.nav', '--colour--white', '#ffffff')
         },
@@ -198,15 +198,15 @@ export const footerColourSwap = () => {
 
 export const setNavColourManual = (colour) => {
   if (colour == 'yellow') {
-    setNewColour('.nav', '--colour--black', '#31261D')
+    setNewColour('.nav', '--colour--black', '#000000')
     setNewColour('.nav', '--colour--yellow', '#E6FE52')
     setNewColour('.nav', '--colour--white', '#ffffff')
   } else if (colour == 'black') {
     setNewColour('.nav', '--colour--black', '#ffffff')
-    setNewColour('.nav', '--colour--yellow', '#31261D')
-    setNewColour('.nav', '--colour--white', '#31261D')
+    setNewColour('.nav', '--colour--yellow', '#000000')
+    setNewColour('.nav', '--colour--white', '#000000')
   } else if (colour == 'red') {
-    setNewColour('.nav', '--colour--black', '#31261D')
+    setNewColour('.nav', '--colour--black', '#000000')
     setNewColour('.nav', '--colour--yellow', '#FF6E65')
   }
 }
