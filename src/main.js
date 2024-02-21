@@ -26,6 +26,7 @@ import {
   hugeTextSplitAnimation,
   recipeSlider,
   recipeModal,
+  recipeAccordionToggle,
 } from './features/Animations'
 import {
   hugeTextScaling,
@@ -92,7 +93,7 @@ barba.hooks.afterEnter((data) => {
       pourLottieAnimations()
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
-      accordionToggle()
+      recipeAccordionToggle()
       recipeCardAnimation()
       instagramSlider()
       shareRecipe()

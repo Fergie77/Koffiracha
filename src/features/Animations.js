@@ -385,77 +385,21 @@ export const storySliderSlideIn = () => {
     opacity: 0,
   })
 
-  function WheelControls(slider) {
-    let touchTimeout
-    let position = { x: 0, y: 0 }
-    let wheelActive = false
-
-    function dispatch(e, name) {
-      position.x -= e.deltaX
-      position.y -= e.deltaY
-      slider.container.dispatchEvent(
-        new CustomEvent(name, {
-          detail: { x: position.x, y: position.y },
-        })
-      )
-    }
-
-    function wheelStart(e) {
-      position = { x: e.pageX, y: e.pageY }
-      dispatch(e, 'ksDragStart')
-    }
-
-    function wheel(e) {
-      dispatch(e, 'ksDrag')
-    }
-
-    function wheelEnd(e) {
-      dispatch(e, 'ksDragEnd')
-    }
-
-    function eventWheel(e) {
-      e.preventDefault()
-      if (!wheelActive) {
-        wheelStart(e)
-        wheelActive = true
-      }
-      wheel(e)
-      clearTimeout(touchTimeout)
-      touchTimeout = setTimeout(() => {
-        wheelActive = false
-        wheelEnd(e)
-      }, 50)
-    }
-
-    slider.on('created', () => {
-      // Initially, do not add the event listener until explicitly activated
-    })
-
-    return {
-      activate() {
-        slider.container.addEventListener('wheel', eventWheel, {
-          passive: false,
-        })
-        wheelActive = true
-      },
-      deactivate() {
-        slider.container.removeEventListener('wheel', eventWheel, {
-          passive: false,
-        })
-        wheelActive = false
-      },
-    }
-  }
+  // Declare this function globally or at a scope accessible by slideIn and WheelControls initialization
+  let enableWheelControls
+  let disableWheelControls // To disable wheel controls
 
   const slideIn = () => {
     gsap.to(slider, {
       x: 0,
       ease: easing,
       duration: duration,
-      onStart: () => {
-        removeListeners() // Correctly call the function
-        console.log(slider)
-        slider.plugins.WheelControls.activate() // Activate WheelControls through the slider instance
+      onStart: removeListeners,
+      onComplete: () => {
+        // Enable wheel controls after slideIn completes
+        if (typeof enableWheelControls === 'function') {
+          enableWheelControls()
+        }
       },
     })
     gsap.to(background, {
@@ -472,6 +416,16 @@ export const storySliderSlideIn = () => {
       x: '67%',
       ease: easing,
       duration: duration,
+      onStart: () => {
+        firstClick = true
+      },
+      onComplete: () => {
+        // Disable wheel controls after slideOut completes
+        if (typeof disableWheelControls === 'function') {
+          disableWheelControls()
+          firstClick = false
+        }
+      },
     })
     gsap.to(background, {
       x: '0%',
@@ -528,16 +482,77 @@ export const storySliderSlideIn = () => {
       })
     }
 
-    // const ifWheelFirst = (slider) => {
-    //   setTimeout(() => {
-    //     slider.on('slideChanged', () => {
-    //       if (!firstClick && slider.track.details.abs > 1) {
-    //         firstClick = true
-    //         slideIn()
-    //       }
-    //     })
-    //   }, 100)
-    // }
+    function WheelControls(slider) {
+      var touchTimeout
+      var position = { x: 0, y: 0 } // Initialize position to prevent undefined errors
+      var wheelActive = false
+
+      function dispatch(e, name) {
+        position.x -= e.deltaX
+        position.y -= e.deltaY
+        slider.container.dispatchEvent(
+          new CustomEvent(name, {
+            detail: {
+              x: position.x,
+              y: position.y,
+            },
+          })
+        )
+      }
+
+      function wheelStart(e) {
+        position = {
+          x: e.pageX,
+          y: e.pageY,
+        }
+        dispatch(e, 'ksDragStart')
+      }
+
+      function wheel(e) {
+        dispatch(e, 'ksDrag')
+      }
+
+      function wheelEnd(e) {
+        dispatch(e, 'ksDragEnd')
+      }
+
+      function eventWheel(e) {
+        e.preventDefault()
+        if (!wheelActive) {
+          wheelStart(e)
+          wheelActive = true
+        }
+        wheel(e)
+        clearTimeout(touchTimeout)
+        touchTimeout = setTimeout(() => {
+          wheelActive = false
+          wheelEnd(e)
+        }, 50)
+      }
+
+      enableWheelControls = () => {
+        slider.container.addEventListener('wheel', eventWheel, {
+          passive: false,
+        })
+      }
+
+      disableWheelControls = () => {
+        slider.container.removeEventListener('wheel', eventWheel, {
+          passive: false,
+        })
+      }
+    }
+
+    const ifWheelFirst = (slider) => {
+      setTimeout(() => {
+        slider.on('slideChanged', () => {
+          if (!firstClick && slider.track.details.abs > 0) {
+            firstClick = true
+            slideIn()
+          }
+        })
+      }, 100)
+    }
 
     var slider = new KeenSlider(
       '.story-slider_wrapper',
@@ -545,9 +560,11 @@ export const storySliderSlideIn = () => {
         loop: false,
         rubberband: false,
         selector: '.story-slide',
-        slides: { perView: 3.5 },
+        slides: {
+          perView: 3.5,
+        },
       },
-      [ArrowButton, revertSlider, WheelControls]
+      [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
     )
     slider
   }
@@ -753,6 +770,57 @@ export const accordionToggle = () => {
 
     element.addEventListener('click', () => {
       toggleAnimation(element, element.nextElementSibling)
+    })
+  })
+}
+
+export const recipeAccordionToggle = () => {
+  const accordionElements = document.querySelectorAll('.accordion1_top')
+
+  const closeAllDropdowns = (exceptElement) => {
+    accordionElements.forEach((element) => {
+      if (element !== exceptElement) {
+        const dropdown = element.nextElementSibling
+        gsap.to(dropdown, { height: 0, ease: 'power2.out' })
+        gsap.to(element.querySelector('.accordion1_icon'), {
+          rotateZ: 0,
+          ease: 'power2.out',
+        })
+      }
+    })
+  }
+
+  const toggleDropdown = (element) => {
+    const dropdown = element.nextElementSibling
+    const isOpen = gsap.getProperty(dropdown, 'height') !== 0
+    const newHeight = isOpen ? 0 : 'auto'
+    const xRotate = isOpen ? 0 : 45
+
+    if (!isOpen) {
+      closeAllDropdowns(element)
+    }
+
+    gsap.to(dropdown, {
+      height: newHeight,
+      ease: 'power2.out',
+    })
+
+    gsap.to(element.querySelector('.accordion1_icon'), {
+      rotateZ: xRotate,
+      ease: 'power2.out',
+    })
+  }
+
+  accordionElements.forEach((element) => {
+    // Set initial state based on the 'start-open' attribute
+    if (!element.getAttribute('start-open')) {
+      gsap.set(element.nextElementSibling, { height: 0 })
+    } else {
+      gsap.set(element.querySelector('.accordion1_icon'), { rotateZ: 45 })
+    }
+
+    element.addEventListener('click', () => {
+      toggleDropdown(element)
     })
   })
 }
