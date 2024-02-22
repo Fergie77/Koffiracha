@@ -233,45 +233,49 @@ export const floatingBottle = () => {
 
     const context = canvas.getContext('2d')
     const frameCount = 300
-    const animationID = canvas?.getAttribute('title')?.toString()
-    let currentFrame = null
-    if (animationID) {
-      currentFrame = (index) =>
-        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
-          .toString()
-          .padStart(4, '0')}.webp`
-    } else {
-      currentFrame = (index) =>
-        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
-          .toString()
-          .padStart(4, '0')}.webp`
-    }
+    const animationID = canvas.getAttribute('title')?.toString() || 'V2' // Default to 'V2' if no title
+    const canvasWidth = 900
+    const canvasHeight = 1050
 
-    // Set canvas dimensions
-    canvas.width = 900
-    canvas.height = 1050
+    canvas.width = canvasWidth
+    canvas.height = canvasHeight
+
+    // Simplified currentFrame function
+    const currentFrame = (index) =>
+      `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
+        .toString()
+        .padStart(4, '0')}.webp`
 
     const images = []
+    let loadedImages = 0
+
     const preloadImages = () => {
-      for (let i = 1; i < frameCount + 1; i++) {
+      for (let i = 1; i <= frameCount; i++) {
         const img = new Image()
+        img.onload = () => {
+          loadedImages++
+          if (loadedImages === frameCount) {
+            requestAnimationFrame(() => updateImage(0))
+          }
+        }
         img.src = currentFrame(i)
         images.push(img)
       }
-      setTimeout(() => {
-        updateImage(0)
-      }, 500)
     }
 
+    let currentIndex = 1
+
     const updateImage = (index) => {
-      context.clearRect(0, 0, canvas.width, canvas.height) // clear canvas
-      const img = images[index]
+      // Ensure we're not redrawing the same frame
+      if (currentIndex !== index) {
+        context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
+        const img = images[index]
+        const centerX = (canvas.width - img.width) / 2
+        const centerY = (canvas.height - img.height) / 2
 
-      // Calculate the center position based on canvas dimensions
-      const centerX = (canvas.width - img.width) / 2
-      const centerY = (canvas.height - img.height) / 2
-
-      context.drawImage(img, centerX, centerY)
+        context.drawImage(img, centerX, centerY)
+        currentIndex = index // Update the current index
+      }
     }
 
     preloadImages()
