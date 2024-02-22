@@ -233,7 +233,7 @@ export const floatingBottle = () => {
 
     const context = canvas.getContext('2d')
     const frameCount = 300
-    const animationID = canvas.getAttribute('title')?.toString() || 'V2' // Default to 'V2' if no title
+    const animationID = canvas.getAttribute('title')?.toString() || 'V2 Test' // Default to 'V2' if no title
     const canvasWidth = 900
     const canvasHeight = 1050
 
