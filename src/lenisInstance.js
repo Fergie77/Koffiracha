@@ -1,7 +1,11 @@
 import Lenis from '@studio-freight/lenis'
 
-// Initialize lenis
-const lenis = new Lenis({ lerp: 0.2 })
+// Function to conditionally initialize Lenis
+function createLenis() {
+  if (window.innerWidth >= 993) {
+    return new Lenis({ lerp: 0.2 })
+  }
+  return null
+}
 
-// Export lenis instance
-export default lenis
+export { createLenis }

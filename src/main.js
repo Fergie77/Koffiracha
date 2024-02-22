@@ -14,7 +14,7 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
-  sliderLoadAnimation,
+  testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
@@ -42,7 +42,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import lenis from './lenisInstance'
+import { createLenis } from './lenisInstance.js'
 
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
@@ -67,7 +67,7 @@ barba.hooks.afterEnter((data) => {
     hugeTextScaling()
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
-      sliderLoadAnimation()
+      testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
       storySliderSlideIn()
@@ -128,14 +128,20 @@ barba.hooks.enter(() => {
   ])
 })
 
-// Use lenis as needed
-lenis.on('scroll', () => {
-  // Your code here
-})
+// Initialize Lenis conditionally
+const lenis = createLenis()
 
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
+if (lenis !== null) {
+  lenis.on('scroll', () => {
+    // Your code here
+  })
+
+  // Define and immediately use the `raf` function within the conditional block
+  ;(function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  })(0) // Immediately invoke with an initial `time` value, such as 0
+} else {
+  // Handle case where Lenis is not initialized (optional)
+  console.log('Lenis is not initialized due to viewport width.')
 }
-
-requestAnimationFrame(raf)

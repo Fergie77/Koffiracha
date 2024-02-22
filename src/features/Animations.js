@@ -175,17 +175,20 @@ export const floatingBottle = () => {
 
     if (!canvas) return // Skip if no canvas found in the current component
 
-    let // startSetting = attr(
-      //     'top top',
-      //     scrubStartEl.getAttribute('tr-scrollflip-scrubstart')
-      //   ),
-      // endSetting = attr(
-      //   'bottom bottom',
-      //   scrubEndEl.getAttribute('tr-scrollflip-scrubend')
-      // ),
-      startSetting = 'top top-=500px',
-      endSetting = 'bottom bottom+=100px',
-      staggerSpeedSetting = attr(
+    let startSetting, endSetting
+
+    // Check if the screen width is below 991px
+    if (window.innerWidth < 991) {
+      // For screens smaller than 991px
+      startSetting = 'top centre'
+      endSetting = 'bottom bottom'
+    } else {
+      // For screens 991px and above
+      startSetting = 'top top-=500px'
+      endSetting = 'bottom bottom+=100px'
+    }
+
+    let staggerSpeedSetting = attr(
         0,
         componentEl.getAttribute('tr-scrollflip-staggerspeed')
       ),
@@ -388,6 +391,8 @@ export const storySliderSlideIn = () => {
   // Declare this function globally or at a scope accessible by slideIn and WheelControls initialization
   let enableWheelControls
   let disableWheelControls // To disable wheel controls
+  const sliderOriginalPositionRef = window.getComputedStyle(slider).transform
+  var sliderOriginalPosition = new DOMMatrix(sliderOriginalPositionRef).e
 
   const slideIn = () => {
     gsap.to(slider, {
@@ -402,18 +407,34 @@ export const storySliderSlideIn = () => {
         }
       },
     })
-    gsap.to(background, {
-      x: '-40%',
-      ease: easing,
-      duration: duration,
-    })
+
+    // Check if the screen width is below 991px
+    if (window.innerWidth < 479) {
+      // For screens smaller than 991px
+      gsap.to(arrow, {
+        opacity: 0,
+        ease: easing,
+        duration: duration,
+        onComplete: () => {
+          arrow.style.display = 'none'
+        },
+      })
+    } else {
+      // For screens 991px and above
+      gsap.to(background, {
+        x: '-40%',
+        ease: easing,
+        duration: duration,
+      })
+    }
+
     gsap.to(close, {
       opacity: 1,
     })
   }
   const slideOut = () => {
     gsap.to(slider, {
-      x: '67%',
+      x: sliderOriginalPosition,
       ease: easing,
       duration: duration,
       onStart: () => {
@@ -427,20 +448,44 @@ export const storySliderSlideIn = () => {
         }
       },
     })
-    gsap.to(background, {
-      x: '0%',
-      ease: easing,
-      duration: duration,
-    })
+
+    // Check if the screen width is below 991px
+    if (window.innerWidth < 479) {
+      // For screens smaller than 991px
+      gsap.to(arrow, {
+        opacity: 1,
+        ease: easing,
+        duration: duration,
+        onStart: () => {
+          arrow.style.display = 'flex'
+        },
+      })
+    } else {
+      // For screens 991px and above
+      gsap.to(background, {
+        x: '0%',
+        ease: easing,
+        duration: duration,
+      })
+    }
+
     gsap.to(close, {
       opacity: 0,
     })
   }
   const slideInSlightly = () => {
-    gsap.to(slider, { x: '57%', ease: 'power2.out', duration: 0.5 })
+    gsap.to(slider, {
+      x: sliderOriginalPosition - 100,
+      ease: 'power2.out',
+      duration: 0.5,
+    })
   }
   const slideOutSlightly = () => {
-    gsap.to(slider, { x: '60%', ease: 'power2.out', duration: 0.5 })
+    gsap.to(slider, {
+      x: sliderOriginalPosition,
+      ease: 'power2.out',
+      duration: 0.5,
+    })
   }
   const removeListeners = () => {
     arrow.removeEventListener('click', slideIn)
@@ -562,6 +607,18 @@ export const storySliderSlideIn = () => {
         selector: '.story-slide',
         slides: {
           perView: 3.5,
+        },
+        breakpoints: {
+          '(max-width: 768px)': {
+            slides: {
+              perView: 2,
+            },
+          },
+          '(max-width: 479px)': {
+            slides: {
+              perView: 1,
+            },
+          },
         },
       },
       [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
@@ -1390,7 +1447,7 @@ export const openCart = () => {
   })
 }
 
-export const sliderLoadAnimation = () => {
+export const testimonialSliderLoadAnimation = () => {
   function WheelControls(slider) {
     var touchTimeout
     var position
@@ -1466,6 +1523,20 @@ export const sliderLoadAnimation = () => {
           spacing: 45,
         },
         loop: true,
+        breakpoints: {
+          '(max-width: 768px)': {
+            slides: {
+              perView: 2.3,
+              spacing: 45,
+            },
+          },
+          '(max-width: 479px)': {
+            slides: {
+              perView: 1.4,
+              spacing: 20,
+            },
+          },
+        },
       },
       [WheelControls, ArrowButton]
     )
