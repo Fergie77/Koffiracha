@@ -643,7 +643,7 @@ export const pageTransition = () => {
     autoplay: false,
     path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/657b1db7e1bbc3dc8b91e5eb_KOFF%20PAGE%20LOADER%203.json',
   })
-  //const footerSwap = footerColourSwap()
+
   barba.preventRunning = true
 
   barba.hooks.enter((data) => {
@@ -659,10 +659,6 @@ export const pageTransition = () => {
           lottieAnim.goToAndPlay(0, true)
           var event = new Event('click')
           hamburger.dispatchEvent(event)
-
-          // footerSwap.setNewColour('.nav', '--colour--black', '#ffffff')
-          // footerSwap.setNewColour('.nav', '--colour--yellow', '#31261D')
-          // footerSwap.setNewColour('.nav', '--colour--white', '#31261D')
         },
       }
     )
@@ -682,24 +678,29 @@ export const pageTransition = () => {
   })
 
   const resizePageTransition = () => {
-    const viewportWidth = window.innerWidth
-    const viewportHeight = window.innerHeight
-
-    const originalWidth = 1920
-    const originalHeight = 1080
-
-    // Calculate the scale factor
-    let scaleFactor = Math.min(
-      originalWidth / viewportWidth,
-      originalHeight / viewportHeight
-    )
-
-    scaleFactor = 1.2661195779601406
+    const screenWidth = window.innerWidth
+    let scaleFactor
     if (container) {
-      container.style.transform = `scale(${scaleFactor})`
+      // Check if screen width is less than 993px
+      if (screenWidth < 993) {
+        // Apply rotation and scale for devices under 993px
+        scaleFactor = 2.5
+        container.style.transform = `scale(${scaleFactor}) rotate(270deg)`
+
+        // Adjust position as needed when rotated
+        container.style.transformOrigin = 'center center'
+        container.style.overflow = 'hidden'
+      } else {
+        // Revert to default scale without rotation for wider screens
+        scaleFactor = 1.266
+        container.style.transform = `scale(${scaleFactor})`
+      }
     }
   }
+
+  // Initial call and add event listener for resize events
   resizePageTransition()
+  window.addEventListener('resize', resizePageTransition)
 }
 
 export const scrollingText = () => {
