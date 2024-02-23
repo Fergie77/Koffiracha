@@ -375,6 +375,7 @@ export const storySliderSlideIn = () => {
   const close = document.querySelector('[story-slider = "close"]')
   const slider = document.querySelector('[story-slider = "slider"]')
   const background = document.querySelector('[story-slider = "background"]')
+  const mobileText = document.querySelector('.mobile-slider-text')
   const easing = 'expo.inOut'
   const duration = 2
   let firstClick = false
@@ -423,6 +424,14 @@ export const storySliderSlideIn = () => {
           arrow.style.display = 'none'
         },
       })
+      gsap.to(mobileText, {
+        opacity: 0,
+        ease: easing,
+        duration: duration,
+        onComplete: () => {
+          mobileText.style.display = 'none'
+        },
+      })
     } else {
       // For screens 991px and above
       gsap.to(background, {
@@ -462,6 +471,14 @@ export const storySliderSlideIn = () => {
         duration: duration,
         onStart: () => {
           arrow.style.display = 'flex'
+        },
+      })
+      gsap.to(mobileText, {
+        opacity: 1,
+        ease: easing,
+        duration: duration,
+        onStart: () => {
+          mobileText.style.display = 'flex'
         },
       })
     } else {

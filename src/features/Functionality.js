@@ -111,15 +111,36 @@ export const shareRecipe = () => {
   })
 }
 
+// Define a flag to keep track of whether scrolling is enabled or not
+let isScrollingEnabled = true
+
 export const stopScrolling = () => {
-  //Disable scrolling
-  document.body.style.overflow = 'hidden'
+  if (isScrollingEnabled) {
+    // Disable scrolling by setting overflow hidden
+    document.body.style.overflow = 'hidden'
+
+    // Prevent touchmove event for mobile devices
+    document.addEventListener('touchmove', preventScroll, { passive: false })
+
+    isScrollingEnabled = false
+  }
 }
 
 export const enableScrolling = () => {
-  // Enable scrolling
-  document.body.style.overflow = '' // or '' to revert to the default
-  // Use lenis as needed
+  if (!isScrollingEnabled) {
+    // Enable scrolling by resetting overflow
+    document.body.style.overflow = ''
+
+    // Remove the event listener to re-enable touch scrolling on mobile
+    document.removeEventListener('touchmove', preventScroll, { passive: false })
+
+    isScrollingEnabled = true
+  }
+}
+
+// Helper function to prevent scrolling on touch devices
+function preventScroll(e) {
+  e.preventDefault()
 }
 
 export const appendUrl = (modal, removeExistingParams = false) => {

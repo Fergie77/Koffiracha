@@ -8,4 +8,23 @@ function createLenis() {
   return null
 }
 
-export { createLenis }
+// Initialize Lenis instance
+const lenis = createLenis()
+
+// Function to stop Lenis
+function stopLenis() {
+  if (lenis) {
+    console.log(lenis)
+    lenis.stop()
+    console.log(lenis)
+  }
+}
+
+// Function to start Lenis
+function startLenis() {
+  if (lenis) {
+    lenis.start()
+  }
+}
+
+export { createLenis, stopLenis, startLenis }
