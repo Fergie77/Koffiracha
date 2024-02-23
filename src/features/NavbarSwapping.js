@@ -39,6 +39,7 @@ export const navSwapping = () => {
               y: (i, el) => {
                 el.textContent = 'Explore Sauces'
                 el.closest('a').setAttribute('href', '/pages/shop')
+                el.closest('a').removeAttribute('cartitemid')
                 el.closest('a').removeEventListener(
                   'click',
                   addCartButtonListener
@@ -52,6 +53,7 @@ export const navSwapping = () => {
               y: (i, el) => {
                 el.textContent = 'Explore Sauces'
                 el.closest('a').setAttribute('href', '/pages/shop')
+                el.closest('a').removeAttribute('cartitemid')
                 el.closest('a').removeEventListener(
                   'click',
                   addCartButtonListener
