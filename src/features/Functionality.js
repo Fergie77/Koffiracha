@@ -119,7 +119,7 @@ export const stopScrolling = () => {
     // Disable scrolling by setting overflow hidden
     document.body.style.overflow = 'hidden'
 
-    // Prevent touchmove event for mobile devices, except for the 'recipe-scroller' element
+    // Prevent touchmove event for mobile devices
     document.addEventListener('touchmove', preventScroll, { passive: false })
 
     isScrollingEnabled = false
@@ -138,12 +138,9 @@ export const enableScrolling = () => {
   }
 }
 
-// Modified helper function to prevent scrolling on touch devices
+// Helper function to prevent scrolling on touch devices
 function preventScroll(e) {
-  // Check if the target of the touchmove event is the 'recipe-scroller' or a child of it
-  if (!e.target.closest('.recipe-scroller')) {
-    e.preventDefault()
-  }
+  e.preventDefault()
 }
 
 export const appendUrl = (modal, removeExistingParams = false) => {
