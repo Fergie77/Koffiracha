@@ -184,7 +184,7 @@ export const floatingBottle = () => {
       endSetting = 'bottom bottom'
     } else {
       // For screens 991px and above
-      startSetting = 'top top-=500px'
+      startSetting = 'top top-=400px'
       endSetting = 'bottom bottom+=100px'
     }
 
