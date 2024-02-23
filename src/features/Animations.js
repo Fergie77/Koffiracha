@@ -233,9 +233,16 @@ export const floatingBottle = () => {
 
     const context = canvas.getContext('2d')
     const frameCount = 300
-    const animationID = canvas.getAttribute('title')?.toString() || 'V2 Test' // Default to 'V2' if no title
+    let animationID = canvas.getAttribute('title')?.toString() || 'V2 Test' // Default to 'V2' if no title
     const canvasWidth = 450
     const canvasHeight = 525
+
+    // Check if the screen width is below 991px
+    if (window.innerWidth < 479) {
+      // For screens smaller than 991px
+      const modifiedAnimationID = animationID + '-mobile'
+      animationID = modifiedAnimationID
+    }
 
     canvas.width = canvasWidth
     canvas.height = canvasHeight
