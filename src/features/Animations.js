@@ -148,6 +148,185 @@ export const roundingImageElement = () => {
   )
 }
 
+// export const floatingBottle = () => {
+//   function attr(defaultVal, attrVal) {
+//     const defaultValType = typeof defaultVal
+//     if (typeof attrVal !== 'string' || attrVal.trim() === '') return defaultVal
+//     if (attrVal === 'true' && defaultValType === 'boolean') return true
+//     if (attrVal === 'false' && defaultValType === 'boolean') return false
+//     if (isNaN(attrVal) && defaultValType === 'string') return attrVal
+//     if (!isNaN(attrVal) && defaultValType === 'number') return +attrVal
+//     return defaultVal
+//   }
+
+//   gsap.registerPlugin(Flip)
+//   ScrollTrigger.normalizeScroll(true)
+
+//   function createTimeline(componentEl, componentIndex) {
+//     let originEl = componentEl.querySelectorAll(
+//         "[tr-scrollflip-element='origin']"
+//       ),
+//       targetEl = componentEl.querySelectorAll(
+//         "[tr-scrollflip-element='target']"
+//       ),
+//       scrubStartEl = componentEl.querySelector('[tr-scrollflip-scrubstart]'),
+//       scrubEndEl = componentEl.querySelector('[tr-scrollflip-scrubend]'),
+//       canvas = componentEl.querySelector('[element="animated-bottle"]') // Select canvas within the component
+
+//     if (!canvas) return // Skip if no canvas found in the current component
+
+//     let startSetting, endSetting
+
+//     // Check if the screen width is below 991px
+//     if (window.innerWidth < 991) {
+//       // For screens smaller than 991px
+//       startSetting = 'top top'
+//       endSetting = 'bottom bottom'
+//     } else {
+//       // For screens 991px and above
+//       startSetting = 'top top-=500px'
+//       endSetting = 'bottom bottom+=100px'
+//     }
+
+//     let staggerSpeedSetting = attr(
+//         0,
+//         componentEl.getAttribute('tr-scrollflip-staggerspeed')
+//       ),
+//       staggerDirectionSetting = attr(
+//         'start',
+//         componentEl.getAttribute('tr-scrollflip-staggerdirection')
+//       ),
+//       breakpointSetting = attr(
+//         0,
+//         componentEl.getAttribute('tr-scrollflip-breakpoint')
+//       )
+
+//     originEl.forEach(function (el, index) {
+//       let flipId = `${componentIndex}-${index}`
+//       el.setAttribute('data-flip-id', flipId)
+//       targetEl[index].setAttribute('data-flip-id', flipId)
+//     })
+
+//     gsap.matchMedia().add(`(min-width: ${breakpointSetting}px)`, function () {
+//       const state = Flip.getState(originEl)
+//       let timeline = gsap.timeline({
+//         scrollTrigger: {
+//           trigger: scrubStartEl,
+//           endTrigger: scrubEndEl,
+//           start: startSetting,
+//           end: endSetting,
+//           scrub: 1,
+//         },
+//       })
+
+//       timeline.add(
+//         Flip.from(state, {
+//           targets: targetEl,
+//           scale: true,
+//           stagger: {
+//             amount: staggerSpeedSetting,
+//             from: staggerDirectionSetting,
+//           },
+//         })
+//       )
+//     })
+
+//     const context = canvas.getContext('2d')
+//     const frameCount = 300
+//     let animationID = canvas.getAttribute('title')?.toString() || 'V2 Test' // Default to 'V2' if no title
+//     let canvasWidth = 450
+//     let canvasHeight = 525
+
+//     // Check if the screen width is below 991px
+//     if (window.innerWidth < 479) {
+//       // For screens smaller than 991px
+//       const modifiedAnimationID = animationID + '-mobile'
+//       animationID = modifiedAnimationID
+//     } else {
+//       canvasWidth = 900
+//       canvasHeight = 1050
+//     }
+
+//     canvas.width = canvasWidth
+//     canvas.height = canvasHeight
+
+//     // Simplified currentFrame function
+//     const currentFrame = (index) =>
+//       `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
+//         .toString()
+//         .padStart(4, '0')}.webp`
+
+//     const images = []
+//     let loadedImages = 0
+
+//     const preloadImages = () => {
+//       for (let i = 1; i <= frameCount; i++) {
+//         const img = new Image()
+//         img.onload = () => {
+//           loadedImages++
+//           if (loadedImages === frameCount) {
+//             requestAnimationFrame(() => updateImage(0))
+//           }
+//         }
+//         img.src = currentFrame(i)
+//         images.push(img)
+//       }
+//     }
+
+//     let currentIndex = 1
+
+//     const updateImage = (index) => {
+//       // Ensure we're not redrawing the same frame
+//       if (currentIndex !== index) {
+//         context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
+//         const img = images[index]
+//         const centerX = (canvas.width - img.width) / 2
+//         const centerY = (canvas.height - img.height) / 2
+
+//         context.drawImage(img, centerX, centerY)
+//         currentIndex = index // Update the current index
+//       }
+//     }
+
+//     preloadImages()
+
+//     gsap.to(
+//       {},
+//       {
+//         scrollTrigger: {
+//           trigger: scrubStartEl,
+//           endTrigger: scrubEndEl,
+//           start: startSetting,
+//           end: endSetting,
+//           scrub: 2,
+//         },
+//         frame: 0,
+//         duration: 1,
+//         ease: 'expo.inOut',
+//         onUpdate: function () {
+//           const progress = this.progress()
+//           const index = Math.floor(progress * (frameCount - 1))
+//           updateImage(index)
+//         },
+//       }
+//     )
+//   }
+
+//   document
+//     .querySelectorAll("[tr-scrollflip-element='component']")
+//     .forEach((componentEl, index) => {
+//       createTimeline(componentEl, index)
+
+//       let resizeTimer
+//       window.addEventListener('resize', () => {
+//         clearTimeout(resizeTimer)
+//         resizeTimer = setTimeout(() => {
+//           createTimeline(componentEl, index)
+//         }, 250)
+//       })
+//     })
+// }
+
 export const floatingBottle = () => {
   function attr(defaultVal, attrVal) {
     const defaultValType = typeof defaultVal
@@ -234,58 +413,51 @@ export const floatingBottle = () => {
     const context = canvas.getContext('2d')
     const frameCount = 300
     let animationID = canvas.getAttribute('title')?.toString() || 'V2 Test' // Default to 'V2' if no title
-    let canvasWidth = 450
-    let canvasHeight = 525
-
+    let currentFrame = null
+    canvas.width = 450
+    canvas.height = 525
     // Check if the screen width is below 991px
     if (window.innerWidth < 479) {
       // For screens smaller than 991px
       const modifiedAnimationID = animationID + '-mobile'
       animationID = modifiedAnimationID
     } else {
-      canvasWidth = 900
-      canvasHeight = 1050
+      canvas.width = 900
+      canvas.height = 1050
+    }
+    if (animationID) {
+      currentFrame = (index) =>
+        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
+          .toString()
+          .padStart(4, '0')}.webp`
+    } else {
+      currentFrame = (index) =>
+        `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/V2/0_${index
+          .toString()
+          .padStart(4, '0')}.webp`
     }
 
-    canvas.width = canvasWidth
-    canvas.height = canvasHeight
-
-    // Simplified currentFrame function
-    const currentFrame = (index) =>
-      `https://raw.githubusercontent.com/Fergie77/Koffiracha/main/Logo%20Animation/${animationID}/0_${index
-        .toString()
-        .padStart(4, '0')}.webp`
-
     const images = []
-    let loadedImages = 0
-
     const preloadImages = () => {
-      for (let i = 1; i <= frameCount; i++) {
+      for (let i = 1; i < frameCount + 1; i++) {
         const img = new Image()
-        img.onload = () => {
-          loadedImages++
-          if (loadedImages === frameCount) {
-            requestAnimationFrame(() => updateImage(0))
-          }
-        }
         img.src = currentFrame(i)
         images.push(img)
       }
+      setTimeout(() => {
+        updateImage(0)
+      }, 500)
     }
 
-    let currentIndex = 1
-
     const updateImage = (index) => {
-      // Ensure we're not redrawing the same frame
-      if (currentIndex !== index) {
-        context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
-        const img = images[index]
-        const centerX = (canvas.width - img.width) / 2
-        const centerY = (canvas.height - img.height) / 2
+      context.clearRect(0, 0, canvas.width, canvas.height) // clear canvas
+      const img = images[index]
 
-        context.drawImage(img, centerX, centerY)
-        currentIndex = index // Update the current index
-      }
+      // Calculate the center position based on canvas dimensions
+      const centerX = (canvas.width - img.width) / 2
+      const centerY = (canvas.height - img.height) / 2
+
+      context.drawImage(img, centerX, centerY)
     }
 
     preloadImages()
