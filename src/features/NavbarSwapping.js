@@ -123,7 +123,7 @@ export const navSwapping = () => {
           trigger: element,
           start: 'top bottom',
           end: 'bottom bottom-=200px',
-          markers: true,
+
           onEnter: () => {
             // This code will be executed when the scroll trigger is entered
             gsap.to('.middle-button_wrapper .button-text', {
