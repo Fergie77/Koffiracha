@@ -1552,6 +1552,7 @@ export const testimonialSliderLoadAnimation = () => {
     const ArrowButton = () => {
       arrow.addEventListener('click', () => {
         slider.next()
+        slider.next()
       })
     }
 
@@ -1575,6 +1576,7 @@ export const testimonialSliderLoadAnimation = () => {
             slides: {
               perView: 1.4,
               spacing: 20,
+              origin: 'center',
             },
           },
         },
