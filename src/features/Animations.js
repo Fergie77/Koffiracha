@@ -216,7 +216,6 @@ export const floatingBottle = () => {
           start: startSetting,
           end: endSetting,
           scrub: 1,
-          markers: true,
         },
       })
 
