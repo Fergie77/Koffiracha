@@ -29,6 +29,8 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
+  cookieLinkSetter,
+  //cookieClassSwap,
   hugeTextScaling,
   openChat,
   recipeFilters,
@@ -42,6 +44,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
+
 //import { createLenis, startLenis } from './lenisInstance.js'
 
 barba.init({
@@ -50,12 +53,14 @@ barba.init({
 
 pageTransition()
 navAnimation()
-
 openCart()
+
 loadCart()
 setCheckout()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
+    //cookieClassSwap()
+    cookieLinkSetter()
     openChat()
     siteWideCartButtons()
     buttonAnimation()

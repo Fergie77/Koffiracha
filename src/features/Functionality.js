@@ -301,3 +301,74 @@ export const setCheckout = () => {
   const checkoutButton = document.querySelector('#checkout-button')
   checkoutButton.setAttribute('href', '/checkout')
 }
+
+// export const cookieClassSwap = () => {
+//   const acceptButton = document.querySelector('#shopify-pc__banner__btn-accept')
+//   const declineButton = document.querySelector(
+//     '#shopify-pc__banner__btn-decline'
+//   )
+
+//   const dialogueWrapperButtons = document.querySelectorAll(
+//     '.shopify-pc__banner__dialog button'
+//   )
+//   const managePrefs = document.querySelector(
+//     '.shopify-pc__banner__btn-manage-prefs'
+//   )
+//   const cookieBanner = document.querySelector('.shopify-pc__banner')
+//   cookieBanner.style.fontSize = '16px'
+//   managePrefs.addEventListener('click', () => {
+//     const dialogueWrapper = document.querySelector('.shopify-pc__prefs')
+//     const inputs = document.querySelector(
+//       '.shopify-pc__prefs__options'
+//     ).childNodes
+
+//     dialogueWrapper.style.fontSize = '16px'
+//     inputs.forEach((element) => {
+//       element.querySelectorAll('span').forEach((element) => {
+//         element.style.width = '15px'
+//         element.style.height = '15px'
+//       })
+//     })
+//   })
+
+//   dialogueWrapperButtons.forEach((element) => {
+//     element.style.borderRadius = '18px'
+//     element.style.lineHeight = '1'
+//   })
+
+//   acceptButton.classList.remove('shopify-pc__banner__btn-accept')
+
+//   acceptButton.classList.add('skinny-button')
+//   acceptButton.classList.add('is-yellow')
+//   declineButton.classList.add('skinny-button')
+//   declineButton.classList.add('is-outlined')
+// }
+
+export const cookieLinkSetter = () => {
+  // Select the link by its ID
+  var link = document.getElementById('cookies-link')
+
+  // Check if the link exists to prevent errors
+  if (link) {
+    // Remove '/#' from the href, if it exists
+    var hrefWithoutHash = link.href.replace('/#', '')
+
+    // Ensure there's no trailing '/' before appending the parameter
+    if (hrefWithoutHash.endsWith('/')) {
+      hrefWithoutHash = hrefWithoutHash.slice(0, -1)
+    }
+
+    // Now append your parameter
+    // Check if the modified URL already has parameters
+    if (hrefWithoutHash.includes('?')) {
+      // If there are already parameters, append the new one with an '&'
+      hrefWithoutHash += '&tinycookie-preview'
+    } else {
+      // If there are no parameters, start the query string with '?'
+      hrefWithoutHash += '?tinycookie-preview'
+    }
+
+    // Update the link's href attribute
+    link.href = hrefWithoutHash
+  }
+}
