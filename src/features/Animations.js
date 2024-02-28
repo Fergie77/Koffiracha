@@ -180,7 +180,7 @@ export const floatingBottle = () => {
     // Check if the screen width is below 991px
     if (window.innerWidth < 991) {
       // For screens smaller than 991px
-      startSetting = 'top top-=100px'
+      startSetting = 'top top-=50px'
       endSetting = 'bottom bottom'
     } else {
       // For screens 991px and above
