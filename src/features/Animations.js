@@ -1547,12 +1547,12 @@ export const testimonialSliderLoadAnimation = () => {
   const selector = '.testimonial-card'
 
   const arrow = sliderRef.querySelector('[testimonial-slider = "arrow"]')
-
+  console.log(arrow)
   const addKeenSlider = () => {
     const ArrowButton = () => {
       arrow.addEventListener('click', () => {
-        slider.next()
-        slider.next()
+        let currentSlide = slider.track.details.rel
+        slider.moveToIdx(currentSlide + 2)
       })
     }
 
@@ -1574,7 +1574,7 @@ export const testimonialSliderLoadAnimation = () => {
           },
           '(max-width: 479px)': {
             slides: {
-              perView: 1.4,
+              perView: 1.25,
               spacing: 20,
               origin: 'center',
             },
