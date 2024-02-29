@@ -107,6 +107,7 @@ barba.hooks.afterEnter((data) => {
       recipeModal()
       filtersDropdownAnimation()
       recipeFilters()
+      pourLottieAnimations()
     }
   }, 10)
 

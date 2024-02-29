@@ -337,56 +337,58 @@ export const floatingBottle = () => {
 }
 
 export const pourLottieAnimations = () => {
-  let containers = document.querySelectorAll('.pour_background-animation')
+  setTimeout(() => {
+    let containers = document.querySelectorAll('.pour_background-animation')
 
-  if (containers) {
-    containers.forEach((container) => {
-      const lottieColour = container.getAttribute('lottie-colour')
-      if (lottieColour != 'red') {
-        let lottieAnim = Lottie.loadAnimation({
-          container: container,
-          renderer: 'canvas',
-          loop: false,
-          autoplay: false,
-          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_2.json',
-        })
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 50%',
-            end: 'bottom center',
-            onEnter: () => {
-              lottieAnim.play()
+    if (containers) {
+      containers.forEach((container) => {
+        const lottieColour = container.getAttribute('lottie-colour')
+
+        if (lottieColour != 'red') {
+          let lottieAnim = Lottie.loadAnimation({
+            container: container,
+            renderer: 'canvas',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_2.json',
+          })
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 50%',
+              end: 'bottom center',
+              onEnter: () => {
+                lottieAnim.play()
+              },
             },
-          },
-        })
+          })
 
-        tl
-      } else {
-        let lottieAnim = Lottie.loadAnimation({
-          container: container,
-          renderer: 'canvas',
-          loop: false,
-          autoplay: false,
-          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_NEON_FLAME_2.json',
-        })
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 50%',
-            end: 'bottom center',
-            onEnter: () => {
-              lottieAnim.play()
+          tl
+        } else {
+          let lottieAnim = Lottie.loadAnimation({
+            container: container,
+            renderer: 'canvas',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_NEON_FLAME_2.json',
+          })
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 50%',
+              end: 'bottom center',
+              onEnter: () => {
+                lottieAnim.play()
+              },
             },
-          },
-        })
+          })
 
-        tl
-      }
-
-      //lottieAnim.play()
-    })
-  }
+          tl
+        }
+      })
+    }
+  }, 200)
 }
 
 export const storySliderSlideIn = () => {
@@ -1547,7 +1549,6 @@ export const testimonialSliderLoadAnimation = () => {
   const selector = '.testimonial-card'
 
   const arrow = sliderRef.querySelector('[testimonial-slider = "arrow"]')
-  console.log(arrow)
   const addKeenSlider = () => {
     const ArrowButton = () => {
       arrow.addEventListener('click', () => {
