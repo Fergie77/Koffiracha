@@ -327,19 +327,21 @@ export const floatingBottle = () => {
     )
   }
 
-  document
-    .querySelectorAll("[tr-scrollflip-element='component']")
-    .forEach((componentEl, index) => {
-      createTimeline(componentEl, index)
+  setTimeout(() => {
+    document
+      .querySelectorAll("[tr-scrollflip-element='component']")
+      .forEach((componentEl, index) => {
+        createTimeline(componentEl, index)
 
-      let resizeTimer
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer)
-        resizeTimer = setTimeout(() => {
-          createTimeline(componentEl, index)
-        }, 250)
+        let resizeTimer
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer)
+          resizeTimer = setTimeout(() => {
+            createTimeline(componentEl, index)
+          }, 250)
+        })
       })
-    })
+  }, 500)
 }
 
 export const pourLottieAnimations = () => {

@@ -73,9 +73,9 @@ barba.hooks.afterEnter((data) => {
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
-      setTimeout(() => {
-        floatingBottle()
-      }, 500)
+      // setTimeout(() => {
+      floatingBottle()
+      // }, 500)
       roundingImageElement()
       storySliderSlideIn()
       instagramSlider()
