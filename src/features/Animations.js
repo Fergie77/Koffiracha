@@ -1566,7 +1566,7 @@ export const testimonialSliderLoadAnimation = () => {
     })
   }
   const sliderRef = document.querySelector('.section_testimonial')
-  const selector = '.testimonial-card-2'
+  const selector = '.testimonial-card'
   const arrow = sliderRef.querySelector(
     '[testimonial-slider = "arrow-desktop"]'
   )
