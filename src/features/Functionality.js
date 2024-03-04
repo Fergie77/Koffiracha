@@ -1,73 +1,103 @@
 import { closeNavFunction } from './Animations'
 
+// export const hugeTextScaling = () => {
+//   function adjustTextSize() {
+//     const container = document.querySelector('.footer3_heading-wrapper') // Replace '.container' with your container's selector
+//     const textElement = container.querySelector('.huge-text') // Replace '.text' with your text element's selector
+
+//     let desiredWidth = container.offsetWidth - 60 // Get the container's current width
+//     let currentFontSize = parseInt(
+//       window.getComputedStyle(textElement, null).getPropertyValue('font-size'),
+//       10
+//     )
+//     textElement.style.fontSize = currentFontSize + 'px' // Set initial font size
+
+//     // Function to estimate the width of the text element
+//     function getTextWidth(text, font) {
+//       // Create a temporary canvas to measure text width
+//       let canvas =
+//         getTextWidth.canvas ||
+//         (getTextWidth.canvas = document.createElement('canvas'))
+//       let context = canvas.getContext('2d')
+//       context.font = font
+//       let metrics = context.measureText(text)
+//       return metrics.width
+//     }
+
+//     let currentTextWidth = getTextWidth(
+//       textElement.textContent,
+//       currentFontSize +
+//         'px ' +
+//         window
+//           .getComputedStyle(textElement, null)
+//           .getPropertyValue('font-family')
+//     )
+
+//     // Adjust the font size until the text width is just less than or equal to the desired width
+//     while (currentTextWidth < desiredWidth && currentFontSize < 1000) {
+//       // Prevents infinite loops
+//       currentFontSize++
+//       textElement.style.fontSize = currentFontSize + 'px'
+//       currentTextWidth = getTextWidth(
+//         textElement.textContent,
+//         currentFontSize +
+//           'px ' +
+//           window
+//             .getComputedStyle(textElement, null)
+//             .getPropertyValue('font-family')
+//       )
+//     }
+
+//     // Optionally, decrease font size if it's too wide
+//     while (currentTextWidth > desiredWidth) {
+//       currentFontSize--
+//       textElement.style.fontSize = currentFontSize + 'px'
+//       currentTextWidth = getTextWidth(
+//         textElement.textContent,
+//         currentFontSize +
+//           'px ' +
+//           window
+//             .getComputedStyle(textElement, null)
+//             .getPropertyValue('font-family')
+//       )
+//     }
+//   }
+//   adjustTextSize()
+//   // // Run the function when the document is fully loaded
+//   // document.addEventListener('DOMContentLoaded', adjustTextSize)
+
+//   // Optionally, adjust text size on window resize
+//   window.addEventListener('resize', adjustTextSize)
+// }
+
 export const hugeTextScaling = () => {
-  function adjustTextSize() {
-    const container = document.querySelector('.footer3_heading-wrapper') // Replace '.container' with your container's selector
-    const textElement = container.querySelector('.huge-text') // Replace '.text' with your text element's selector
+  var title = document.querySelector('#footer-header')
 
-    let desiredWidth = container.offsetWidth - 60 // Get the container's current width
-    let currentFontSize = parseInt(
-      window.getComputedStyle(textElement, null).getPropertyValue('font-size'),
-      10
-    )
-    textElement.style.fontSize = currentFontSize + 'px' // Set initial font size
+  var titleText = title.innerHTML
 
-    // Function to estimate the width of the text element
-    function getTextWidth(text, font) {
-      // Create a temporary canvas to measure text width
-      let canvas =
-        getTextWidth.canvas ||
-        (getTextWidth.canvas = document.createElement('canvas'))
-      let context = canvas.getContext('2d')
-      context.font = font
-      let metrics = context.measureText(text)
-      return metrics.width
-    }
+  title.style.fontSize = 10.625 / (titleText.length / 5) + 'rem'
 
-    let currentTextWidth = getTextWidth(
-      textElement.textContent,
-      currentFontSize +
-        'px ' +
-        window
-          .getComputedStyle(textElement, null)
-          .getPropertyValue('font-family')
-    )
-
-    // Adjust the font size until the text width is just less than or equal to the desired width
-    while (currentTextWidth < desiredWidth && currentFontSize < 1000) {
-      // Prevents infinite loops
-      currentFontSize++
-      textElement.style.fontSize = currentFontSize + 'px'
-      currentTextWidth = getTextWidth(
-        textElement.textContent,
-        currentFontSize +
-          'px ' +
-          window
-            .getComputedStyle(textElement, null)
-            .getPropertyValue('font-family')
-      )
-    }
-
-    // Optionally, decrease font size if it's too wide
-    while (currentTextWidth > desiredWidth) {
-      currentFontSize--
-      textElement.style.fontSize = currentFontSize + 'px'
-      currentTextWidth = getTextWidth(
-        textElement.textContent,
-        currentFontSize +
-          'px ' +
-          window
-            .getComputedStyle(textElement, null)
-            .getPropertyValue('font-family')
-      )
+  function myFunction(x) {
+    console.log(title.parentElement.clientWidth)
+    if (x.matches) {
+      // If media query matches
+      title.style.fontSize =
+        title.parentElement.clientWidth /
+          68.4978902954 /
+          (titleText.length / 5) +
+        'rem'
+    } else {
+      title.style.fontSize =
+        title.parentElement.clientWidth /
+          47.4978902954 /
+          (titleText.length / 5) +
+        'rem'
     }
   }
-  adjustTextSize()
-  // // Run the function when the document is fully loaded
-  // document.addEventListener('DOMContentLoaded', adjustTextSize)
 
-  // Optionally, adjust text size on window resize
-  window.addEventListener('resize', adjustTextSize)
+  var x = window.matchMedia('(max-width: 600px)')
+  myFunction(x) // Call listener function at run time
+  window.addEventListener('resize', myFunction) // Attach listener function on state changes
 }
 
 export const shareRecipe = () => {

@@ -1,7 +1,7 @@
 import barba from '@barba/core'
 
 import {
-  buttonAnimation,
+  //buttonAnimation,
   floatingBottle,
   navAnimation,
   pageTransition,
@@ -13,7 +13,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  siteWideCartButtons,
+  //siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -29,20 +29,20 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  cookieLinkSetter,
-  //cookieClassSwap,
-  hugeTextScaling,
-  openChat,
+  // cookieLinkSetter,
+  // //cookieClassSwap,
+  // hugeTextScaling,
+  // openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  disableFooterColourSwap,
-  footerColourSwap,
-  navSwapping,
-  setNavColourManual,
+  // disableFooterColourSwap,
+  // footerColourSwap,
+  // navSwapping,
+  // setNavColourManual,
 } from './features/NavbarSwapping'
 
 //import { createLenis, startLenis } from './lenisInstance.js'
@@ -60,16 +60,16 @@ setCheckout()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     //cookieClassSwap()
-    cookieLinkSetter()
-    openChat()
-    siteWideCartButtons()
-    buttonAnimation()
-    //featuredProductAddToCart()
-    navSwapping()
-    disableFooterColourSwap()
-    footerColourSwap()
-    setNavColourManual('yellow')
-    hugeTextScaling()
+    // cookieLinkSetter()
+    // openChat()
+    // siteWideCartButtons()
+    // buttonAnimation()
+    // //featuredProductAddToCart()
+    // navSwapping()
+    // disableFooterColourSwap()
+    // footerColourSwap()
+    // setNavColourManual('yellow')
+    // hugeTextScaling()
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()

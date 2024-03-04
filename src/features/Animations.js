@@ -941,7 +941,7 @@ const initTimeline = () => {
       {
         width: '100%',
         height: '650%',
-        ease: 'elastic(0.3,0.5)',
+        ease: 'elastic.out(0.3,0.5)',
         duration: 1.5,
         onStart: () => {
           navLinksList.style.display = 'flex'
@@ -1997,7 +1997,7 @@ export const recipeModal = () => {
     const modalBackground = modal.querySelector('.recipe-modal_background')
     const close = modal.querySelector('[recipe-modal="close"]')
     const modalLink = e.currentTarget.getAttribute('recipe-slug')
-
+    console.log(modalLink)
     appendUrl(modalLink)
 
     const tl = gsap.timeline({ paused: true })
