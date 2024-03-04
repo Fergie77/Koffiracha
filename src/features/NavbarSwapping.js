@@ -6,7 +6,6 @@ import { addToCart } from './Animations'
 //import { siteWideCartButtons } from './Animations'
 
 export const navSwapping = () => {
-  gsap.registerPlugin(ScrollTrigger)
   ScrollTrigger.killAll()
   // const featuredProduct = document
   //   .querySelector('[cartitemid]')

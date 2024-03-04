@@ -9,6 +9,8 @@ import SplitType from 'split-type'
 import { appendUrl, enableScrolling, stopScrolling } from './Functionality'
 import { setNavColourManual } from './NavbarSwapping'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
   const smallbutton = document.querySelectorAll("[gsap-button-2='true']")
@@ -160,7 +162,7 @@ export const floatingBottle = () => {
   }
 
   gsap.registerPlugin(Flip)
-  ScrollTrigger.normalizeScroll(true)
+  //ScrollTrigger.normalizeScroll(true)
 
   function createTimeline(componentEl, componentIndex) {
     let originEl = componentEl.querySelectorAll(
