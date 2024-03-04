@@ -1,5 +1,6 @@
 import barba from '@barba/core'
 
+import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
   floatingBottle,
@@ -7,7 +8,7 @@ import {
   pageTransition,
   roundingImageElement,
   scaleUpAnimation,
-  storySliderSlideIn,
+  //storySliderSlideIn,
   scrollingText,
   productLinkHover,
   accordionToggle,
@@ -45,8 +46,6 @@ import {
   setNavColourManual,
 } from './features/NavbarSwapping'
 
-//import { createLenis, startLenis } from './lenisInstance.js'
-
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
 })
@@ -77,11 +76,24 @@ barba.hooks.afterEnter((data) => {
       floatingBottle()
       // }, 500)
       roundingImageElement()
-      storySliderSlideIn()
       instagramSlider()
       pourPourPour()
       scrollingText()
       hugeTextSplitAnimation()
+      storySliderSlideIn(
+        document.querySelector('[story-slider = "arrow"]'),
+        document.querySelector('[story-slider = "close"]'),
+        document.querySelector('[story-slider = "slider"]'),
+        document.querySelector('[story-slider = "background"]'),
+        document.querySelector('[story-slider = "text"]')
+      )
+      storySliderSlideIn(
+        document.querySelector('[testimonial-slider = "arrow"]'),
+        document.querySelector('[testimonial-slider = "close"]'),
+        document.querySelector('[testimonial-slider = "slider"]'),
+        null,
+        document.querySelector('[testimonial-slider = "text"]')
+      )
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()

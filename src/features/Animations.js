@@ -399,284 +399,296 @@ export const pourLottieAnimations = () => {
   }, 200)
 }
 
-export const storySliderSlideIn = () => {
-  const arrow = document.querySelector('[story-slider = "arrow"]')
-  const close = document.querySelector('[story-slider = "close"]')
-  const slider = document.querySelector('[story-slider = "slider"]')
-  const background = document.querySelector('[story-slider = "background"]')
-  const mobileText = document.querySelector('.mobile-slider-text')
-  const easing = 'expo.inOut'
-  const duration = 2
-  let firstClick = false
-  const easeInOutExpo = (t) => {
-    return t === 0
-      ? 0
-      : t === 1
-      ? 1
-      : t < 0.5
-      ? 0.5 * Math.pow(2, 20 * t - 10)
-      : 1 - 0.5 * Math.pow(2, -20 * t + 10)
-  }
+// export const storySliderSlideIn = (
+//   arrow,
+//   close,
+//   slider,
+//   background,
+//   mobileText
+// ) => {
+//   const easing = 'expo.inOut'
+//   const duration = 2
+//   let firstClick = false
+//   const easeInOutExpo = (t) => {
+//     return t === 0
+//       ? 0
+//       : t === 1
+//       ? 1
+//       : t < 0.5
+//       ? 0.5 * Math.pow(2, 20 * t - 10)
+//       : 1 - 0.5 * Math.pow(2, -20 * t + 10)
+//   }
 
-  gsap.set(close, {
-    opacity: 0,
-  })
+//   gsap.set(close, {
+//     opacity: 0,
+//   })
 
-  // Declare this function globally or at a scope accessible by slideIn and WheelControls initialization
-  let enableWheelControls
-  let disableWheelControls // To disable wheel controls
-  const sliderOriginalPositionRef = window.getComputedStyle(slider).transform
-  var sliderOriginalPosition = new DOMMatrix(sliderOriginalPositionRef).e
+//   // Declare this function globally or at a scope accessible by slideIn and WheelControls initialization
+//   let enableWheelControls
+//   let disableWheelControls // To disable wheel controls
 
-  const slideIn = () => {
-    gsap.to(slider, {
-      x: 0,
-      ease: easing,
-      duration: duration,
-      onStart: removeListeners,
-      onComplete: () => {
-        // Enable wheel controls after slideIn completes
-        if (typeof enableWheelControls === 'function') {
-          enableWheelControls()
-        }
-      },
-    })
+//   const sliderOriginalPositionRef = window.getComputedStyle(slider).transform
+//   var sliderOriginalPosition = new DOMMatrix(sliderOriginalPositionRef).e
 
-    // Check if the screen width is below 991px
-    if (window.innerWidth < 479) {
-      // For screens smaller than 991px
-      gsap.to(arrow, {
-        opacity: 0,
-        ease: easing,
-        duration: duration,
-        onComplete: () => {
-          arrow.style.display = 'none'
-        },
-      })
-      gsap.to(mobileText, {
-        opacity: 0,
-        ease: easing,
-        duration: duration,
-        onComplete: () => {
-          mobileText.style.display = 'none'
-        },
-      })
-    } else {
-      // For screens 991px and above
-      gsap.to(background, {
-        x: '-40%',
-        ease: easing,
-        duration: duration,
-      })
-    }
+//   const slideIn = () => {
+//     gsap.to(slider, {
+//       x: 0,
+//       ease: easing,
+//       duration: duration,
+//       onStart: removeListeners,
+//       onComplete: () => {
+//         // Enable wheel controls after slideIn completes
+//         if (typeof enableWheelControls === 'function') {
+//           enableWheelControls()
+//         }
+//       },
+//     })
 
-    gsap.to(close, {
-      opacity: 1,
-    })
-  }
-  const slideOut = () => {
-    gsap.to(slider, {
-      x: sliderOriginalPosition,
-      ease: easing,
-      duration: duration,
-      onStart: () => {
-        firstClick = true
-      },
-      onComplete: () => {
-        // Disable wheel controls after slideOut completes
-        if (typeof disableWheelControls === 'function') {
-          disableWheelControls()
-          firstClick = false
-        }
-      },
-    })
+//     // Check if the screen width is below 991px
+//     if (window.innerWidth < 479) {
+//       // For screens smaller than 991px
+//       gsap.to(arrow, {
+//         opacity: 0,
+//         ease: easing,
+//         duration: duration,
+//         onComplete: () => {
+//           arrow.style.display = 'none'
+//         },
+//       })
+//       gsap.to(mobileText, {
+//         opacity: 0,
+//         ease: easing,
+//         duration: duration,
+//         onComplete: () => {
+//           mobileText.style.display = 'none'
+//         },
+//       })
+//     } else {
+//       // For screens 991px and above
+//       if (background) {
+//         gsap.to(background, {
+//           x: '-40%',
+//           ease: easing,
+//           duration: duration,
+//         })
+//       }
+//     }
 
-    // Check if the screen width is below 991px
-    if (window.innerWidth < 479) {
-      // For screens smaller than 991px
-      gsap.to(arrow, {
-        opacity: 1,
-        ease: easing,
-        duration: duration,
-        onStart: () => {
-          arrow.style.display = 'flex'
-        },
-      })
-      gsap.to(mobileText, {
-        opacity: 1,
-        ease: easing,
-        duration: duration,
-        onStart: () => {
-          mobileText.style.display = 'flex'
-        },
-      })
-    } else {
-      // For screens 991px and above
-      gsap.to(background, {
-        x: '0%',
-        ease: easing,
-        duration: duration,
-      })
-    }
+//     gsap.to(close, {
+//       opacity: 1,
+//     })
+//   }
+//   const slideOut = () => {
+//     gsap.to(slider, {
+//       x: sliderOriginalPosition,
+//       ease: easing,
+//       duration: duration,
+//       onStart: () => {
+//         firstClick = true
+//       },
+//       onComplete: () => {
+//         // Disable wheel controls after slideOut completes
+//         if (typeof disableWheelControls === 'function') {
+//           disableWheelControls()
+//           firstClick = false
+//         }
+//       },
+//     })
 
-    gsap.to(close, {
-      opacity: 0,
-    })
-  }
-  const slideInSlightly = () => {
-    gsap.to(slider, {
-      x: sliderOriginalPosition - 100,
-      ease: 'power2.out',
-      duration: 0.5,
-    })
-  }
-  const slideOutSlightly = () => {
-    gsap.to(slider, {
-      x: sliderOriginalPosition,
-      ease: 'power2.out',
-      duration: 0.5,
-    })
-  }
-  const removeListeners = () => {
-    arrow.removeEventListener('click', slideIn)
-    arrow.removeEventListener('mouseenter', slideInSlightly)
-    arrow.removeEventListener('mouseleave', slideOutSlightly)
-  }
-  arrow.addEventListener('click', slideIn)
-  arrow.addEventListener('mouseenter', slideInSlightly)
-  arrow.addEventListener('mouseleave', slideOutSlightly)
+//     // Check if the screen width is below 991px
+//     if (window.innerWidth < 479) {
+//       // For screens smaller than 991px
+//       gsap.to(arrow, {
+//         opacity: 1,
+//         ease: easing,
+//         duration: duration,
+//         onStart: () => {
+//           arrow.style.display = 'flex'
+//         },
+//       })
+//       gsap.to(mobileText, {
+//         opacity: 1,
+//         ease: easing,
+//         duration: duration,
+//         onStart: () => {
+//           mobileText.style.display = 'flex'
+//         },
+//       })
+//     } else {
+//       // For screens 991px and above
+//       if (background) {
+//         gsap.to(background, {
+//           x: '0%',
+//           ease: easing,
+//           duration: duration,
+//         })
+//       }
+//     }
 
-  const addKeenSlider = () => {
-    const ArrowButton = () => {
-      arrow.addEventListener('click', () => {
-        if (firstClick) {
-          slider.next()
-        }
-        firstClick = true
-      })
-    }
+//     gsap.to(close, {
+//       opacity: 0,
+//     })
+//   }
+//   const slideInSlightly = () => {
+//     gsap.to(slider, {
+//       x: sliderOriginalPosition - 100,
+//       ease: 'power2.out',
+//       duration: 0.5,
+//     })
+//   }
+//   const slideOutSlightly = () => {
+//     gsap.to(slider, {
+//       x: sliderOriginalPosition,
+//       ease: 'power2.out',
+//       duration: 0.5,
+//     })
+//   }
+//   const removeListeners = () => {
+//     arrow.removeEventListener('click', slideIn)
+//     arrow.removeEventListener('mouseenter', slideInSlightly)
+//     arrow.removeEventListener('mouseleave', slideOutSlightly)
+//   }
+//   arrow.addEventListener('click', slideIn)
+//   arrow.addEventListener('mouseenter', slideInSlightly)
+//   arrow.addEventListener('mouseleave', slideOutSlightly)
 
-    const revertSlider = () => {
-      document.addEventListener('click', function (event) {
-        // Check if the click target is not the specific element or its descendants
+//   const addKeenSlider = () => {
+//     const ArrowButton = () => {
+//       arrow.addEventListener('click', () => {
+//         if (firstClick) {
+//           slider.next()
+//         }
+//         firstClick = true
+//       })
+//     }
 
-        if (
-          event.target !== arrow &&
-          !arrow.contains(event.target) &&
-          event.target !== slider.container &&
-          !slider.container.contains(event.target)
-        ) {
-          // This code will run when you click anything other than the specific element
-          slideOut()
-          firstClick = false
-          arrow.addEventListener('click', slideIn)
-          arrow.addEventListener('mouseenter', slideInSlightly)
-          arrow.addEventListener('mouseleave', slideOutSlightly)
-          slider.moveToIdx(0, false, { duration: 2000, easing: easeInOutExpo })
-        }
-      })
-    }
+//     const revertSlider = () => {
+//       document.addEventListener('click', function (event) {
+//         // Check if the click target is not the specific element or its descendants
 
-    function WheelControls(slider) {
-      var touchTimeout
-      var position = { x: 0, y: 0 } // Initialize position to prevent undefined errors
-      var wheelActive = false
+//         if (
+//           event.target !== arrow &&
+//           !arrow.contains(event.target) &&
+//           event.target !== slider.container &&
+//           !slider.container.contains(event.target)
+//         ) {
+//           // This code will run when you click anything other than the specific element
+//           slideOut()
+//           firstClick = false
+//           arrow.addEventListener('click', slideIn)
+//           arrow.addEventListener('mouseenter', slideInSlightly)
+//           arrow.addEventListener('mouseleave', slideOutSlightly)
+//           slider.moveToIdx(0, false, { duration: 2000, easing: easeInOutExpo })
+//         }
+//       })
+//     }
 
-      function dispatch(e, name) {
-        position.x -= e.deltaX
-        position.y -= e.deltaY
-        slider.container.dispatchEvent(
-          new CustomEvent(name, {
-            detail: {
-              x: position.x,
-              y: position.y,
-            },
-          })
-        )
-      }
+//     function WheelControls(slider) {
+//       var touchTimeout
+//       var position = { x: 0, y: 0 } // Initialize position to prevent undefined errors
+//       var wheelActive = false
 
-      function wheelStart(e) {
-        position = {
-          x: e.pageX,
-          y: e.pageY,
-        }
-        dispatch(e, 'ksDragStart')
-      }
+//       function dispatch(e, name) {
+//         position.x -= e.deltaX
+//         position.y -= e.deltaY
+//         slider.container.dispatchEvent(
+//           new CustomEvent(name, {
+//             detail: {
+//               x: position.x,
+//               y: position.y,
+//             },
+//           })
+//         )
+//       }
 
-      function wheel(e) {
-        dispatch(e, 'ksDrag')
-      }
+//       function wheelStart(e) {
+//         position = {
+//           x: e.pageX,
+//           y: e.pageY,
+//         }
+//         dispatch(e, 'ksDragStart')
+//       }
 
-      function wheelEnd(e) {
-        dispatch(e, 'ksDragEnd')
-      }
+//       function wheel(e) {
+//         dispatch(e, 'ksDrag')
+//       }
 
-      function eventWheel(e) {
-        e.preventDefault()
-        if (!wheelActive) {
-          wheelStart(e)
-          wheelActive = true
-        }
-        wheel(e)
-        clearTimeout(touchTimeout)
-        touchTimeout = setTimeout(() => {
-          wheelActive = false
-          wheelEnd(e)
-        }, 50)
-      }
+//       function wheelEnd(e) {
+//         dispatch(e, 'ksDragEnd')
+//       }
 
-      enableWheelControls = () => {
-        slider.container.addEventListener('wheel', eventWheel, {
-          passive: false,
-        })
-      }
+//       function eventWheel(e) {
+//         e.preventDefault()
+//         if (!wheelActive) {
+//           wheelStart(e)
+//           wheelActive = true
+//         }
+//         wheel(e)
+//         clearTimeout(touchTimeout)
+//         touchTimeout = setTimeout(() => {
+//           wheelActive = false
+//           wheelEnd(e)
+//         }, 50)
+//       }
 
-      disableWheelControls = () => {
-        slider.container.removeEventListener('wheel', eventWheel, {
-          passive: false,
-        })
-      }
-    }
+//       enableWheelControls = () => {
+//         slider.container.addEventListener('wheel', eventWheel, {
+//           passive: false,
+//         })
+//       }
 
-    const ifWheelFirst = (slider) => {
-      setTimeout(() => {
-        slider.on('slideChanged', () => {
-          if (!firstClick && slider.track.details.abs > 0) {
-            firstClick = true
-            slideIn()
-          }
-        })
-      }, 100)
-    }
+//       disableWheelControls = () => {
+//         slider.container.removeEventListener('wheel', eventWheel, {
+//           passive: false,
+//         })
+//       }
+//     }
 
-    var slider = new KeenSlider(
-      '.story-slider_wrapper',
-      {
-        loop: false,
-        rubberband: false,
-        selector: '.story-slide',
-        slides: {
-          perView: 3.5,
-        },
-        breakpoints: {
-          '(max-width: 768px)': {
-            slides: {
-              perView: 2,
-            },
-          },
-          '(max-width: 479px)': {
-            slides: {
-              perView: 1,
-            },
-          },
-        },
-      },
-      [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
-    )
-    slider
-  }
-  addKeenSlider()
-}
+//     const ifWheelFirst = (slider) => {
+//       setTimeout(() => {
+//         slider.on('slideChanged', () => {
+//           if (!firstClick && slider.track.details.abs > 0) {
+//             firstClick = true
+//             slideIn()
+//           }
+//         })
+//       }, 100)
+//     }
+
+//     document
+//       .querySelectorAll('.story-slider_wrapper')
+//       .forEach((sliderElement) => {
+//         console.log(sliderElement)
+//         var slider = new KeenSlider(
+//           sliderElement,
+//           {
+//             loop: false,
+//             rubberband: false,
+//             selector: '.story-slide',
+//             slides: {
+//               perView: 3.5,
+//             },
+//             breakpoints: {
+//               '(max-width: 768px)': {
+//                 slides: {
+//                   perView: 2,
+//                 },
+//               },
+//               '(max-width: 479px)': {
+//                 slides: {
+//                   perView: 1,
+//                 },
+//               },
+//             },
+//           },
+//           [ArrowButton, revertSlider, WheelControls, ifWheelFirst]
+//         )
+//         slider
+//         //console.log(slider)
+//       })
+//   }
+//   addKeenSlider()
+// }
 
 export const pageTransition = () => {
   let container = document.querySelector('.page-transition')
@@ -1554,46 +1566,46 @@ export const testimonialSliderLoadAnimation = () => {
     })
   }
   const sliderRef = document.querySelector('.section_testimonial')
-  const selector = '.testimonial-card'
+  const selector = '.testimonial-card-2'
+  const arrow = sliderRef.querySelector(
+    '[testimonial-slider = "arrow-desktop"]'
+  )
 
-  const arrow = sliderRef.querySelector('[testimonial-slider = "arrow"]')
-  const addKeenSlider = () => {
-    const ArrowButton = () => {
-      arrow.addEventListener('click', () => {
-        let currentSlide = slider.track.details.rel
-        slider.moveToIdx(currentSlide + 2)
-      })
-    }
+  const ArrowButton = (slider) => {
+    arrow.addEventListener('click', () => {
+      let currentSlide = slider.track.details.rel
+      slider.moveToIdx(currentSlide + 2)
+    })
+  }
 
-    const slider = new KeenSlider(
-      sliderRef,
-      {
-        selector: selector,
-        slides: {
-          perView: 2.7,
-          spacing: 45,
-        },
-        loop: true,
-        breakpoints: {
-          '(max-width: 768px)': {
-            slides: {
-              perView: 2.3,
-              spacing: 45,
-            },
+  const slider = new KeenSlider(
+    sliderRef,
+    {
+      selector: selector,
+      slides: {
+        perView: 2.7,
+        spacing: 45,
+      },
+      loop: true,
+      breakpoints: {
+        '(max-width: 768px)': {
+          slides: {
+            perView: 2.3,
+            spacing: 45,
           },
-          '(max-width: 479px)': {
-            slides: {
-              perView: 1.25,
-              spacing: 20,
-              origin: 'center',
-            },
+        },
+        '(max-width: 479px)': {
+          slides: {
+            perView: 1.25,
+            spacing: 20,
+            //origin: 'center',
           },
         },
       },
-      [WheelControls, ArrowButton]
-    )
-  }
-  addKeenSlider()
+    },
+    [WheelControls, ArrowButton]
+  )
+  slider
 }
 
 export const recipeCardAnimation = () => {

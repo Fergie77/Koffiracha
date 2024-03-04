@@ -78,7 +78,6 @@ export const hugeTextScaling = () => {
   title.style.fontSize = 10.625 / (titleText.length / 5) + 'rem'
 
   function myFunction(x) {
-    console.log(title.parentElement.clientWidth)
     if (x.matches) {
       // If media query matches
       title.style.fontSize =
