@@ -49,8 +49,7 @@ export const storySliderSlideIn = (
           arrow.style.display = 'none'
         },
         onStart: () => {
-          removeListeners()
-          console.log('done')
+          //  removeListeners()
         },
       })
       gsap.to(mobileText, {
