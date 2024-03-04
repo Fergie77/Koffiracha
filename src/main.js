@@ -1,7 +1,7 @@
 import barba from '@barba/core'
 
 import {
-  //buttonAnimation,
+  buttonAnimation,
   floatingBottle,
   navAnimation,
   pageTransition,
@@ -13,7 +13,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  //siteWideCartButtons,
+  siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -29,10 +29,10 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  // cookieLinkSetter,
+  cookieLinkSetter,
   // //cookieClassSwap,
   // hugeTextScaling,
-  // openChat,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
@@ -41,7 +41,7 @@ import {
   checkIfRedProduct,
   // disableFooterColourSwap,
   // footerColourSwap,
-  // navSwapping,
+  navSwapping,
   // setNavColourManual,
 } from './features/NavbarSwapping'
 
@@ -60,12 +60,12 @@ setCheckout()
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     //cookieClassSwap()
-    // cookieLinkSetter()
-    // openChat()
-    // siteWideCartButtons()
-    // buttonAnimation()
+    cookieLinkSetter()
+    openChat()
+    siteWideCartButtons()
+    buttonAnimation()
     // //featuredProductAddToCart()
-    // navSwapping()
+    navSwapping()
     // disableFooterColourSwap()
     // footerColourSwap()
     // setNavColourManual('yellow')
