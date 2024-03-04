@@ -163,9 +163,9 @@ export const floatingBottle = () => {
 
   gsap.registerPlugin(Flip)
   ScrollTrigger.normalizeScroll({
-    allowNestedScroll: true,
-    lockAxis: false,
-    type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
+    //allowNestedScroll: true,
+    //lockAxis: false,
+    //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
   })
 
   function createTimeline(componentEl, componentIndex) {
