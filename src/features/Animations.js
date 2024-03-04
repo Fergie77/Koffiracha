@@ -162,7 +162,7 @@ export const floatingBottle = () => {
   }
 
   gsap.registerPlugin(Flip)
-  //ScrollTrigger.normalizeScroll(true)
+  ScrollTrigger.normalizeScroll(true)
 
   function createTimeline(componentEl, componentIndex) {
     let originEl = componentEl.querySelectorAll(
