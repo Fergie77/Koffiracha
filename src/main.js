@@ -30,8 +30,8 @@ import {
 } from './features/Animations'
 import {
   cookieLinkSetter,
-  // //cookieClassSwap,
-  // hugeTextScaling,
+  //cookieClassSwap,
+  hugeTextScaling,
   openChat,
   recipeFilters,
   setCheckout,
@@ -39,10 +39,10 @@ import {
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  // disableFooterColourSwap,
-  // footerColourSwap,
-  navSwapping,
-  // setNavColourManual,
+  disableFooterColourSwap,
+  footerColourSwap,
+  //navSwapping,
+  setNavColourManual,
 } from './features/NavbarSwapping'
 
 //import { createLenis, startLenis } from './lenisInstance.js'
@@ -64,12 +64,12 @@ barba.hooks.afterEnter((data) => {
     openChat()
     siteWideCartButtons()
     buttonAnimation()
-    // //featuredProductAddToCart()
-    navSwapping()
-    // disableFooterColourSwap()
-    // footerColourSwap()
-    // setNavColourManual('yellow')
-    // hugeTextScaling()
+    //featuredProductAddToCart()
+    //navSwapping()
+    disableFooterColourSwap()
+    footerColourSwap()
+    setNavColourManual('yellow')
+    hugeTextScaling()
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
