@@ -1611,32 +1611,33 @@ export const testimonialSliderLoadAnimation = () => {
 export const recipeCardAnimation = () => {
   const recipeCards = document.querySelectorAll('.gallery3_card-link')
 
+  const lottieColour = document.querySelector('.is-red-test')
+
   recipeCards.forEach((card) => {
     const container = card.querySelectorAll('.gallery3_card-lottie')
 
     let lottie = null
 
     container.forEach((element) => {
-      const lottieColour = element.getAttribute('lottie-colour')
-
-      if (!element.classList.contains('w-condition-invisible')) {
-        if (lottieColour != 'red' || lottieColour == null) {
-          lottie = Lottie.loadAnimation({
-            container: element,
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
-          })
-        } else {
-          lottie = Lottie.loadAnimation({
-            container: element,
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION_NEON_FLAME.json',
-          })
-        }
+      //const lottieColour = element.getAttribute('lottie-colour')
+      if (lottieColour.classList.contains('w-condition-invisible')) {
+        console.log('yellow')
+        lottie = Lottie.loadAnimation({
+          container: element,
+          renderer: 'svg',
+          loop: false,
+          autoplay: false,
+          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
+        })
+      } else {
+        console.log(lottieColour)
+        lottie = Lottie.loadAnimation({
+          container: element,
+          renderer: 'svg',
+          loop: false,
+          autoplay: false,
+          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION_NEON_FLAME.json',
+        })
       }
     })
 
@@ -1979,7 +1980,6 @@ export const recipeSlider = () => {
   const selector = '.gallery3_card-link'
 
   const arrow = sliderRef.querySelector('[recipe-slider = "arrow"]')
-
   const addKeenSlider = () => {
     const ArrowButton = () => {
       arrow.addEventListener('click', () => {

@@ -186,9 +186,14 @@ export const footerColourSwap = () => {
           setNewColour('.nav', '--colour--white', '#000000')
         },
         onLeaveBack: () => {
-          setNewColour('.nav', '--colour--black', '#000000')
-          setNewColour('.nav', '--colour--yellow', '#E6FE52')
-          setNewColour('.nav', '--colour--white', '#ffffff')
+          const colour = document.querySelector('.is-red-test')
+          if (!colour.classList.contains('w-condition-invisible')) {
+            setNavColourManual('red')
+          } else {
+            setNewColour('.nav', '--colour--black', '#000000')
+            setNewColour('.nav', '--colour--yellow', '#E6FE52')
+            setNewColour('.nav', '--colour--white', '#ffffff')
+          }
         },
       })
     }
@@ -209,6 +214,7 @@ export const setNavColourManual = (colour) => {
   } else if (colour == 'red') {
     setNewColour('.nav', '--colour--black', '#000000')
     setNewColour('.nav', '--colour--yellow', '#FF6E65')
+    setNewColour('.nav', '--colour--white', '#ffffff')
   }
 }
 
