@@ -145,15 +145,15 @@ let isScrollingEnabled = true
 
 export const stopScrolling = () => {
   // Check if the screen width is greater than 479px
-  //  if (window.innerWidth > 479 && isScrollingEnabled) {
-  // Disable scrolling by setting overflow hidden
-  document.body.style.overflow = 'hidden'
+  if (window.innerWidth > 479 && isScrollingEnabled) {
+    // Disable scrolling by setting overflow hidden
+    document.body.style.overflow = 'hidden'
 
-  // Prevent touchmove event for mobile devices
-  document.addEventListener('touchmove', preventScroll, { passive: false })
+    // Prevent touchmove event for mobile devices
+    document.addEventListener('touchmove', preventScroll, { passive: false })
 
-  isScrollingEnabled = false
-  //  }
+    isScrollingEnabled = false
+  }
 }
 
 export const enableScrolling = () => {
