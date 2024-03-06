@@ -173,7 +173,17 @@ export const enableScrolling = () => {
 
 export const hideNav = (hideOrShow) => {
   const nav = document.querySelector('.nav')
+  const middleButton = nav.querySelector('.middle-button_wrapper')
+  const middleButtonText = middleButton.querySelector('.button-text_wrapper')
 
+  gsap.to(middleButtonText, {
+    opacity: hideOrShow ? '0' : '1',
+    ease: 'power2.Out',
+  })
+  gsap.to(middleButton, {
+    scale: hideOrShow ? '2' : '1',
+    ease: 'power2.Out',
+  })
   gsap.to(nav, {
     y: hideOrShow ? '200%' : '0%',
     ease: 'power2.Out',
