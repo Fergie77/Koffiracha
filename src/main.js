@@ -13,7 +13,7 @@ import {
   productLinkHover,
   accordionToggle,
   loadCart,
-  //openCart,
+  openCart,
   siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
@@ -52,7 +52,7 @@ barba.init({
 
 pageTransition()
 navAnimation()
-//openCart()
+openCart()
 
 loadCart()
 setCheckout()
