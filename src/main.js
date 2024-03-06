@@ -1,4 +1,5 @@
 import barba from '@barba/core'
+import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
