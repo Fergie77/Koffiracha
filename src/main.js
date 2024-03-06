@@ -121,6 +121,7 @@ barba.hooks.afterEnter((data) => {
       filtersDropdownAnimation()
       recipeFilters()
       pourLottieAnimations()
+      ScrollTrigger.normalizeScroll(false)
     }
   }, 10)
 
