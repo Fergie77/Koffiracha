@@ -13,7 +13,7 @@ import {
   productLinkHover,
   accordionToggle,
   loadCart,
-  openCart,
+  //openCart,
   siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
@@ -52,7 +52,7 @@ barba.init({
 
 pageTransition()
 navAnimation()
-openCart()
+//openCart()
 
 loadCart()
 setCheckout()
@@ -60,7 +60,7 @@ barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     //cookieClassSwap()
     cookieLinkSetter()
-    openChat()
+    //openChat()
     siteWideCartButtons()
     buttonAnimation()
     //featuredProductAddToCart()
