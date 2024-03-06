@@ -1591,7 +1591,7 @@ export const testimonialSliderLoadAnimation = () => {
         '(max-width: 768px)': {
           slides: {
             perView: 2.3,
-            spacing: 45,
+            spacing: 0,
           },
         },
         '(max-width: 479px)': {
@@ -1620,23 +1620,31 @@ export const recipeCardAnimation = () => {
 
     container.forEach((element) => {
       //const lottieColour = element.getAttribute('lottie-colour')
-      if (lottieColour.classList.contains('w-condition-invisible')) {
-        console.log('yellow')
+      if (lottieColour) {
+        if (lottieColour.classList.contains('w-condition-invisible')) {
+          lottie = Lottie.loadAnimation({
+            container: element,
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
+          })
+        } else {
+          lottie = Lottie.loadAnimation({
+            container: element,
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION_NEON_FLAME.json',
+          })
+        }
+      } else {
         lottie = Lottie.loadAnimation({
           container: element,
           renderer: 'svg',
           loop: false,
           autoplay: false,
           path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION.json',
-        })
-      } else {
-        console.log(lottieColour)
-        lottie = Lottie.loadAnimation({
-          container: element,
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_HOVER_ANIMATION_NEON_FLAME.json',
         })
       }
     })
@@ -1995,7 +2003,24 @@ export const recipeSlider = () => {
           perView: 3.1,
           spacing: 24,
         },
+
         loop: true,
+        breakpoints: {
+          '(max-width: 768px)': {
+            slides: {
+              perView: 1.2,
+              spacing: 45,
+              origin: 'center',
+            },
+          },
+          '(max-width: 479px)': {
+            slides: {
+              perView: 1.15,
+              spacing: 20,
+              origin: 'center',
+            },
+          },
+        },
       },
       [WheelControls, ArrowButton]
     )
@@ -2012,12 +2037,13 @@ export const recipeModal = () => {
   const searchParams = url.searchParams
 
   const toggleModal = (e) => {
+    console.log(e)
     const modal = e.currentTarget.nextElementSibling
     const modalInfo = modal.querySelector('.section_layout3')
     const modalBackground = modal.querySelector('.recipe-modal_background')
     const close = modal.querySelector('[recipe-modal="close"]')
     const modalLink = e.currentTarget.getAttribute('recipe-slug')
-    console.log(modalLink)
+
     appendUrl(modalLink)
 
     const tl = gsap.timeline({ paused: true })

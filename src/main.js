@@ -13,7 +13,7 @@ import {
   productLinkHover,
   accordionToggle,
   loadCart,
-  openCart,
+  //openCart,
   siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
@@ -52,7 +52,7 @@ barba.init({
 
 pageTransition()
 navAnimation()
-openCart()
+//openCart()
 
 loadCart()
 setCheckout()
@@ -110,6 +110,7 @@ barba.hooks.afterEnter((data) => {
       }, 1000)
       recipeSlider()
       pourLottieAnimations()
+      recipeModal()
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       recipeAccordionToggle()

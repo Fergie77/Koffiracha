@@ -173,6 +173,7 @@ export const footerColourSwap = () => {
   ScrollTrigger.killAll()
 
   setTimeout(() => {
+    const colour = document.querySelector('.is-red-test')
     // Only create a new ScrollTrigger if it doesn't already exist
     if (!footerScrollTrigger) {
       footerScrollTrigger = ScrollTrigger.create({
@@ -186,7 +187,6 @@ export const footerColourSwap = () => {
           setNewColour('.nav', '--colour--white', '#000000')
         },
         onLeaveBack: () => {
-          const colour = document.querySelector('.is-red-test')
           if (!colour.classList.contains('w-condition-invisible')) {
             setNavColourManual('red')
           } else {
