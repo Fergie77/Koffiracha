@@ -1,3 +1,5 @@
+import { gsap } from 'gsap'
+
 import { closeNavFunction } from './Animations'
 
 // export const hugeTextScaling = () => {
@@ -167,6 +169,15 @@ export const enableScrolling = () => {
 
     isScrollingEnabled = true
   }
+}
+
+export const hideNav = (hideOrShow) => {
+  const nav = document.querySelector('.nav')
+
+  gsap.to(nav, {
+    y: hideOrShow ? '200%' : '0%',
+    ease: 'power2.Out',
+  })
 }
 
 // Helper function to prevent scrolling on touch devices

@@ -6,7 +6,12 @@ import KeenSlider from 'keen-slider'
 import Lottie from 'lottie-web'
 import SplitType from 'split-type'
 
-import { appendUrl, enableScrolling, stopScrolling } from './Functionality'
+import {
+  appendUrl,
+  enableScrolling,
+  hideNav,
+  stopScrolling,
+} from './Functionality'
 import { setNavColourManual } from './NavbarSwapping'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -2037,7 +2042,6 @@ export const recipeModal = () => {
   const searchParams = url.searchParams
 
   const toggleModal = (e) => {
-    console.log(e)
     const modal = e.currentTarget.nextElementSibling
     const modalInfo = modal.querySelector('.section_layout3')
     const modalBackground = modal.querySelector('.recipe-modal_background')
@@ -2071,6 +2075,12 @@ export const recipeModal = () => {
         scaleY: 1,
         duration: 1,
         ease: 'expo.inOut',
+        onStart: () => {
+          hideNav(true)
+        },
+        onReverseComplete: () => {
+          hideNav(false)
+        },
       },
       '<'
     )
@@ -2080,6 +2090,7 @@ export const recipeModal = () => {
         opacity: 1,
         onStart: () => {
           stopScrolling()
+
           setNavColourManual('black')
         },
         onComplete: () => {
@@ -2090,6 +2101,7 @@ export const recipeModal = () => {
         onReverseComplete: () => {
           close.removeEventListener('click', tl.reverse())
           enableScrolling()
+
           appendUrl('', true)
           setNavColourManual('yellow')
         },
