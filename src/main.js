@@ -1,5 +1,5 @@
 import barba from '@barba/core'
-import { ScrollTrigger } from 'gsap/all'
+//import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
@@ -122,7 +122,7 @@ barba.hooks.afterEnter((data) => {
       filtersDropdownAnimation()
       recipeFilters()
       pourLottieAnimations()
-      ScrollTrigger.normalizeScroll(false)
+      // ScrollTrigger.normalizeScroll(false)
     }
   }, 10)
 
