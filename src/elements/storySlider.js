@@ -1,6 +1,6 @@
 import { gsap } from 'gsap'
-import KeenSlider from 'keen-slider'
 import { ScrollTrigger } from 'gsap/all'
+import KeenSlider from 'keen-slider'
 
 export const storySliderSlideIn = (
   arrow,
