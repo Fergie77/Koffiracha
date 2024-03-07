@@ -48,9 +48,7 @@ export const storySliderSlideIn = (
         onComplete: () => {
           arrow.style.display = 'none'
         },
-        onStart: () => {
-          //  removeListeners()
-        },
+        onStart: () => {},
       })
       gsap.to(mobileText, {
         opacity: 0,
@@ -267,6 +265,16 @@ export const storySliderSlideIn = (
             },
           },
         },
+        dragStarted: function () {
+          // This event fires when a drag starts
+          // Disable Normalize Scroll to allow for slider interaction
+          ScrollTrigger.normalizeScroll(false)
+        },
+        // dragEnded: function () {
+        //   // This event fires when a drag starts
+        //   // Disable Normalize Scroll to allow for slider interaction
+        //   ScrollTrigger.normalizeScroll(true)
+        // },
       },
       [ArrowButton, revertSlider, WheelControls]
     )
