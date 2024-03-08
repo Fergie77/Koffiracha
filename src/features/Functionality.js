@@ -233,6 +233,7 @@ export const openChat = () => {
               const iframe = node.children[0]
 
               const hideButton = () => {
+                console.log('done')
                 iframe.style.display = 'none'
               }
 
@@ -243,9 +244,19 @@ export const openChat = () => {
                       .firstChild.firstChild
 
                   pseudoChatButton.addEventListener('click', () => {
+                    let button2 = null
+                    setTimeout(() => {
+                      const iframe2 = node.children[1]
+                      button2 = iframe2.contentDocument
+                        .querySelector('#mountHere')
+                        .querySelector('.message-window-iframe-xaqbo8')
+                      console.log(button2)
+                      button2.addEventListener('click', hideButton)
+                    }, 500)
                     button.click()
                     iframe.style.display = 'block'
-                    button.addEventListener('click', hideButton)
+
+                    button?.addEventListener('click', hideButton)
                     closeNavFunction()
                   })
                 }, 1000)
