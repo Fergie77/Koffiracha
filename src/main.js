@@ -33,7 +33,7 @@ import {
   cookieLinkSetter,
   //cookieClassSwap,
   hugeTextScaling,
-  //openChat,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
@@ -60,7 +60,7 @@ barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     //cookieClassSwap()
     cookieLinkSetter()
-    //openChat()
+    openChat()
     siteWideCartButtons()
     buttonAnimation()
     //featuredProductAddToCart()
