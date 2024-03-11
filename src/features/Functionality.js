@@ -232,9 +232,12 @@ export const openChat = () => {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const iframe = node.children[0]
 
-              const hideButton = (e) => {
+              const hideButton = () => {
                 iframe.style.display = 'none'
-                console.log(e.target)
+              }
+
+              const hideButton2 = () => {
+                console.log('test click')
               }
 
               iframe.addEventListener('load', () => {
@@ -250,10 +253,13 @@ export const openChat = () => {
                       button2 = iframe2.contentDocument
                         .querySelector('#mountHere')
                         .querySelector('.message-window-iframe-xaqbo8')
-                      console.log(button2.parentElement)
+                      // button2.parentElement.addEventListener(
+                      //   'click',
+                      //   hideButton
+                      // )
                       button2.parentElement.addEventListener(
                         'click',
-                        hideButton
+                        hideButton2
                       )
                     }, 500)
                     button.click()
