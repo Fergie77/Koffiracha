@@ -187,7 +187,7 @@ export const footerColourSwap = () => {
           setNewColour('.nav', '--colour--white', '#000000')
         },
         onLeaveBack: () => {
-          if (!colour.classList.contains('w-condition-invisible')) {
+          if (!colour?.classList.contains('w-condition-invisible')) {
             setNavColourManual('red')
           } else {
             setNewColour('.nav', '--colour--black', '#000000')
