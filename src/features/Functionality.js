@@ -236,10 +236,6 @@ export const openChat = () => {
                 iframe.style.display = 'none'
               }
 
-              const hideButton2 = () => {
-                console.log('test click')
-              }
-
               iframe.addEventListener('load', () => {
                 setTimeout(() => {
                   const button =
@@ -259,7 +255,7 @@ export const openChat = () => {
                       // )
                       button2.parentElement.addEventListener(
                         'touchstart',
-                        hideButton2
+                        hideButton
                       )
                     }, 500)
                     button.click()
