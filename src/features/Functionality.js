@@ -231,9 +231,8 @@ export const openChat = () => {
             // Check if the added node is an element (optional: check for specific child ID or class)
             if (node.nodeType === Node.ELEMENT_NODE) {
               const iframe = node.children[0]
-
+              console.log('here')
               const hideButton = () => {
-                console.log('here')
                 iframe.style.display = 'none'
               }
 
