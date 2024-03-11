@@ -232,9 +232,9 @@ export const openChat = () => {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const iframe = node.children[0]
 
-              const hideButton = () => {
+              const hideButton = (e) => {
                 iframe.style.display = 'none'
-                console.log(button2)
+                console.log(e.target)
               }
 
               iframe.addEventListener('load', () => {
