@@ -250,7 +250,10 @@ export const openChat = () => {
                         .querySelector('#mountHere')
                         .querySelector('.message-window-iframe-xaqbo8')
                       console.log(button2)
-                      button2.addEventListener('click', hideButton)
+                      button2.parentElement.addEventListener(
+                        'click',
+                        hideButton
+                      )
                     }, 500)
                     button.click()
                     iframe.style.display = 'block'
