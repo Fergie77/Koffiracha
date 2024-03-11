@@ -187,8 +187,14 @@ export const footerColourSwap = () => {
           setNewColour('.nav', '--colour--white', '#000000')
         },
         onLeaveBack: () => {
-          if (!colour?.classList.contains('w-condition-invisible')) {
-            setNavColourManual('red')
+          if (colour) {
+            if (!colour.classList.contains('w-condition-invisible')) {
+              setNavColourManual('red')
+            } else {
+              setNewColour('.nav', '--colour--black', '#000000')
+              setNewColour('.nav', '--colour--yellow', '#E6FE52')
+              setNewColour('.nav', '--colour--white', '#ffffff')
+            }
           } else {
             setNewColour('.nav', '--colour--black', '#000000')
             setNewColour('.nav', '--colour--yellow', '#E6FE52')
