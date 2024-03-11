@@ -233,6 +233,7 @@ export const openChat = () => {
               const iframe = node.children[0]
 
               const hideButton = () => {
+                console.log('click')
                 iframe.style.display = 'none'
               }
 
@@ -249,7 +250,7 @@ export const openChat = () => {
                       button2 = iframe2.contentDocument
                         .querySelector('#mountHere')
                         .querySelector('.message-window-iframe-xaqbo8')
-                      console.log(button2)
+                      console.log(button2.parentElement)
                       button2.parentElement.addEventListener(
                         'click',
                         hideButton
