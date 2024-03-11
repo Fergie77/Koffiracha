@@ -233,6 +233,7 @@ export const openChat = () => {
               const iframe = node.children[0]
 
               const hideButton = () => {
+                console.log('here')
                 iframe.style.display = 'none'
               }
 
