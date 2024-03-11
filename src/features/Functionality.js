@@ -233,9 +233,8 @@ export const openChat = () => {
               const iframe = node.children[0]
 
               const hideButton = () => {
-                console.log('click')
                 iframe.style.display = 'none'
-                console.log(iframe)
+                console.log(button2)
               }
 
               iframe.addEventListener('load', () => {
