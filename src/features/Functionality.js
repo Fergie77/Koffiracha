@@ -245,12 +245,11 @@ export const openChat = () => {
                   pseudoChatButton.addEventListener('click', () => {
                     let button2 = null
                     setTimeout(() => {
-                      console.log('inside timeout 2')
                       const iframe2 = node.children[1]
                       button2 = iframe2.contentDocument
                         .querySelector('#mountHere')
                         .querySelector('.message-window-iframe-xaqbo8')
-
+                      console.log(button2)
                       button2.parentElement.addEventListener(
                         'click',
                         hideButton
