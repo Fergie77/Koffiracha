@@ -231,13 +231,14 @@ export const openChat = () => {
             // Check if the added node is an element (optional: check for specific child ID or class)
             if (node.nodeType === Node.ELEMENT_NODE) {
               const iframe = node.children[0]
-              console.log('here')
+
               const hideButton = () => {
                 iframe.style.display = 'none'
               }
 
               iframe.addEventListener('load', () => {
                 setTimeout(() => {
+                  console.log('inside timeout')
                   const button =
                     iframe.contentDocument.querySelector('#mountHere')
                       .firstChild.firstChild
