@@ -1033,6 +1033,7 @@ const cartPopUpItemInfo = (data) => {
   const popupItem = document.querySelector('.cart-popup-item')
   const popupTitle = popupItem.querySelector('[popup="title"')
   const popupPrice = popupItem.querySelector('[popup="price"')
+
   popupTitle.textContent = data.items[0].product_title
   popupPrice.textContent = '£' + (data.items[0].price / 100).toFixed(2)
 }
@@ -1453,10 +1454,13 @@ export function addToCart(variantId, quantity, openCart) {
     .then((response) => response.json())
     .then((data) => {
       loadCart()
-      cartPopUpItemInfo(data)
-      //cartPopUpAnimation().openNav(quantity)
-      if (openCart) {
-        cartAnimation().openNav()
+      if (data.message != 'Cart Error') {
+        cartPopUpItemInfo(data)
+        if (openCart) {
+          cartAnimation().openNav()
+        }
+      } else {
+        alert('This product is not in stock')
       }
 
       return data
