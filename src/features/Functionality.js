@@ -238,7 +238,6 @@ export const openChat = () => {
 
               iframe.addEventListener('load', () => {
                 setTimeout(() => {
-                  console.log('inside timeout')
                   const button =
                     iframe.contentDocument.querySelector('#mountHere')
                       .firstChild.firstChild
@@ -246,6 +245,7 @@ export const openChat = () => {
                   pseudoChatButton.addEventListener('click', () => {
                     let button2 = null
                     setTimeout(() => {
+                      console.log('inside timeout 2')
                       const iframe2 = node.children[1]
                       button2 = iframe2.contentDocument
                         .querySelector('#mountHere')
