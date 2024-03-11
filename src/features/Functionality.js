@@ -258,7 +258,7 @@ export const openChat = () => {
                       //   hideButton
                       // )
                       button2.parentElement.addEventListener(
-                        'click',
+                        'touchstart',
                         hideButton2
                       )
                     }, 500)
