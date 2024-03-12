@@ -1584,7 +1584,7 @@ export const testimonialSliderLoadAnimation = () => {
   const ArrowButton = (slider) => {
     arrow.addEventListener('click', () => {
       let currentSlide = slider.track.details.rel
-      slider.moveToIdx(currentSlide + 2)
+      slider.moveToIdx(currentSlide - 2)
     })
   }
 
@@ -1593,7 +1593,7 @@ export const testimonialSliderLoadAnimation = () => {
     {
       selector: selector,
       slides: {
-        perView: 2,
+        perView: 1.9,
         spacing: 45,
       },
       loop: true,
