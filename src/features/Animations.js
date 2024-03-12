@@ -1576,7 +1576,7 @@ export const testimonialSliderLoadAnimation = () => {
     })
   }
   const sliderRef = document.querySelector('.section_testimonial')
-  const selector = '.testimonial-card'
+  const selector = '.testimonial-item'
   const arrow = sliderRef.querySelector(
     '[testimonial-slider = "arrow-desktop"]'
   )
@@ -1593,8 +1593,8 @@ export const testimonialSliderLoadAnimation = () => {
     {
       selector: selector,
       slides: {
-        perView: 2.7,
-        spacing: 45,
+        perView: 2,
+        //spacing: 45,
       },
       loop: true,
       breakpoints: {
