@@ -1975,7 +1975,11 @@ export const recipeSlider = () => {
     }
 
     function eventWheel(e) {
-      e.preventDefault()
+      // Only prevent default action for horizontal wheel events
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault()
+      }
+
       if (!wheelActive) {
         wheelStart(e)
         wheelActive = true
@@ -1994,6 +1998,7 @@ export const recipeSlider = () => {
       })
     })
   }
+
   const sliderRef = document.querySelector('.gallery3_component')
   const selector = '.gallery3_card-link'
 

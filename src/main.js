@@ -111,6 +111,7 @@ barba.hooks.afterEnter((data) => {
       recipeSlider()
       pourLottieAnimations()
       recipeModal()
+      shareRecipe()
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       recipeAccordionToggle()

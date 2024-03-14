@@ -119,14 +119,27 @@ export const shareRecipe = () => {
       })
   }
 
+  // Function to generate the recipe page URL
+  function generateRecipePageUrl() {
+    // Define the base URL for the recipe page
+    const recipeBaseUrl = 'https://koffiracha.com/pages/recipes'
+    // Extract the recipe name from the current URL
+    const recipeName = window.location.href.split('modalToOpen=')[1]
+    // Construct the recipe page URL
+    return `${recipeBaseUrl}?modalToOpen=${recipeName}`
+  }
+
   // Add a click event listener to each button
   shareButtons.forEach((button) => {
     button.addEventListener('click', () => {
+      // Generate the URL for the recipe page
+      const recipePageUrl = generateRecipePageUrl()
+
       if (navigator.share) {
         navigator
           .share({
             title: document.title,
-            url: window.location.href,
+            url: recipePageUrl,
           })
           .then(() => {
             console.log('Thanks for sharing!')
@@ -135,8 +148,8 @@ export const shareRecipe = () => {
             console.error('Error sharing:', error)
           })
       } else {
-        // Fallback to copying the URL if sharing isn't supported
-        copyUrlToClipboard(window.location.href)
+        // Use the generated recipe page URL as the fallback
+        copyUrlToClipboard(recipePageUrl)
       }
     })
   })
