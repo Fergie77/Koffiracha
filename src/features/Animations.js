@@ -1556,7 +1556,11 @@ export const testimonialSliderLoadAnimation = () => {
     }
 
     function eventWheel(e) {
-      e.preventDefault()
+      // Only prevent default action for horizontal wheel events
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault()
+      }
+
       if (!wheelActive) {
         wheelStart(e)
         wheelActive = true
@@ -1575,6 +1579,7 @@ export const testimonialSliderLoadAnimation = () => {
       })
     })
   }
+
   const sliderRef = document.querySelector('.section_testimonial')
   const selector = '.testimonial-item'
   const arrow = sliderRef.querySelector(
