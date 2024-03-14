@@ -1584,7 +1584,7 @@ export const testimonialSliderLoadAnimation = () => {
   const ArrowButton = (slider) => {
     arrow.addEventListener('click', () => {
       let currentSlide = slider.track.details.rel
-      slider.moveToIdx(currentSlide - 2)
+      slider.moveToIdx(currentSlide + 1)
     })
   }
 
