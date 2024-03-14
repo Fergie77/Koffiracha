@@ -1593,7 +1593,7 @@ export const testimonialSliderLoadAnimation = () => {
     {
       selector: selector,
       slides: {
-        perView: 1.9,
+        perView: 1.4,
         spacing: 45,
       },
       loop: true,
