@@ -299,7 +299,6 @@ export const floatingBottle = () => {
     const updateImage = (index) => {
       // Ensure we're not redrawing the same frame
       if (currentIndex !== index) {
-        console.log(canvas)
         context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
         const img = images[index]
         const centerX = (canvas.width - img.width) / 2
