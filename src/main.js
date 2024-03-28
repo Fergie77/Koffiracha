@@ -3,7 +3,7 @@ import barba from '@barba/core'
 import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  floatingBottle,
+  //floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -72,9 +72,9 @@ barba.hooks.afterEnter((data) => {
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
-      // setTimeout(() => {
-      floatingBottle()
-      // }, 500)
+
+      //    floatingBottle()
+
       roundingImageElement()
       instagramSlider()
       pourPourPour()
@@ -121,6 +121,9 @@ barba.hooks.afterEnter((data) => {
       recipeModal()
       filtersDropdownAnimation()
       recipeFilters()
+      pourLottieAnimations()
+    } else if (data.next.namespace == 'media-kit') {
+      recipeAccordionToggle()
       pourLottieAnimations()
     }
   }, 10)
