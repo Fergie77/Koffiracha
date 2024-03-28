@@ -31,7 +31,7 @@ export const storySliderSlideIn = (
       return
     }
     gsap.to(sliderElement, {
-      x: '-5%',
+      x: '0%',
       ease: easing,
       duration: duration,
       onStart: removeListeners,
