@@ -56,6 +56,14 @@ openCart()
 
 loadCart()
 setCheckout()
+
+ScrollTrigger.normalizeScroll({
+  allowNestedScroll: true,
+  ignore: '#story-slider-1',
+  //lockAxis: false,
+  //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
+})
+
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     //cookieClassSwap()
