@@ -953,7 +953,7 @@ export const recipeAccordionToggle = () => {
 }
 
 // Assuming gsap is already imported
-const duration = 0.6
+//const duration = 0.6
 let tl
 
 const initTimeline = () => {
