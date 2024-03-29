@@ -14,8 +14,6 @@ import {
 } from './Functionality'
 import { setNavColourManual } from './NavbarSwapping'
 
-gsap.registerPlugin(ScrollTrigger)
-
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
   const smallbutton = document.querySelectorAll("[gsap-button-2='true']")
@@ -165,14 +163,18 @@ export const floatingBottle = () => {
     if (!isNaN(attrVal) && defaultValType === 'number') return +attrVal
     return defaultVal
   }
-
+  gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(Flip)
+
   ScrollTrigger.normalizeScroll({
     allowNestedScroll: true,
     ignore: '#story-slider-1',
     //lockAxis: false,
     //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
   })
+  setTimeout(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+  }, 1000)
   function createTimeline(componentEl, componentIndex) {
     let originEl = componentEl.querySelectorAll(
         "[tr-scrollflip-element='origin']"
