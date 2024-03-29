@@ -365,7 +365,7 @@ export const pourLottieAnimations = () => {
             renderer: 'canvas',
             loop: false,
             autoplay: false,
-            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_2.json',
+            path: 'https://cdn.shopify.com/s/files/1/0551/2983/3536/files/KOFF_POUR_STROKE_NEON_FLAME.json',
           })
 
           const tl = gsap.timeline({
@@ -386,7 +386,7 @@ export const pourLottieAnimations = () => {
             renderer: 'canvas',
             loop: false,
             autoplay: false,
-            path: 'https://cdn.shopify.com/s/files/1/0641/1055/9404/files/KOFF_POUR_STROKE_NEON_FLAME_2.json',
+            path: 'https://cdn.shopify.com/s/files/1/0551/2983/3536/files/KOFF_POUR_STROKE_NEON_FIRE.json',
           })
           const tl = gsap.timeline({
             scrollTrigger: {
