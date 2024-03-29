@@ -1,6 +1,4 @@
 import barba from '@barba/core'
-// import { gsap } from 'gsap'
-// import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
@@ -10,7 +8,6 @@ import {
   pageTransition,
   roundingImageElement,
   scaleUpAnimation,
-  //storySliderSlideIn,
   scrollingText,
   productLinkHover,
   accordionToggle,
@@ -22,9 +19,7 @@ import {
   filtersDropdownAnimation,
   instagramSlider,
   pourPourPour,
-  //homepageHeroTextAnimation,
   mobileProductSlider,
-  //featuredProductAddToCart,
   pourLottieAnimations,
   hugeTextSplitAnimation,
   recipeSlider,
@@ -33,7 +28,6 @@ import {
 } from './features/Animations'
 import {
   cookieLinkSetter,
-  //cookieClassSwap,
   hugeTextScaling,
   openChat,
   recipeFilters,
@@ -59,24 +53,12 @@ openCart()
 loadCart()
 setCheckout()
 
-//gsap.registerPlugin(ScrollTrigger)
-
-// ScrollTrigger.normalizeScroll({
-//   allowNestedScroll: true,
-//   ignore: '#story-slider-1',
-//   //lockAxis: false,
-//   //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
-// })
-
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    //ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
-    //cookieClassSwap()
     cookieLinkSetter()
     openChat()
     siteWideCartButtons()
     buttonAnimation()
-    //featuredProductAddToCart()
     navSwapping()
     disableFooterColourSwap()
     footerColourSwap()
@@ -85,9 +67,7 @@ barba.hooks.afterEnter((data) => {
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
-      // setTimeout(() => {
       floatingBottle()
-      // }, 500)
       roundingImageElement()
       instagramSlider()
       pourPourPour()
@@ -111,7 +91,6 @@ barba.hooks.afterEnter((data) => {
       productLinkHover()
       mobileProductSlider()
       filtersDropdownAnimation()
-
       pourLottieAnimations()
       roundingImageElement()
     } else if (data.next.namespace == 'product') {
