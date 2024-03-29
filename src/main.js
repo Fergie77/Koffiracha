@@ -1,4 +1,5 @@
 import barba from '@barba/core'
+import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
@@ -58,18 +59,18 @@ openCart()
 loadCart()
 setCheckout()
 
-//ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
+gsap.registerPlugin(ScrollTrigger)
 
-ScrollTrigger.normalizeScroll({
-  allowNestedScroll: true,
-  ignore: '#story-slider-1',
-  //lockAxis: false,
-  //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
-})
+// ScrollTrigger.normalizeScroll({
+//   allowNestedScroll: true,
+//   ignore: '#story-slider-1',
+//   //lockAxis: false,
+//   //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
+// })
 
 barba.hooks.afterEnter((data) => {
-  //ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
   setTimeout(() => {
+    ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
     //cookieClassSwap()
     cookieLinkSetter()
     openChat()
