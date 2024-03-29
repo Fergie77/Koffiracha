@@ -1,6 +1,6 @@
 import barba from '@barba/core'
 import { gsap } from 'gsap'
-//import { ScrollTrigger } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/all'
 import { Flip } from 'gsap/all'
 import KeenSlider from 'keen-slider'
 import Lottie from 'lottie-web'
@@ -163,7 +163,7 @@ export const floatingBottle = () => {
     if (!isNaN(attrVal) && defaultValType === 'number') return +attrVal
     return defaultVal
   }
-  //gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(Flip)
 
   // ScrollTrigger.normalizeScroll({
