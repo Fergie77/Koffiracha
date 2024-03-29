@@ -1,6 +1,6 @@
 import barba from '@barba/core'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+// import { gsap } from 'gsap'
+// import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
@@ -59,7 +59,7 @@ openCart()
 loadCart()
 setCheckout()
 
-gsap.registerPlugin(ScrollTrigger)
+//gsap.registerPlugin(ScrollTrigger)
 
 // ScrollTrigger.normalizeScroll({
 //   allowNestedScroll: true,
@@ -70,7 +70,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
+    //ScrollTrigger.normalizeScroll({ allowNestedScroll: true })
     //cookieClassSwap()
     cookieLinkSetter()
     openChat()
