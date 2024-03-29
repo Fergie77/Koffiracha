@@ -953,7 +953,7 @@ export const recipeAccordionToggle = () => {
 }
 
 // Assuming gsap is already imported
-//const duration = 0.6
+const duration = 0.6
 let tl
 
 const initTimeline = () => {
@@ -983,17 +983,17 @@ const initTimeline = () => {
     )
     tl.to('.nav-background', { boxShadow: '0 2px 4px rgba(0, 0, 0, .1)' }, '<')
     tl.to('.nav-buttons_wrapper > *, .button.drop-shadow ', { opacity: 0 }, '<')
-    // tl.from(
-    //   '.nav-links_list > *',
-    //   {
-    //     opacity: 0,
-    //     y: 50,
-    //     duration: duration,
-    //     ease: 'power2.out',
-    //     stagger: 0.1,
-    //   },
-    //   '<0.2'
-    // )
+    tl.from(
+      '.nav-links_list > *',
+      {
+        opacity: 0,
+        y: 50,
+        duration: duration,
+        ease: 'power2.out',
+        stagger: 0.1,
+      },
+      '<0.2'
+    )
   }
 }
 
