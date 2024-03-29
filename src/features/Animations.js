@@ -172,9 +172,9 @@ export const floatingBottle = () => {
   //   //lockAxis: false,
   //   //type: 'touch,wheel,pointer', // now the page will be drag-scrollable on desktop because "pointer" is in the list
   // })
-  setTimeout(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-  }, 1000)
+  // setTimeout(() => {
+  //   document.querySelector('html').style.scrollBehavior = 'auto'
+  // }, 1000)
   function createTimeline(componentEl, componentIndex) {
     let originEl = componentEl.querySelectorAll(
         "[tr-scrollflip-element='origin']"
