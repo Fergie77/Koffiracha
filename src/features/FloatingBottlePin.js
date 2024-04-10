@@ -15,6 +15,7 @@ export const floatingBottlePinAnimation = () => {
     path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/66169644cad74b6ff5213724_KoffirachaTest.json',
     speed: 'medium',
     scrub: 1, // seconds it takes for the playhead to "catch up"
+    renderer: 'canvas',
     // you can also add ANY ScrollTrigger values here too, like trigger, start, end, onEnter, onLeave, onUpdate, etc. See /docs/v3/Plugins/ScrollTrigger
   })
 
