@@ -14,6 +14,8 @@ import {
 } from './Functionality'
 import { setNavColourManual } from './NavbarSwapping'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export const buttonAnimation = () => {
   const button = document.querySelectorAll("[gsap-button='true']")
   const smallbutton = document.querySelectorAll("[gsap-button-2='true']")
