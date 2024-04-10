@@ -26,6 +26,7 @@ import {
   recipeModal,
   recipeAccordionToggle,
 } from './features/Animations'
+import { floatingBottlePinAnimation } from './features/FloatingBottlePin'
 import {
   cookieLinkSetter,
   hugeTextScaling,
@@ -64,6 +65,10 @@ barba.hooks.afterEnter((data) => {
     footerColourSwap()
     setNavColourManual('yellow')
     hugeTextScaling()
+    if (data.next.namespace == 'home-test') {
+      floatingBottlePinAnimation()
+    }
+
     if (data.next.namespace == 'home') {
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
