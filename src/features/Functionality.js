@@ -159,6 +159,7 @@ export const shareRecipe = () => {
 let isScrollingEnabled = true
 
 export const stopScrolling = () => {
+  console.log('disable scrolling')
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && isScrollingEnabled) {
     // Disable scrolling by setting overflow hidden
@@ -172,6 +173,7 @@ export const stopScrolling = () => {
 }
 
 export const enableScrolling = () => {
+  console.log('enable scrolling')
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && !isScrollingEnabled) {
     // Enable scrolling by resetting overflow
