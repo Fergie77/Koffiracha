@@ -194,14 +194,14 @@ function preventScroll(e) {
 }
 
 const removeTouchAction = () => {
-  const bodyElement = document.querySelector('body')
+  const bodyElement = document.querySelector('.page-wrapper')
   const htmlElement = document.querySelector('html')
   bodyElement.setAttribute('style', 'overflow: hidden; height: 100vh')
   htmlElement.setAttribute('style', 'scroll-behavior: smooth;')
 }
 
 const addTouchAction = () => {
-  const bodyElement = document.querySelector('body')
+  const bodyElement = document.querySelector('.page-wrapper')
   const htmlElement = document.querySelector('html')
   bodyElement.setAttribute('style', 'overflow: hidden;')
   htmlElement.setAttribute('style', 'scroll-behavior: auto;')
