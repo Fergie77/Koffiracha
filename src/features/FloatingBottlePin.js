@@ -8,13 +8,14 @@ gsap.registerPlugin(ScrollTrigger)
 export const floatingBottlePinAnimation = () => {
   //const player = document.querySelector('lottie-player')
   const player2 = document.querySelector('.new-bottle-origin')
+  const playerWrapper = document.querySelector('.new-bottle-wrapper')
   //const totalFrames = 300 // Assuming 300 is the total frame count of your Lottie animation
 
   LottieScrollTrigger({
     target: player2,
-    path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/66169644cad74b6ff5213724_KoffirachaTest.json',
+    path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/6617c25f0180aec7c8363699_KoffirachaTest4.json',
     speed: 'medium',
-    scrub: 1, // seconds it takes for the playhead to "catch up"
+    scrub: 2, // seconds it takes for the playhead to "catch up"
     renderer: 'canvas',
     // you can also add ANY ScrollTrigger values here too, like trigger, start, end, onEnter, onLeave, onUpdate, etc. See /docs/v3/Plugins/ScrollTrigger
   })
@@ -25,13 +26,13 @@ export const floatingBottlePinAnimation = () => {
       //speeds = { slow: '+=2000', medium: '+=1000', fast: '+=500' },
       st = {
         trigger: target,
-        pin: true,
+        // pin: target,
         markers: true,
         start: 'top top',
         //end: speeds[vars.speed] || '+=1000',
-        end: () => `bottom +=${player2.offsetHeight}`,
+        end: () => `bottom 30%+=${player2.offsetHeight}`,
         endTrigger: '.floating-bottle-section_wrapper',
-        scrub: 1,
+        scrub: true,
       },
       ctx = gsap.context && gsap.context(),
       animation = lottie.loadAnimation({
@@ -66,29 +67,21 @@ export const floatingBottlePinAnimation = () => {
     return animation
   }
 
-  // gsap.to(
-  //   {},
-  //   {
-  //     // An empty object since we're just using this to leverage the onUpdate
-  //     scrollTrigger: {
-  //       trigger: player,
-  //       endTrigger: '.floating-bottle-section_wrapper',
-  //       start: 'top 10%',
-  //       end: () => `bottom 20%+=${player.offsetHeight}`,
-  //       scrub: true, // Set to true or increase the number for more smoothing
-  //       pin: player,
-  //       invalidateOnRefresh: true,
-  //       markers: true,
-  //       onUpdate: (self) => {
-  //         // Calculate progress based on the scrollTrigger's progress
-  //         const progress = self.progress
-  //         // Smoothly interpolate the frame index based on the animation progress
-  //         const frameIndex = Math.floor(
-  //           gsap.utils.interpolate(0, totalFrames - 1, progress)
-  //         )
-  //         player.seek(frameIndex)
-  //       },
-  //     },
-  //   }
-  // )
+  gsap.to(
+    {},
+    {
+      // An empty object since we're just using this to leverage the onUpdate
+      scrollTrigger: {
+        trigger: playerWrapper,
+        startTrigger: '.floating-bottle-section_wrapper',
+        endTrigger: '.floating-bottle-section_wrapper',
+        start: 'top 10%',
+        end: () => `bottom 20%+=${playerWrapper.offsetHeight}`,
+        scrub: true, // Set to true or increase the number for more smoothing
+        pin: playerWrapper,
+        invalidateOnRefresh: true,
+        markers: true,
+      },
+    }
+  )
 }
