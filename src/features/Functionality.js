@@ -196,7 +196,7 @@ function preventScroll(e) {
 const removeTouchAction = () => {
   const bodyElement = document.querySelector('body')
   const htmlElement = document.querySelector('html')
-  bodyElement.setAttribute('style', 'overflow: hidden;')
+  bodyElement.setAttribute('style', 'overflow: hidden; height: 100vh')
   htmlElement.setAttribute('style', 'scroll-behavior: smooth;')
 }
 
