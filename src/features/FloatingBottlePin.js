@@ -10,7 +10,7 @@ export const floatingBottlePinAnimation = () => {
   const player2 = document.querySelector('.new-bottle-origin')
   const playerWrapper = document.querySelector('.new-bottle-wrapper')
   //const totalFrames = 300 // Assuming 300 is the total frame count of your Lottie animation
-
+  ScrollTrigger.normalizeScroll()
   LottieScrollTrigger({
     target: player2,
     path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/6617c25f0180aec7c8363699_KoffirachaTest4.json',
