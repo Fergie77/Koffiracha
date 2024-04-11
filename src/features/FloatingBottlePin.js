@@ -32,10 +32,11 @@ export const floatingBottlePinAnimation = () => {
       st = {
         trigger: target,
         // pin: target,
-        markers: true,
-        start: 'top top',
+        //markers: true,
+        start: 'top 10%',
         //end: speeds[vars.speed] || '+=1000',
-        end: () => `bottom 30%+=${player2.offsetHeight}`,
+        //end: () => `bottom 30%+=${player2.offsetHeight}`,
+        end: 'bottom bottom',
         endTrigger: '.floating-bottle-section_wrapper',
         scrub: true,
       },
@@ -78,12 +79,13 @@ export const floatingBottlePinAnimation = () => {
       // An empty object since we're just using this to leverage the onUpdate
       scrollTrigger: {
         trigger: playerWrapper,
-        startTrigger: '.floating-bottle-section_wrapper',
-        endTrigger: '.floating-bottle-section_wrapper',
+        startTrigger: '#test-anchor',
+        endTrigger: '#bottle-section-1',
         start: 'top 10%',
-        end: () => `bottom 20%+=${playerWrapper.offsetHeight}`,
+        //end: () => `bottom 20%+=${playerWrapper.offsetHeight}`,
+        end: 'bottom bottom',
         scrub: true, // Set to true or increase the number for more smoothing
-        pin: playerWrapper,
+        pin: true,
         invalidateOnRefresh: true,
         markers: true,
       },

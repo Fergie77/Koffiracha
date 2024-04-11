@@ -1927,23 +1927,27 @@ export const hugeTextSplitAnimation = () => {
 
   const hugeText = document.querySelectorAll('[animation="split-text"]')
 
-  hugeText.forEach((element) => {
-    const splitText = new SplitType(element)
+  var mm = gsap.matchMedia()
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: splitText.elements,
-        start: 'top top',
-        end: 'bottom bottom',
-      },
-      defaults: {
-        ease: cubicBezierEasing,
-      },
+  mm.add('(min-width: 800px)', () => {
+    hugeText.forEach((element) => {
+      const splitText = new SplitType(element)
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: splitText.elements,
+          start: 'top top',
+          end: 'bottom bottom',
+        },
+        defaults: {
+          ease: cubicBezierEasing,
+        },
+      })
+      tl.from(splitText.lines[0], { y: '150%', opacity: 0 }, '<')
+      tl.from(splitText.lines[1], { y: '50%', opacity: 0 }, '<')
+      tl.from(splitText.lines[2], { y: '-50%', opacity: 0 }, '<')
+      tl.from(splitText.lines[3], { y: '-150%', opacity: 0 }, '<')
     })
-    tl.from(splitText.lines[0], { y: '150%', opacity: 0 }, '<')
-    tl.from(splitText.lines[1], { y: '50%', opacity: 0 }, '<')
-    tl.from(splitText.lines[2], { y: '-50%', opacity: 0 }, '<')
-    tl.from(splitText.lines[3], { y: '-150%', opacity: 0 }, '<')
   })
 }
 

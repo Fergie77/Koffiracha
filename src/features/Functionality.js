@@ -160,6 +160,7 @@ let isScrollingEnabled = true
 
 export const stopScrolling = () => {
   console.log('disable scrolling')
+  removeTouchAction()
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && isScrollingEnabled) {
     // Disable scrolling by setting overflow hidden
@@ -174,6 +175,7 @@ export const stopScrolling = () => {
 
 export const enableScrolling = () => {
   console.log('enable scrolling')
+  addTouchAction()
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && !isScrollingEnabled) {
     // Enable scrolling by resetting overflow
@@ -186,6 +188,25 @@ export const enableScrolling = () => {
   }
 }
 
+// Helper function to prevent scrolling on touch devices
+function preventScroll(e) {
+  e.preventDefault()
+}
+
+const removeTouchAction = () => {
+  const bodyElement = document.querySelector('body')
+  const htmlElement = document.querySelector('html')
+  bodyElement.setAttribute('style', 'overflow: hidden;')
+  htmlElement.setAttribute('style', 'scroll-behavior: smooth;')
+}
+
+const addTouchAction = () => {
+  const bodyElement = document.querySelector('body')
+  const htmlElement = document.querySelector('html')
+  bodyElement.setAttribute('style', 'overflow: hidden;')
+  htmlElement.setAttribute('style', 'scroll-behavior: auto;')
+}
+
 export const hideNav = (hideOrShow) => {
   const nav = document.querySelector('.nav')
 
@@ -193,11 +214,6 @@ export const hideNav = (hideOrShow) => {
     y: hideOrShow ? '200%' : '0%',
     ease: 'power2.Out',
   })
-}
-
-// Helper function to prevent scrolling on touch devices
-function preventScroll(e) {
-  e.preventDefault()
 }
 
 export const appendUrl = (modal, removeExistingParams = false) => {
