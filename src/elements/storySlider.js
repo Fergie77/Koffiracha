@@ -257,7 +257,7 @@ export const storySliderSlideIn = (
         breakpoints: {
           '(max-width: 768px)': {
             slides: {
-              perView: 2,
+              perView: 1.8,
             },
           },
           '(max-width: 479px)': {

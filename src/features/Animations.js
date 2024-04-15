@@ -1608,8 +1608,8 @@ export const testimonialSliderLoadAnimation = () => {
       breakpoints: {
         '(max-width: 768px)': {
           slides: {
-            perView: 2.3,
-            spacing: 0,
+            perView: 1,
+            spacing: 45,
           },
         },
         '(max-width: 479px)': {
@@ -1927,28 +1927,28 @@ export const hugeTextSplitAnimation = () => {
 
   const hugeText = document.querySelectorAll('[animation="split-text"]')
 
-  var mm = gsap.matchMedia()
+  // var mm = gsap.matchMedia()
 
-  mm.add('(min-width: 800px)', () => {
-    hugeText.forEach((element) => {
-      const splitText = new SplitType(element)
+  // mm.add('(min-width: 800px)', () => {
+  hugeText.forEach((element) => {
+    const splitText = new SplitType(element)
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: splitText.elements,
-          start: 'top top',
-          end: 'bottom bottom',
-        },
-        defaults: {
-          ease: cubicBezierEasing,
-        },
-      })
-      tl.from(splitText.lines[0], { y: '150%', opacity: 0 }, '<')
-      tl.from(splitText.lines[1], { y: '50%', opacity: 0 }, '<')
-      tl.from(splitText.lines[2], { y: '-50%', opacity: 0 }, '<')
-      tl.from(splitText.lines[3], { y: '-150%', opacity: 0 }, '<')
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: splitText.elements,
+        start: 'top top',
+        end: 'bottom bottom',
+      },
+      defaults: {
+        ease: cubicBezierEasing,
+      },
     })
+    tl.from(splitText.lines[0], { y: '150%', opacity: 0 }, '<')
+    tl.from(splitText.lines[1], { y: '50%', opacity: 0 }, '<')
+    tl.from(splitText.lines[2], { y: '-50%', opacity: 0 }, '<')
+    tl.from(splitText.lines[3], { y: '-150%', opacity: 0 }, '<')
   })
+  // })
 }
 
 export const recipeSlider = () => {
