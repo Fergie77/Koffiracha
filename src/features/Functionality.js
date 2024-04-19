@@ -383,8 +383,8 @@ export const chatButton2 = () => {
             secondButton.style.display = 'none'
           } else {
             button.style.display = 'inline-flex'
-            secondButton.setAttribute('style', 'display= "none";')
-            secondButton.style.display = 'none'
+            //secondButton.setAttribute('style', 'display= "none";')
+            //secondButton.style.display = 'none'
           }
           // You can add additional code here to handle the change
         }
