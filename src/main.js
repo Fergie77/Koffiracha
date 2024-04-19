@@ -21,7 +21,7 @@ import {
   pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
-  hugeTextSplitAnimation,
+  //hugeTextSplitAnimation,
   recipeSlider,
   recipeModal,
   recipeAccordionToggle,
@@ -77,7 +77,7 @@ barba.hooks.afterEnter((data) => {
       instagramSlider()
       pourPourPour()
       scrollingText()
-      hugeTextSplitAnimation()
+      // hugeTextSplitAnimation()
       storySliderSlideIn(
         document.querySelector('[story-slider = "arrow"]'),
         document.querySelector('[story-slider = "close"]'),

@@ -199,7 +199,7 @@ export const floatingBottle = () => {
       endSetting = 'bottom bottom+=200px'
     } else {
       // For screens 991px and above
-      startSetting = 'top top-=400px'
+      startSetting = 'top top-=200px'
       endSetting = 'bottom bottom+=100px'
     }
 
@@ -301,6 +301,7 @@ export const floatingBottle = () => {
 
     const updateImage = (index) => {
       // Ensure we're not redrawing the same frame
+      console.log(index)
       if (currentIndex !== index) {
         context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
         const img = images[index]
@@ -337,19 +338,22 @@ export const floatingBottle = () => {
   }
 
   setTimeout(() => {
-    document
-      .querySelectorAll("[tr-scrollflip-element='component']")
-      .forEach((componentEl, index) => {
-        createTimeline(componentEl, index)
+    const scrollFlipElement = document.querySelectorAll(
+      "[tr-scrollflip-element='component']"
+    )
 
-        let resizeTimer
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer)
-          resizeTimer = setTimeout(() => {
-            createTimeline(componentEl, index)
-          }, 250)
-        })
+    console.log(scrollFlipElement)
+    scrollFlipElement.forEach((componentEl, index) => {
+      createTimeline(componentEl, index)
+
+      let resizeTimer
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer)
+        resizeTimer = setTimeout(() => {
+          createTimeline(componentEl, index)
+        }, 250)
       })
+    })
   }, 500)
 }
 
