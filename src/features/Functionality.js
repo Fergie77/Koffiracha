@@ -349,6 +349,56 @@ export const openChat = () => {
   setTimeout(() => {}, 1000)
 }
 
+export const chatButton2 = () => {
+  // Wait for the DOM content to be fully loaded
+  // Access the iframe by its ID
+  var iframe = document.getElementById('chat-button')
+
+  // Make sure the iframe is fully loaded
+
+  var iframeDocument = iframe.contentDocument || iframe.contentWindow.document
+
+  // Access the button by its data-testid attribute or class
+  var button = iframeDocument.querySelector(
+    'button[data-testid="gorgias-chat-messenger-button"]'
+  )
+  console.log(button)
+
+  // Check if the button exists
+  if (button) {
+    // Create an observer instance to monitor attribute changes
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'aria-expanded'
+        ) {
+          var expanded = button.getAttribute('aria-expanded')
+          console.log('aria-expanded changed to:', expanded)
+          const secondButton = document.querySelector('#chat-button')
+          console.log(secondButton)
+          if (!expanded) {
+            button.style.display = 'none'
+            secondButton.style.visibility = 'hidden'
+          } else {
+            button.style.display = 'inline-flex'
+            secondButton.style.visibility = 'hidden'
+          }
+          // You can add additional code here to handle the change
+        }
+      })
+    })
+
+    // Configuration of the observer:
+    var config = { attributes: true, attributeFilter: ['aria-expanded'] }
+
+    // Start observing the target node for configured mutations
+    observer.observe(button, config)
+  } else {
+    console.error('Button not found in iframe!')
+  }
+}
+
 export const recipeFilters = () => {
   const cards = document.querySelectorAll('.gallery3_card-link')
 

@@ -301,7 +301,6 @@ export const floatingBottle = () => {
 
     const updateImage = (index) => {
       // Ensure we're not redrawing the same frame
-      console.log(index)
       if (currentIndex !== index) {
         context.clearRect(0, 0, canvas.width, canvas.height) // Clear canvas
         const img = images[index]
@@ -342,7 +341,6 @@ export const floatingBottle = () => {
       "[tr-scrollflip-element='component']"
     )
 
-    console.log(scrollFlipElement)
     scrollFlipElement.forEach((componentEl, index) => {
       createTimeline(componentEl, index)
 

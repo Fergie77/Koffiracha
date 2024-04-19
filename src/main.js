@@ -28,6 +28,7 @@ import {
 } from './features/Animations'
 import { floatingBottlePinAnimation } from './features/FloatingBottlePin'
 import {
+  chatButton2,
   cookieLinkSetter,
   hugeTextScaling,
   openChat,
@@ -54,10 +55,17 @@ openCart()
 loadCart()
 setCheckout()
 
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0)
+}
+
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     cookieLinkSetter()
     openChat()
+    setTimeout(() => {
+      chatButton2()
+    }, 1000)
     siteWideCartButtons()
     buttonAnimation()
     navSwapping()
@@ -109,6 +117,9 @@ barba.hooks.afterEnter((data) => {
       pourLottieAnimations()
       recipeModal()
       shareRecipe()
+      setTimeout(() => {
+        window.okeWidgetApi.initAllWidgets()
+      }, 500)
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       recipeAccordionToggle()
