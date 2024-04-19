@@ -362,7 +362,6 @@ export const chatButton2 = () => {
   var button = iframeDocument.querySelector(
     'button[data-testid="gorgias-chat-messenger-button"]'
   )
-  console.log(button)
 
   // Check if the button exists
   if (button) {
@@ -383,8 +382,11 @@ export const chatButton2 = () => {
             secondButton.style.display = 'none'
           } else {
             button.style.display = 'inline-flex'
-            //secondButton.setAttribute('style', 'display= "none";')
-            //secondButton.style.display = 'none'
+            var x = window.matchMedia('(max-width: 768px)')
+            if (x.matches) {
+              secondButton.setAttribute('style', 'display= "none";')
+              secondButton.style.display = 'none'
+            }
           }
           // You can add additional code here to handle the change
         }
