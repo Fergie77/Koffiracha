@@ -379,9 +379,11 @@ export const chatButton2 = () => {
           console.log(secondButton)
           if (!expanded) {
             button.style.display = 'none'
+            secondButton.setAttribute('style', 'display= "none";')
             secondButton.style.visibility = 'hidden'
           } else {
             button.style.display = 'inline-flex'
+            secondButton.setAttribute('style', 'display= "none";')
             secondButton.style.visibility = 'hidden'
           }
           // You can add additional code here to handle the change
