@@ -117,9 +117,9 @@ barba.hooks.afterEnter((data) => {
       pourLottieAnimations()
       recipeModal()
       shareRecipe()
-      setTimeout(() => {
-        window.okeWidgetApi.initAllWidgets()
-      }, 500)
+      // setTimeout(() => {
+      //   window.okeWidgetApi.initAllWidgets()
+      // }, 500)
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       recipeAccordionToggle()
