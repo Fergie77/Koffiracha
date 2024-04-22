@@ -1253,6 +1253,7 @@ export const cartAnimation = () => {
 
 const createCartItem = (cartDataItem, newItem, cart, data) => {
   //check if newly added product already exists in the cart or not
+  console.log(data)
   const cartTest = Array.from(cart.children).find((element) => {
     return element.attributes.product_id.value == cartDataItem.id
   })
@@ -1261,6 +1262,7 @@ const createCartItem = (cartDataItem, newItem, cart, data) => {
   if (cartTest) {
     cartTest.querySelector('[cart-item="quantity"]').textContent =
       cartDataItem.quantity
+
     cartTest.querySelector('[cart-item="quantity"]').textContent =
       cartDataItem.quantity
     cartTest.querySelector('[cart-item="price"]').textContent =
@@ -1271,6 +1273,9 @@ const createCartItem = (cartDataItem, newItem, cart, data) => {
     newItem.style.display = 'flex'
     newItem.querySelector('[cart-item="quantity"]').textContent =
       cartDataItem.quantity
+    newItem
+      .querySelector('[cart-item="image"]')
+      .setAttribute('src', cartDataItem.image)
     newItem.querySelector('[cart-item="title"]').textContent =
       cartDataItem.product_title
     newItem.querySelector('[cart-item="price"]').textContent =
