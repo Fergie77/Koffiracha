@@ -375,7 +375,7 @@ export const pourLottieAnimations = () => {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: container.parentElement,
-              start: 'top 40%',
+              start: 'top center',
               end: 'bottom center',
               onEnter: () => {
                 lottieAnim.play()
@@ -396,7 +396,7 @@ export const pourLottieAnimations = () => {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: container.parentElement,
-              start: 'top 50%',
+              start: 'top center',
               end: 'bottom center',
               onEnter: () => {
                 lottieAnim.play()
