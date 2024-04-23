@@ -59,6 +59,14 @@ window.onbeforeunload = function () {
   window.scrollTo(0, 0)
 }
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual'
+}
+
+barba.hooks.beforeEnter(() => {
+  history.scrollRestoration = 'manual'
+})
+
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     cookieLinkSetter()

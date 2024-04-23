@@ -30,6 +30,7 @@
     "gsap": "^3.9.1",
     "keen-slider": "^6.8.6",
     "lottie-web": "^5.12.2",
+    "scroll-restoration-polyfill": "^0.6.1",
     "split-type": "^0.3.4",
     "spltjs": "^1.1.0"
   }
