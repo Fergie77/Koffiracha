@@ -380,6 +380,7 @@ export const pourLottieAnimations = () => {
               onEnter: () => {
                 lottieAnim.play()
               },
+              markers: true,
             },
           })
 
