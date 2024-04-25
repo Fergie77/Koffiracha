@@ -9,7 +9,7 @@ export const rotatingBottleAnimation = () => {
   const player = document.querySelector('[lottie-element="mobile"]')
   console.log(player)
   player.load(
-    'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662a29a72e8bf4f328bdde18_Chilli%20Fire.json'
+    'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662a8b3cccc4ab25860810b6_Chilli%20Flame%20Compressed.json'
   )
 
   player.addEventListener('ready', () => {
