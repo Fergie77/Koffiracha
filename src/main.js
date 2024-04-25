@@ -43,6 +43,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
@@ -86,6 +87,7 @@ barba.hooks.afterEnter((data) => {
     }
 
     if (data.next.namespace == 'home') {
+      rotatingBottleAnimation()
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
       floatingBottle()
