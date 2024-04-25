@@ -3,9 +3,11 @@ import { ScrollTrigger } from 'gsap/all'
 import { Flip } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(Flip)
 
 export const rotatingBottleAnimation = () => {
   const player = document.querySelector('[lottie-element="mobile"]')
+  console.log(player)
   player.load(
     'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662a29a72e8bf4f328bdde18_Chilli%20Fire.json'
   )
