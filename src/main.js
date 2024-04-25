@@ -3,7 +3,7 @@ import barba from '@barba/core'
 import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  floatingBottle,
+  //floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -90,7 +90,7 @@ barba.hooks.afterEnter((data) => {
       rotatingBottleAnimation()
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
-      floatingBottle()
+      //floatingBottle()
       roundingImageElement()
       instagramSlider()
       pourPourPour()
