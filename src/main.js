@@ -3,7 +3,7 @@ import barba from '@barba/core'
 import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -43,7 +43,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation } from './features/RotatingBottle'
+//import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
@@ -87,10 +87,10 @@ barba.hooks.afterEnter((data) => {
     }
 
     if (data.next.namespace == 'home') {
-      rotatingBottleAnimation()
+      //rotatingBottleAnimation()
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
-      //floatingBottle()
+      floatingBottle()
       roundingImageElement()
       instagramSlider()
       pourPourPour()
