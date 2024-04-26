@@ -14,7 +14,7 @@ export const rotatingBottleAnimation = () => {
 
   player.addEventListener('ready', () => {
     // const target = document.querySelector('.bottle-destination')
-    const origin = document.querySelector('.bottle-origin')
+    const origin = document.querySelector('.bottle-origin2')
     console.log(player)
 
     const state = Flip.getState(player)
