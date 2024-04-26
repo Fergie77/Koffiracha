@@ -19,8 +19,8 @@ export const rotatingBottleAnimation = () => {
   var animation = Lottie.loadAnimation({
     container: container,
     renderer: 'canvas',
-    loop: true,
-    autoplay: true,
+    loop: false,
+    autoplay: false,
     path: jsonPath,
   })
 
@@ -34,12 +34,12 @@ export const rotatingBottleAnimation = () => {
   // FLIP!
   const flip = Flip.to(state, {
     duration: 5,
-
+    absolute: true,
     ease: 'power1.inOut',
   })
 
   // player.pause()
-  //const frameCount = 50
+  const frameCount = 50
   ScrollTrigger.create({
     trigger: '#trigger-test',
     start: 'top center',
@@ -48,10 +48,13 @@ export const rotatingBottleAnimation = () => {
     markers: true,
     animation: flip,
     scrub: true,
-    // onUpdate: (self) => {
-    // let frame = Math.floor(self.progress * frameCount)
-    //   player.seek(frame)
-    // },
+    onUpdate: (self) => {
+      let frame = Math.floor(self.progress * frameCount)
+      console.log(frame)
+      animation.goToAndStop(frame, true)
+    },
   })
+  ScrollTrigger.sort()
+  ScrollTrigger.refresh()
   // })
 }
