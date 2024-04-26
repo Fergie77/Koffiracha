@@ -27,7 +27,7 @@ export const rotatingBottleAnimation = () => {
     })
 
     player.pause()
-    const frameCount = 50
+    //const frameCount = 50
     ScrollTrigger.create({
       trigger: '#trigger-test',
       start: 'top center',
@@ -36,10 +36,10 @@ export const rotatingBottleAnimation = () => {
       markers: true,
       animation: flip,
       scrub: true,
-      onUpdate: (self) => {
-        let frame = Math.floor(self.progress * frameCount)
-        player.seek(frame)
-      },
+      // onUpdate: (self) => {
+      //   let frame = Math.floor(self.progress * frameCount)
+      //   player.seek(frame)
+      // },
     })
   })
 }
