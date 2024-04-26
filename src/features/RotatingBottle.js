@@ -42,7 +42,7 @@ export const rotatingBottleAnimation = () => {
   const frameCount = 50
   ScrollTrigger.create({
     trigger: '#trigger-test',
-    start: 'top center',
+    start: 'top 20%',
     end: 'bottom bottom',
     endTrigger: '#endTrigger',
     markers: true,
