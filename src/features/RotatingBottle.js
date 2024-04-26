@@ -15,10 +15,10 @@ export const rotatingBottleAnimation = () => {
   var container = document.querySelector('[lottie-element="mobile"]')
 
   var jsonPath =
-    'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662b81560e5a807d218ccfea_Chilli%20Flame%20Compressed%20More.json'
+    'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662a8b3cccc4ab25860810b6_Chilli%20Flame%20Compressed.json'
   var animation = Lottie.loadAnimation({
     container: container,
-    renderer: 'svg',
+    renderer: 'canvas',
     loop: true,
     autoplay: true,
     path: jsonPath,
