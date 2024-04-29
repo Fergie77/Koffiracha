@@ -25,7 +25,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
       autoplay: false,
       path: jsonPath,
     })
-    console.log(element)
     const origin = triggerElement.querySelector('.bottle-origin2')
     const state = Flip.getState(element)
     origin.appendChild(element)
