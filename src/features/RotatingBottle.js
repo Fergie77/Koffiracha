@@ -12,8 +12,13 @@ export const rotatingBottleAnimation = (pageContainer) => {
   container.forEach((element) => {
     const triggerElement = element.closest('.floating-bottle-section_wrapper')
     const endTrigger = triggerElement.querySelector('#endTrigger')
-    var jsonPath =
-      'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/662a8b3cccc4ab25860810b6_Chilli%20Flame%20Compressed.json'
+    let animationID =
+      element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
+
+    var jsonPath = `https://cdn.shopify.com/s/files/1/0551/2983/3536/files/${
+      animationID + '-mobile'
+    }.json`
+    console.log(jsonPath)
     var animation = Lottie.loadAnimation({
       container: element,
       renderer: 'canvas',
@@ -21,7 +26,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
       autoplay: false,
       path: jsonPath,
     })
-
+    console.log(element)
     const origin = triggerElement.querySelector('.bottle-origin2')
     const state = Flip.getState(element)
     origin.appendChild(element)
@@ -38,7 +43,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
       start: 'top 20%',
       end: 'bottom bottom',
       endTrigger: endTrigger,
-      markers: true,
+      //markers: true,
       animation: flip,
       scrub: true,
       onUpdate: (self) => {
