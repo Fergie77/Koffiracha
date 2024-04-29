@@ -82,7 +82,8 @@ barba.hooks.afterEnter((data) => {
     setNavColourManual('yellow')
     hugeTextScaling()
     if (data.next.namespace == 'home-test') {
-      rotatingBottleAnimation()
+      rotatingBottleAnimation(data.next.container)
+      floatingBottle()
     }
 
     if (data.next.namespace == 'home') {
