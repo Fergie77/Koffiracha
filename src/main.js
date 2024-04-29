@@ -26,7 +26,6 @@ import {
   recipeModal,
   recipeAccordionToggle,
 } from './features/Animations'
-import { floatingBottlePinAnimation } from './features/FloatingBottlePin'
 import {
   chatButton2,
   cookieLinkSetter,
@@ -43,7 +42,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-//import { rotatingBottleAnimation } from './features/RotatingBottle'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
@@ -83,7 +82,7 @@ barba.hooks.afterEnter((data) => {
     setNavColourManual('yellow')
     hugeTextScaling()
     if (data.next.namespace == 'home-test') {
-      floatingBottlePinAnimation()
+      rotatingBottleAnimation()
     }
 
     if (data.next.namespace == 'home') {
