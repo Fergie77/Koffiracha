@@ -1257,7 +1257,6 @@ export const cartAnimation = () => {
 
 const createCartItem = (cartDataItem, newItem, cart, data) => {
   //check if newly added product already exists in the cart or not
-  console.log(data)
   const cartTest = Array.from(cart.children).find((element) => {
     return element.attributes.product_id.value == cartDataItem.id
   })
