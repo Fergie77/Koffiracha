@@ -1,5 +1,4 @@
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
 import KeenSlider from 'keen-slider'
 
 export const storySliderSlideIn = (
@@ -265,16 +264,6 @@ export const storySliderSlideIn = (
               perView: 1,
             },
           },
-        },
-        dragStarted: function () {
-          // This event fires when a drag starts
-          // Disable Normalize Scroll to allow for slider interaction
-          ScrollTrigger.normalizeScroll(false)
-        },
-        dragEnded: function () {
-          // This event fires when a drag starts
-          // Disable Normalize Scroll to allow for slider interaction
-          ScrollTrigger.normalizeScroll(true)
         },
       },
       [ArrowButton, revertSlider, WheelControls]
