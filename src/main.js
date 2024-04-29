@@ -87,7 +87,7 @@ barba.hooks.afterEnter((data) => {
     }
 
     if (data.next.namespace == 'home') {
-      //rotatingBottleAnimation()
+      rotatingBottleAnimation(data.next.container)
       pourLottieAnimations()
       testimonialSliderLoadAnimation()
       floatingBottle()
