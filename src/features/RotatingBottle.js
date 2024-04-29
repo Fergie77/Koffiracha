@@ -18,7 +18,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
     var jsonPath = `https://cdn.shopify.com/s/files/1/0551/2983/3536/files/${
       animationID + '-mobile'
     }.json`
-    console.log(jsonPath)
     var animation = Lottie.loadAnimation({
       container: element,
       renderer: 'canvas',
