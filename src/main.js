@@ -2,9 +2,9 @@ import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-//import { storySliderSlideIn } from './elements/storySlider'
+import { storySliderSlideIn } from './elements/storySlider'
 import {
-  // buttonAnimation,
+  buttonAnimation,
   //floatingBottle,
   navAnimation,
   pageTransition,
@@ -15,12 +15,12 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  // siteWideCartButtons,
+  siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  // pourPourPour,
+  pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -28,20 +28,20 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  // chatButton2,
-  // cookieLinkSetter,
-  // hugeTextScaling,
-  // openChat,
+  chatButton2,
+  cookieLinkSetter,
+  hugeTextScaling,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  // disableFooterColourSwap,
-  // footerColourSwap,
-  // navSwapping,
-  // setNavColourManual,
+  disableFooterColourSwap,
+  footerColourSwap,
+  navSwapping,
+  setNavColourManual,
 } from './features/NavbarSwapping'
 import {
   //rotatingBottleAnimation,
@@ -89,7 +89,6 @@ barba.hooks.beforeLeave(() => {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    /* commented out for testing
     cookieLinkSetter()
     openChat()
     setTimeout(() => {
@@ -102,7 +101,7 @@ barba.hooks.afterEnter((data) => {
     footerColourSwap()
     setNavColourManual('yellow')
     hugeTextScaling()
-*/
+
     if (data.next.namespace == 'home') {
       setTimeout(() => {
         //pourLottieAnimations(data.next.container)
@@ -119,13 +118,13 @@ barba.hooks.afterEnter((data) => {
       testimonialSliderLoadAnimation()
       /* commented out for testing
       floatingBottle()
-      
+      */
       roundingImageElement()
       instagramSlider()
-      
+
       pourPourPour()
       scrollingText()
-      
+
       storySliderSlideIn(
         document.querySelector('[story-slider = "arrow"]'),
         document.querySelector('[story-slider = "close"]'),
@@ -139,7 +138,7 @@ barba.hooks.afterEnter((data) => {
         document.querySelector('[testimonial-slider = "slider"]'),
         null,
         document.querySelector('[testimonial-slider = "text"]')
-      ) */
+      )
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
