@@ -53,7 +53,9 @@ barba.init({
         window.scrollTo(0, 0)
       },
       afterEnter(data) {
-        pourLottieAnimations(data.next.container)
+        setTimeout(() => {
+          pourLottieAnimations(data.next.container)
+        }, 500)
       },
     },
   ],
