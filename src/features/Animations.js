@@ -364,8 +364,6 @@ export const pourLottieAnimations = (pageContainer) => {
     let containers = pageContainer.querySelectorAll(
       '.pour_background-animation'
     )
-    // ScrollTrigger.sort()
-    // ScrollTrigger.refresh()
     if (containers) {
       containers.forEach((container) => {
         const lottieColour = container.getAttribute('lottie-colour')
