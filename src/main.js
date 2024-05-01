@@ -54,7 +54,7 @@ barba.init({
     {
       namespace: 'home',
       beforeEnter() {
-        window.scrollTo(0, 0)
+        //window.scrollTo(0, 0)
         ScrollTrigger.killAll()
       },
       afterEnter(data) {
