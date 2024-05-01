@@ -12,6 +12,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
   container.forEach((element) => {
     const triggerElement = element.closest('.floating-bottle-section_wrapper')
     const endTrigger = triggerElement.querySelector('#endTrigger')
+    console.log(triggerElement, endTrigger)
     let animationID =
       element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
 
@@ -51,8 +52,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
     })
   })
 
-  setTimeout(() => {
-    ScrollTrigger.sort()
-    ScrollTrigger.refresh()
-  }, 3000)
+  ScrollTrigger.sort()
+  ScrollTrigger.refresh()
 }
