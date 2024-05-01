@@ -201,7 +201,7 @@ const removeTouchAction = () => {
 const addTouchAction = () => {
   const bodyElement = document.querySelector('.page-wrapper')
   const htmlElement = document.querySelector('html')
-  bodyElement.setAttribute('style', 'overflow: hidden;')
+  bodyElement.setAttribute('style', '')
   htmlElement.setAttribute('style', 'scroll-behavior: auto;')
 }
 
