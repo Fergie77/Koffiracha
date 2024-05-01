@@ -1,88 +1,88 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { Flip } from 'gsap/all'
-//mport Lottie from 'lottie-web'
+import Lottie from 'lottie-web'
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(Flip)
 
-// export const rotatingBottleAnimation = (pageContainer) => {
-//   var container = document.querySelectorAll('[lottie-element="mobile"]')
-//   console.log(pageContainer)
-//   setTimeout(() => {
-//     container.forEach((element) => {
-//       const triggerElement = element.closest('.floating-bottle-section_wrapper')
-//       const endTrigger = triggerElement.querySelector('#endTrigger')
+export const rotatingBottleAnimation = (pageContainer) => {
+  var container = document.querySelectorAll('[lottie-element="mobile"]')
+  console.log(pageContainer)
+  setTimeout(() => {
+    container.forEach((element) => {
+      const triggerElement = element.closest('.floating-bottle-section_wrapper')
+      const endTrigger = triggerElement.querySelector('#endTrigger')
 
-//       let animationID =
-//         element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
+      let animationID =
+        element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
 
-//       var jsonPath = `https://cdn.shopify.com/s/files/1/0551/2983/3536/files/${
-//         animationID + '-mobile'
-//       }.json`
-//       var animation = Lottie.loadAnimation({
-//         container: element,
-//         renderer: 'canvas',
-//         loop: false,
-//         autoplay: false,
-//         path: jsonPath,
-//       })
-//       const origin = triggerElement.querySelector('.bottle-origin2')
-//       const state = Flip.getState(element)
-//       origin.appendChild(element)
-//       // FLIP!
-//       const flip = Flip.to(state, {
-//         duration: 5,
-//         absolute: true,
-//         ease: 'power1.inOut',
-//       })
+      var jsonPath = `https://cdn.shopify.com/s/files/1/0551/2983/3536/files/${
+        animationID + '-mobile'
+      }.json`
+      var animation = Lottie.loadAnimation({
+        container: element,
+        renderer: 'canvas',
+        loop: false,
+        autoplay: false,
+        path: jsonPath,
+      })
+      const origin = triggerElement.querySelector('.bottle-origin2')
+      const state = Flip.getState(element)
+      origin.appendChild(element)
+      // FLIP!
+      const flip = Flip.to(state, {
+        duration: 5,
+        absolute: true,
+        ease: 'power1.inOut',
+      })
 
-//       const frameCount = 50
-//       const st = ScrollTrigger.create({
-//         trigger: triggerElement,
-//         start: 'top 20%',
-//         end: 'bottom bottom',
-//         endTrigger: endTrigger,
-//         //markers: true,
-//         animation: flip,
-//         scrub: true,
-//         onUpdate: (self) => {
-//           let frame = Math.floor(self.progress * frameCount)
-//           animation.goToAndStop(frame, true)
-//         },
-//       })
+      const frameCount = 50
+      const st = ScrollTrigger.create({
+        trigger: triggerElement,
+        start: 'top 20%',
+        end: 'bottom bottom',
+        endTrigger: endTrigger,
+        //markers: true,
+        animation: flip,
+        scrub: true,
+        onUpdate: (self) => {
+          let frame = Math.floor(self.progress * frameCount)
+          animation.goToAndStop(frame, true)
+        },
+      })
 
-//       ScrollTrigger.sort()
-//       st.refresh()
-//       //ScrollTrigger.refresh()
-//     })
-//   }, 200)
-// }
-
-export const stTest = () => {
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '.floating-bottle-section_wrapper',
-      start: 'top 20%',
-      end: 'bottom bottom',
-      //endTrigger: endTrigger,
-      markers: true,
-      //animation: flip,
-      scrub: true,
-    },
-  })
-
-  // ScrollTrigger.create({
-  //   trigger: '#bottle-origin2',
-  //   start: 'top 20%',
-  //   end: 'bottom bottom',
-  //   //endTrigger: endTrigger,
-  //   markers: true,
-  //   //animation: flip,
-  //   scrub: true,
-  //   // onUpdate: (self) => {
-  //   //   let frame = Math.floor(self.progress * frameCount)
-  //   //   animation.goToAndStop(frame, true)
-  //   // },
-  // })
+      ScrollTrigger.sort()
+      st.refresh()
+      //ScrollTrigger.refresh()
+    })
+  }, 200)
 }
+
+// export const stTest = () => {
+//   gsap.timeline({
+//     scrollTrigger: {
+//       trigger: '.floating-bottle-section_wrapper',
+//       start: 'top 20%',
+//       end: 'bottom bottom',
+//       //endTrigger: endTrigger,
+//       markers: true,
+//       //animation: flip,
+//       scrub: true,
+//     },
+//   })
+
+// ScrollTrigger.create({
+//   trigger: '#bottle-origin2',
+//   start: 'top 20%',
+//   end: 'bottom bottom',
+//   //endTrigger: endTrigger,
+//   markers: true,
+//   //animation: flip,
+//   scrub: true,
+//   // onUpdate: (self) => {
+//   //   let frame = Math.floor(self.progress * frameCount)
+//   //   animation.goToAndStop(frame, true)
+//   // },
+// })
+//}
