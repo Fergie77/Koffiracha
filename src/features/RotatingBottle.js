@@ -62,7 +62,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
 export const stTest = () => {
   let tl = gsap.timeline({
     scrollTrigger: {
-      trigger: '#bottle-origin2',
+      trigger: '.bottle-origin2',
       start: 'top 20%',
       end: 'bottom bottom',
       //endTrigger: endTrigger,
