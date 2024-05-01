@@ -64,6 +64,10 @@ barba.init({
           //pourLottieAnimations(data.next.container)
           //rotatingBottleAnimation(data.next.container)
           stTest()
+          setTimeout(() => {
+            ScrollTrigger.sort()
+            ScrollTrigger.refresh()
+          }, 1000)
         }, 2000)
       },
     },
