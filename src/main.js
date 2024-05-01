@@ -56,7 +56,7 @@ barba.init({
         setTimeout(() => {
           pourLottieAnimations(data.next.container)
           rotatingBottleAnimation(data.next.container)
-        }, 500)
+        }, 2000)
       },
     },
   ],
