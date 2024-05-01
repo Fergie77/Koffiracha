@@ -58,14 +58,14 @@ barba.init({
       namespace: 'home',
       beforeEnter() {
         //window.scrollTo(0, 0)
-        stTest()
       },
-      // afterEnter(data) {
-      //   setTimeout(() => {
-      //     pourLottieAnimations(data.next.container)
-      //     //rotatingBottleAnimation(data.next.container)
-      //   }, 2000)
-      // },
+      afterEnter() {
+        setTimeout(() => {
+          //pourLottieAnimations(data.next.container)
+          //rotatingBottleAnimation(data.next.container)
+          stTest()
+        }, 2000)
+      },
     },
   ],
 })
