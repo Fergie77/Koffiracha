@@ -14,8 +14,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
       const triggerElement = element.closest('.floating-bottle-section_wrapper')
       const endTrigger = triggerElement.querySelector('#endTrigger')
 
-      console.log(triggerElement.offsetTop, endTrigger.offsetTop)
-
       let animationID =
         element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
 
@@ -40,7 +38,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
       })
 
       const frameCount = 50
-      ScrollTrigger.create({
+      const st = ScrollTrigger.create({
         trigger: triggerElement,
         start: 'top 20%',
         end: 'bottom bottom',
@@ -53,6 +51,8 @@ export const rotatingBottleAnimation = (pageContainer) => {
           animation.goToAndStop(frame, true)
         },
       })
+
+      console.log(st)
     })
     ScrollTrigger.sort()
     ScrollTrigger.refresh()
