@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  //floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -108,14 +108,16 @@ barba.hooks.afterEnter((data) => {
         rotatingBottleAnimation(data.next.container)
         //stTest()
 
-        setTimeout(() => {
-          console.log(ScrollTrigger.getAll())
-        }, 4000)
         //ScrollTrigger.sort()
         //ScrollTrigger.refresh()
       }, 2000)
 
       testimonialSliderLoadAnimation()
+
+      if (window.matchMedia('(min-width: 767px)').matches) {
+        console.log('matches')
+        floatingBottle()
+      }
       /* commented out for testing
       floatingBottle()
       */
