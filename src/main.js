@@ -20,7 +20,7 @@ import {
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  pourPourPour,
+  // pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -120,9 +120,10 @@ barba.hooks.afterEnter((data) => {
       floatingBottle()
       roundingImageElement()
       instagramSlider()
+      /* commented out for testing
       pourPourPour()
       scrollingText()
-      /* commented out for testing
+      
       storySliderSlideIn(
         document.querySelector('[story-slider = "arrow"]'),
         document.querySelector('[story-slider = "close"]'),
