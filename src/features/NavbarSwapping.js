@@ -6,7 +6,7 @@ import { addToCart } from './Animations'
 //import { siteWideCartButtons } from './Animations'
 
 export const navSwapping = () => {
-  ScrollTrigger.killAll()
+  //ScrollTrigger.killAll()
   // const featuredProduct = document
   //   .querySelector('[cartitemid]')
   //   ?.getAttribute('cartitemid')
@@ -170,7 +170,7 @@ function setNewColour(parentSelector, var1, var2) {
 }
 
 export const footerColourSwap = () => {
-  ScrollTrigger.killAll()
+  //ScrollTrigger.killAll()
 
   setTimeout(() => {
     const colour = document.querySelector('.is-red-test')

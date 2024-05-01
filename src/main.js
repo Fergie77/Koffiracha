@@ -44,7 +44,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation } from './features/RotatingBottle'
+import { rotatingBottleAnimation, stTest } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,11 +55,12 @@ barba.init({
       namespace: 'home',
       beforeEnter() {
         //window.scrollTo(0, 0)
+        stTest()
       },
       afterEnter(data) {
         setTimeout(() => {
           pourLottieAnimations(data.next.container)
-          rotatingBottleAnimation(data.next.container)
+          //rotatingBottleAnimation(data.next.container)
         }, 2000)
       },
     },
@@ -73,20 +74,20 @@ openCart()
 loadCart()
 setCheckout()
 
-// window.onbeforeunload = function () {
-//   window.scrollTo(0, 0)
-// }
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0)
+}
 
-// if ('scrollRestoration' in history) {
-//   history.scrollRestoration = 'manual'
-// }
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual'
+}
 
-// barba.hooks.beforeEnter(() => {
-//   history.scrollRestoration = 'manual'
-// })
+barba.hooks.beforeEnter(() => {
+  history.scrollRestoration = 'manual'
+  //ScrollTrigger.refresh()
+})
 
 barba.hooks.afterEnter((data) => {
-  ScrollTrigger.killAll()
   setTimeout(() => {
     cookieLinkSetter()
     openChat()
