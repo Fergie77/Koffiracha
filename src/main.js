@@ -49,12 +49,12 @@ barba.init({
   views: [
     {
       namespace: 'home',
-      beforeEnter(data) {
+      beforeEnter() {
+        window.scrollTo(0, 0)
+      },
+      afterEnter(data) {
         pourLottieAnimations(data.next.container)
       },
-      // afterEnter(data) {
-      //   navBackgroundAnimation(data.next.container)
-      // },
     },
   ],
 })
