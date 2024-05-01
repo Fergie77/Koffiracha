@@ -366,7 +366,7 @@ export const pourLottieAnimations = () => {
     if (containers) {
       containers.forEach((container) => {
         const lottieColour = container.getAttribute('lottie-colour')
-
+        console.log(container.parentElement)
         if (lottieColour != 'red') {
           let lottieAnim = Lottie.loadAnimation({
             container: container,
