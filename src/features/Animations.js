@@ -359,9 +359,11 @@ export const floatingBottle = () => {
   }, 500)
 }
 
-export const pourLottieAnimations = () => {
+export const pourLottieAnimations = (pageContainer) => {
   setTimeout(() => {
-    let containers = document.querySelectorAll('.pour_background-animation')
+    let containers = pageContainer.querySelectorAll(
+      '.pour_background-animation'
+    )
 
     if (containers) {
       containers.forEach((container) => {

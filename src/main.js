@@ -88,7 +88,7 @@ barba.hooks.afterEnter((data) => {
 
     if (data.next.namespace == 'home') {
       rotatingBottleAnimation(data.next.container)
-      pourLottieAnimations()
+      pourLottieAnimations(data.next.container)
       testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
@@ -114,7 +114,7 @@ barba.hooks.afterEnter((data) => {
       productLinkHover()
       mobileProductSlider()
       filtersDropdownAnimation()
-      pourLottieAnimations()
+      pourLottieAnimations(data.next.container)
       roundingImageElement()
     } else if (data.next.namespace == 'product') {
       checkIfRedProduct()
@@ -124,7 +124,7 @@ barba.hooks.afterEnter((data) => {
         recipeCardAnimation()
       }, 1000)
       recipeSlider()
-      pourLottieAnimations()
+      pourLottieAnimations(data.next.container)
       recipeModal()
       shareRecipe()
       setTimeout(() => {
@@ -139,10 +139,10 @@ barba.hooks.afterEnter((data) => {
       recipeModal()
       filtersDropdownAnimation()
       recipeFilters()
-      pourLottieAnimations()
+      pourLottieAnimations(data.next.container)
     } else if (data.next.namespace == 'media-kit') {
       recipeAccordionToggle()
-      pourLottieAnimations()
+      pourLottieAnimations(data.next.container)
     }
   }, 10)
 
