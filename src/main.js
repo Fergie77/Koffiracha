@@ -1,4 +1,6 @@
 import barba from '@barba/core'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
@@ -44,6 +46,8 @@ import {
 } from './features/NavbarSwapping'
 import { rotatingBottleAnimation } from './features/RotatingBottle'
 
+gsap.registerPlugin(ScrollTrigger)
+
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
   views: [
@@ -51,6 +55,7 @@ barba.init({
       namespace: 'home',
       beforeEnter() {
         window.scrollTo(0, 0)
+        ScrollTrigger.killAll()
       },
       afterEnter(data) {
         setTimeout(() => {
