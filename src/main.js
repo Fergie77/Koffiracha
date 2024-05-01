@@ -46,6 +46,17 @@ import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 barba.init({
   prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
+  views: [
+    {
+      namespace: 'home',
+      beforeEnter(data) {
+        pourLottieAnimations(data.next.container)
+      },
+      // afterEnter(data) {
+      //   navBackgroundAnimation(data.next.container)
+      // },
+    },
+  ],
 })
 
 pageTransition()
@@ -88,7 +99,7 @@ barba.hooks.afterEnter((data) => {
 
     if (data.next.namespace == 'home') {
       rotatingBottleAnimation(data.next.container)
-      pourLottieAnimations(data.next.container)
+
       testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
