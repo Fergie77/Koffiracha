@@ -118,9 +118,10 @@ barba.hooks.afterEnter((data) => {
 
       testimonialSliderLoadAnimation()
       floatingBottle()
+      /* commented out for testing
       roundingImageElement()
       instagramSlider()
-      /* commented out for testing
+      
       pourPourPour()
       scrollingText()
       
