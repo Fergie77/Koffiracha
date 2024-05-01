@@ -744,7 +744,7 @@ export const pageTransition = () => {
       duration: lottieAnim.timeCompleted / 60 / 3,
       ease: 'expo.inOut',
       onComplete: () => {
-        window.scrollTo(0, 0)
+        //window.scrollTo(0, 0)
         data.next.container.classList.remove('fixed')
       },
     })
