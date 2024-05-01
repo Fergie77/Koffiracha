@@ -159,7 +159,6 @@ export const shareRecipe = () => {
 let isScrollingEnabled = true
 
 export const stopScrolling = () => {
-  console.log('disable scrolling')
   removeTouchAction()
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && isScrollingEnabled) {
@@ -174,7 +173,6 @@ export const stopScrolling = () => {
 }
 
 export const enableScrolling = () => {
-  console.log('enable scrolling')
   addTouchAction()
   // Check if the screen width is greater than 479px
   if (window.innerWidth > 479 && !isScrollingEnabled) {
@@ -203,7 +201,7 @@ const removeTouchAction = () => {
 const addTouchAction = () => {
   const bodyElement = document.querySelector('.page-wrapper')
   const htmlElement = document.querySelector('html')
-  bodyElement.setAttribute('style', 'overflow: hidden;')
+  bodyElement.setAttribute('style', '')
   htmlElement.setAttribute('style', 'scroll-behavior: auto;')
 }
 
