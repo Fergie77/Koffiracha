@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
-  floatingBottle,
+  //floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -117,8 +117,9 @@ barba.hooks.afterEnter((data) => {
       }, 2000)
 
       testimonialSliderLoadAnimation()
-      floatingBottle()
       /* commented out for testing
+      floatingBottle()
+      
       roundingImageElement()
       instagramSlider()
       
