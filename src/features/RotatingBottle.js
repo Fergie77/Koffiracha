@@ -51,8 +51,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
         },
       })
     })
+    ScrollTrigger.sort()
+    ScrollTrigger.refresh()
   }, 200)
-
-  ScrollTrigger.sort()
-  ScrollTrigger.refresh()
 }
