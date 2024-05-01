@@ -77,16 +77,16 @@ openCart()
 loadCart()
 setCheckout()
 
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0)
-}
+// window.onbeforeunload = function () {
+//   window.scrollTo(0, 0)
+// }
 
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual'
-}
+// if ('scrollRestoration' in history) {
+//   history.scrollRestoration = 'manual'
+// }
 
 barba.hooks.beforeEnter(() => {
-  history.scrollRestoration = 'manual'
+  //history.scrollRestoration = 'manual'
   //ScrollTrigger.refresh()
 })
 
