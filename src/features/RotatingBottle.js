@@ -41,7 +41,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
       start: 'top 20%',
       end: 'bottom bottom',
       endTrigger: endTrigger,
-      //markers: true,
+      markers: true,
       animation: flip,
       scrub: true,
       onUpdate: (self) => {
