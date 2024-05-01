@@ -44,7 +44,10 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation, stTest } from './features/RotatingBottle'
+import {
+  rotatingBottleAnimation,
+  //stTest
+} from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,7 +58,7 @@ barba.init({
       namespace: 'home',
       beforeEnter() {
         //window.scrollTo(0, 0)
-        stTest()
+        //stTest()
       },
       afterEnter(data) {
         setTimeout(() => {
