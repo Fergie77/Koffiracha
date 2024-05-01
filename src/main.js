@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,11 +16,11 @@ import {
   loadCart,
   openCart,
   // siteWideCartButtons,
-  // testimonialSliderLoadAnimation,
+  testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  // pourPourPour,
+  pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -115,13 +115,14 @@ barba.hooks.afterEnter((data) => {
         //ScrollTrigger.sort()
         //ScrollTrigger.refresh()
       }, 2000)
-      /* commented out for testing
+
       testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
       instagramSlider()
       pourPourPour()
       scrollingText()
+      /* commented out for testing
       storySliderSlideIn(
         document.querySelector('[story-slider = "arrow"]'),
         document.querySelector('[story-slider = "close"]'),
