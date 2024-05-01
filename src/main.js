@@ -104,7 +104,7 @@ barba.hooks.afterEnter((data) => {
 
     if (data.next.namespace == 'home') {
       setTimeout(() => {
-        //pourLottieAnimations(data.next.container)
+        pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
         //stTest()
 
