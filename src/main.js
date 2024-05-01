@@ -55,6 +55,7 @@ barba.init({
       afterEnter(data) {
         setTimeout(() => {
           pourLottieAnimations(data.next.container)
+          rotatingBottleAnimation(data.next.container)
         }, 500)
       },
     },
@@ -100,8 +101,6 @@ barba.hooks.afterEnter((data) => {
     }
 
     if (data.next.namespace == 'home') {
-      rotatingBottleAnimation(data.next.container)
-
       testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
