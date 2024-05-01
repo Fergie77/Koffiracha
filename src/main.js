@@ -65,7 +65,6 @@ if ('scrollRestoration' in history) {
 
 barba.hooks.beforeEnter(() => {
   history.scrollRestoration = 'manual'
-  window.scrollTo(0, 0)
 })
 
 barba.hooks.afterEnter((data) => {
