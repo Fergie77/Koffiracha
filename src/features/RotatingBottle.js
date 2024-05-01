@@ -7,8 +7,8 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(Flip)
 
 export const rotatingBottleAnimation = (pageContainer) => {
-  var container = pageContainer.querySelectorAll('[lottie-element="mobile"]')
-
+  var container = document.querySelectorAll('[lottie-element="mobile"]')
+  console.log(pageContainer)
   setTimeout(() => {
     container.forEach((element) => {
       const triggerElement = element.closest('.floating-bottle-section_wrapper')
