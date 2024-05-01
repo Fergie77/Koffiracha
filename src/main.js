@@ -44,7 +44,10 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation, stTest } from './features/RotatingBottle'
+import {
+  //rotatingBottleAnimation,
+  stTest,
+} from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -57,12 +60,12 @@ barba.init({
         //window.scrollTo(0, 0)
         stTest()
       },
-      afterEnter(data) {
-        setTimeout(() => {
-          pourLottieAnimations(data.next.container)
-          //rotatingBottleAnimation(data.next.container)
-        }, 2000)
-      },
+      // afterEnter(data) {
+      //   setTimeout(() => {
+      //     pourLottieAnimations(data.next.container)
+      //     //rotatingBottleAnimation(data.next.container)
+      //   }, 2000)
+      // },
     },
   ],
 })
@@ -101,10 +104,6 @@ barba.hooks.afterEnter((data) => {
     footerColourSwap()
     setNavColourManual('yellow')
     hugeTextScaling()
-    if (data.next.namespace == 'home-test') {
-      rotatingBottleAnimation(data.next.container)
-      floatingBottle()
-    }
 
     if (data.next.namespace == 'home') {
       testimonialSliderLoadAnimation()
