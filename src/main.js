@@ -71,6 +71,8 @@ openCart()
 loadCart()
 setCheckout()
 
+ScrollTrigger.normalizeScroll()
+
 // window.onbeforeunload = function () {
 //   window.scrollTo(0, 0)
 // }
