@@ -62,7 +62,7 @@ gsap.registerPlugin(Flip)
 export const stTest = () => {
   gsap.timeline({
     scrollTrigger: {
-      trigger: '.bottle-origin2',
+      trigger: '.floating-bottle-section_wrapper',
       start: 'top 20%',
       end: 'bottom bottom',
       //endTrigger: endTrigger,

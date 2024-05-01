@@ -59,17 +59,7 @@ barba.init({
       beforeEnter() {
         //window.scrollTo(0, 0)
       },
-      afterEnter() {
-        setTimeout(() => {
-          //pourLottieAnimations(data.next.container)
-          //rotatingBottleAnimation(data.next.container)
-          stTest()
-          setTimeout(() => {
-            ScrollTrigger.sort()
-            ScrollTrigger.refresh()
-          }, 1000)
-        }, 2000)
-      },
+      afterEnter() {},
     },
   ],
 })
@@ -94,6 +84,10 @@ barba.hooks.beforeEnter(() => {
   //ScrollTrigger.refresh()
 })
 
+barba.hooks.beforeLeave(() => {
+  ScrollTrigger.killAll()
+})
+
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     cookieLinkSetter()
@@ -110,6 +104,17 @@ barba.hooks.afterEnter((data) => {
     hugeTextScaling()
 
     if (data.next.namespace == 'home') {
+      setTimeout(() => {
+        //pourLottieAnimations(data.next.container)
+        //rotatingBottleAnimation(data.next.container)
+        stTest()
+        setTimeout(() => {
+          console.log('refresh')
+          //ScrollTrigger.sort()
+          //ScrollTrigger.refresh()
+        }, 1000)
+      }, 2000)
+
       testimonialSliderLoadAnimation()
       floatingBottle()
       roundingImageElement()
