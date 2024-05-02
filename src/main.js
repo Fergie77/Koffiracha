@@ -2,7 +2,7 @@ import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-// import { storySliderSlideIn } from './elements/storySlider'
+import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
   // floatingBottle,
@@ -118,21 +118,21 @@ barba.hooks.afterEnter((data) => {
       // roundingImageElement() // is you
       // instagramSlider()
       // pourPourPour()
-      scrollingText()
-      // storySliderSlideIn(
-      //   document.querySelector('[story-slider = "arrow"]'),
-      //   document.querySelector('[story-slider = "close"]'),
-      //   document.querySelector('[story-slider = "slider"]'),
-      //   document.querySelector('[story-slider = "background"]'),
-      //   document.querySelector('[story-slider = "text"]')
-      // )
-      // storySliderSlideIn(
-      //   document.querySelector('[testimonial-slider = "arrow"]'),
-      //   document.querySelector('[testimonial-slider = "close"]'),
-      //   document.querySelector('[testimonial-slider = "slider"]'),
-      //   null,
-      //   document.querySelector('[testimonial-slider = "text"]')
-      // )
+      // scrollingText()
+      storySliderSlideIn(
+        document.querySelector('[story-slider = "arrow"]'),
+        document.querySelector('[story-slider = "close"]'),
+        document.querySelector('[story-slider = "slider"]'),
+        document.querySelector('[story-slider = "background"]'),
+        document.querySelector('[story-slider = "text"]')
+      )
+      storySliderSlideIn(
+        document.querySelector('[testimonial-slider = "arrow"]'),
+        document.querySelector('[testimonial-slider = "close"]'),
+        document.querySelector('[testimonial-slider = "slider"]'),
+        null,
+        document.querySelector('[testimonial-slider = "text"]')
+      )
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
