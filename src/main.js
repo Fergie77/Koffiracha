@@ -2,10 +2,10 @@ import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-import { storySliderSlideIn } from './elements/storySlider'
+//import { storySliderSlideIn } from './elements/storySlider'
 import {
-  // buttonAnimation,
-  floatingBottle,
+  buttonAnimation,
+  //floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -15,12 +15,12 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  // siteWideCartButtons,
-  testimonialSliderLoadAnimation,
+  siteWideCartButtons,
+  // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  pourPourPour,
+  // pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -28,21 +28,21 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  // chatButton2,
-  // cookieLinkSetter,
-  // openChat,
+  chatButton2,
+  cookieLinkSetter,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  // disableFooterColourSwap,
-  // footerColourSwap,
-  // navSwapping,
-  // setNavColourManual,
+  disableFooterColourSwap,
+  footerColourSwap,
+  navSwapping,
+  setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation } from './features/RotatingBottle'
+// import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -90,49 +90,49 @@ window.addEventListener('beforeunload', function () {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    //   cookieLinkSetter()
-    //   openChat()
-    //   setTimeout(() => {
-    //     chatButton2()
-    //   }, 1000)
+    cookieLinkSetter()
+    openChat()
+    setTimeout(() => {
+      chatButton2()
+    }, 1000)
 
-    //   siteWideCartButtons()
-    //   buttonAnimation()
-    //   navSwapping()
+    siteWideCartButtons()
+    buttonAnimation()
+    navSwapping()
 
-    //   disableFooterColourSwap()
+    disableFooterColourSwap()
 
-    //   footerColourSwap()
+    footerColourSwap()
 
-    //   setNavColourManual('yellow')
+    setNavColourManual('yellow')
 
     if (data.next.namespace == 'home') {
-      setTimeout(() => {
-        pourLottieAnimations(data.next.container)
-        rotatingBottleAnimation(data.next.container)
-      }, 2000)
-      testimonialSliderLoadAnimation()
-      if (window.matchMedia('(min-width: 767px)').matches) {
-        floatingBottle()
-      }
-      roundingImageElement()
-      instagramSlider()
-      pourPourPour()
-      scrollingText()
-      storySliderSlideIn(
-        document.querySelector('[story-slider = "arrow"]'),
-        document.querySelector('[story-slider = "close"]'),
-        document.querySelector('[story-slider = "slider"]'),
-        document.querySelector('[story-slider = "background"]'),
-        document.querySelector('[story-slider = "text"]')
-      )
-      storySliderSlideIn(
-        document.querySelector('[testimonial-slider = "arrow"]'),
-        document.querySelector('[testimonial-slider = "close"]'),
-        document.querySelector('[testimonial-slider = "slider"]'),
-        null,
-        document.querySelector('[testimonial-slider = "text"]')
-      )
+      // setTimeout(() => {
+      //   pourLottieAnimations(data.next.container)
+      //   rotatingBottleAnimation(data.next.container)
+      // }, 2000)
+      // testimonialSliderLoadAnimation()
+      // if (window.matchMedia('(min-width: 767px)').matches) {
+      //   floatingBottle()
+      // }
+      // roundingImageElement()
+      // instagramSlider()
+      // pourPourPour()
+      // scrollingText()
+      // storySliderSlideIn(
+      //   document.querySelector('[story-slider = "arrow"]'),
+      //   document.querySelector('[story-slider = "close"]'),
+      //   document.querySelector('[story-slider = "slider"]'),
+      //   document.querySelector('[story-slider = "background"]'),
+      //   document.querySelector('[story-slider = "text"]')
+      // )
+      // storySliderSlideIn(
+      //   document.querySelector('[testimonial-slider = "arrow"]'),
+      //   document.querySelector('[testimonial-slider = "close"]'),
+      //   document.querySelector('[testimonial-slider = "slider"]'),
+      //   null,
+      //   document.querySelector('[testimonial-slider = "text"]')
+      // )
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
