@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
-  // buttonAnimation,
+  buttonAnimation,
   // floatingBottle,
   navAnimation,
   pageTransition,
@@ -15,7 +15,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  // siteWideCartButtons,
+  siteWideCartButtons,
   // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -40,7 +40,7 @@ import {
   checkIfRedProduct,
   // disableFooterColourSwap,
   // footerColourSwap,
-  // navSwapping,
+  navSwapping,
   // setNavColourManual,
 } from './features/NavbarSwapping'
 //import { rotatingBottleAnimation } from './features/RotatingBottle'
@@ -91,10 +91,11 @@ barba.hooks.afterEnter((data) => {
     setTimeout(() => {
       chatButton2()
     }, 1000)
-    /*commented out for testing
+
     siteWideCartButtons()
     buttonAnimation()
     navSwapping()
+    /*commented out for testing
     disableFooterColourSwap()
     footerColourSwap()
     setNavColourManual('yellow')
