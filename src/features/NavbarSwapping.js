@@ -173,17 +173,8 @@ export const footerColourSwap = (container) => {
   //ScrollTrigger.killAll()
   setTimeout(() => {
     const colour = document.querySelector('.is-red-test')
-    // Only create a new ScrollTrigger if it doesn't already exist
     const trigger = container.querySelector('[scroll-trigger="footer"]')
 
-    // gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: trigger,
-    //     start: 'bottom bottom',
-    //     end: 'bottom bottom',
-    //     markers: true,
-    //   },
-    // })
     ScrollTrigger.create({
       trigger: trigger,
       start: 'bottom bottom',
