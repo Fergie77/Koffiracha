@@ -83,6 +83,11 @@ barba.hooks.beforeLeave(() => {
   ScrollTrigger.killAll()
 })
 
+window.addEventListener('beforeunload', function () {
+  console.log('load')
+  window.scrollTo(0, 0)
+})
+
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     // cookieLinkSetter()
