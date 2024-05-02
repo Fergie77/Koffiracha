@@ -51,9 +51,8 @@ barba.init({
   views: [
     {
       namespace: 'home',
-      beforeEnter(data) {
+      beforeEnter() {
         //window.scrollTo(0, 0)
-        footerColourSwap(data.next.container) // is you
       },
       afterEnter() {},
     },
@@ -115,6 +114,7 @@ barba.hooks.afterEnter((data) => {
         floatingBottle()
       }
       roundingImageElement() // is you
+      footerColourSwap(data.next.container) // is you
       instagramSlider()
       pourPourPour()
       scrollingText()
@@ -138,6 +138,7 @@ barba.hooks.afterEnter((data) => {
       filtersDropdownAnimation()
       pourLottieAnimations(data.next.container)
       roundingImageElement()
+      footerColourSwap(data.next.container) // is you
     } else if (data.next.namespace == 'product') {
       checkIfRedProduct()
       scrollingText()
@@ -146,12 +147,14 @@ barba.hooks.afterEnter((data) => {
         recipeCardAnimation()
       }, 1000)
       recipeSlider()
+      footerColourSwap(data.next.container) // is you
       pourLottieAnimations(data.next.container)
       recipeModal()
       shareRecipe()
       setTimeout(() => {
         window.okeWidgetApi.initAllWidgets()
       }, 500)
+      footerColourSwap(data.next.container) // is you
     } else if (data.next.namespace == 'recipes') {
       scrollingText()
       recipeAccordionToggle()
@@ -162,9 +165,11 @@ barba.hooks.afterEnter((data) => {
       filtersDropdownAnimation()
       recipeFilters()
       pourLottieAnimations(data.next.container)
+      footerColourSwap(data.next.container) // is you
     } else if (data.next.namespace == 'media-kit') {
       recipeAccordionToggle()
       pourLottieAnimations(data.next.container)
+      footerColourSwap(data.next.container) // is you
     }
   }, 10)
 
