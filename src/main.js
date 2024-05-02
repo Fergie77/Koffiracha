@@ -112,8 +112,9 @@ barba.hooks.afterEnter((data) => {
       }
 
       roundingImageElement()
-      instagramSlider()
       /*commented out for testing
+      instagramSlider()
+      
       pourPourPour()
       scrollingText()
 
