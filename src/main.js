@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
-  buttonAnimation,
+  // buttonAnimation,
   // floatingBottle,
   navAnimation,
   pageTransition,
@@ -15,8 +15,8 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  siteWideCartButtons,
-  testimonialSliderLoadAnimation,
+  // siteWideCartButtons,
+  // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
@@ -28,21 +28,21 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  chatButton2,
-  cookieLinkSetter,
-  openChat,
+  // chatButton2,
+  // cookieLinkSetter,
+  // openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  disableFooterColourSwap,
-  footerColourSwap,
-  navSwapping,
-  setNavColourManual,
+  // disableFooterColourSwap,
+  // footerColourSwap,
+  // navSwapping,
+  // setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation } from './features/RotatingBottle'
+//import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -85,6 +85,7 @@ barba.hooks.beforeLeave(() => {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
+    /*commented out for testing
     cookieLinkSetter()
     openChat()
     setTimeout(() => {
@@ -98,15 +99,16 @@ barba.hooks.afterEnter((data) => {
     disableFooterColourSwap()
     footerColourSwap()
     setNavColourManual('yellow')
-
+*/
     if (data.next.namespace == 'home') {
+      /*commented out for testing
       setTimeout(() => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
 
       testimonialSliderLoadAnimation()
-      /*commented out for testing
+      
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
       }
