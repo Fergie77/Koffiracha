@@ -172,7 +172,7 @@ function setNewColour(parentSelector, var1, var2) {
 export const footerColourSwap = (container) => {
   //ScrollTrigger.killAll()
   setTimeout(() => {
-    //const colour = document.querySelector('.is-red-test')
+    const colour = document.querySelector('.is-red-test')
     // Only create a new ScrollTrigger if it doesn't already exist
     const trigger = container.querySelector('[scroll-trigger="footer"]')
 
@@ -188,29 +188,27 @@ export const footerColourSwap = (container) => {
       trigger: trigger,
       start: 'bottom bottom',
       end: 'bottom bottom',
-      markers: true,
-      /*
-            onEnter: () => {
-              setNewColour('.nav', '--colour--black', '#ffffff')
-              setNewColour('.nav', '--colour--yellow', '#000000')
-              setNewColour('.nav', '--colour--white', '#000000')
-            },
-            onLeaveBack: () => {
-              if (colour) {
-                if (!colour.classList.contains('w-condition-invisible')) {
-                  setNavColourManual('red')
-                } else {
-                  setNewColour('.nav', '--colour--black', '#000000')
-                  setNewColour('.nav', '--colour--yellow', '#E6FE52')
-                  setNewColour('.nav', '--colour--white', '#ffffff')
-                }
-              } else {
-                setNewColour('.nav', '--colour--black', '#000000')
-                setNewColour('.nav', '--colour--yellow', '#E6FE52')
-                setNewColour('.nav', '--colour--white', '#ffffff')
-              }
-            },
-    */
+
+      onEnter: () => {
+        setNewColour('.nav', '--colour--black', '#ffffff')
+        setNewColour('.nav', '--colour--yellow', '#000000')
+        setNewColour('.nav', '--colour--white', '#000000')
+      },
+      onLeaveBack: () => {
+        if (colour) {
+          if (!colour.classList.contains('w-condition-invisible')) {
+            setNavColourManual('red')
+          } else {
+            setNewColour('.nav', '--colour--black', '#000000')
+            setNewColour('.nav', '--colour--yellow', '#E6FE52')
+            setNewColour('.nav', '--colour--white', '#ffffff')
+          }
+        } else {
+          setNewColour('.nav', '--colour--black', '#000000')
+          setNewColour('.nav', '--colour--yellow', '#E6FE52')
+          setNewColour('.nav', '--colour--white', '#ffffff')
+        }
+      },
     })
   }, 2000)
   return { setNewColour }
