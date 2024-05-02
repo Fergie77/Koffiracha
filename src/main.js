@@ -20,7 +20,7 @@ import {
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  // pourPourPour,
+  pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -116,8 +116,8 @@ barba.hooks.afterEnter((data) => {
       //   floatingBottle()
       // }
       // roundingImageElement() // is you
-      instagramSlider()
-      // pourPourPour()
+      // instagramSlider()
+      pourPourPour()
       // scrollingText()
       // storySliderSlideIn(
       //   document.querySelector('[story-slider = "arrow"]'),
