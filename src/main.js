@@ -110,10 +110,10 @@ barba.hooks.afterEnter((data) => {
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
       }
-      /*commented out for testing
+
       roundingImageElement()
       instagramSlider()
-
+      /*commented out for testing
       pourPourPour()
       scrollingText()
 
