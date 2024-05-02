@@ -43,10 +43,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-import {
-  rotatingBottleAnimation,
-  //stTest,
-} from './features/RotatingBottle'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,13 +67,13 @@ openCart()
 loadCart()
 setCheckout()
 
-// window.onbeforeunload = function () {
-//   window.scrollTo(0, 0)
-// }
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0)
+}
 
-// if ('scrollRestoration' in history) {
-//   history.scrollRestoration = 'manual'
-// }
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual'
+}
 
 barba.hooks.beforeEnter(() => {
   //history.scrollRestoration = 'manual'
@@ -106,21 +103,14 @@ barba.hooks.afterEnter((data) => {
       setTimeout(() => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
-        //stTest()
-
-        //ScrollTrigger.sort()
-        //ScrollTrigger.refresh()
       }, 2000)
 
       testimonialSliderLoadAnimation()
 
       if (window.matchMedia('(min-width: 767px)').matches) {
-        console.log('matches')
         floatingBottle()
       }
-      /* commented out for testing
-      floatingBottle()
-      */
+
       roundingImageElement()
       instagramSlider()
 

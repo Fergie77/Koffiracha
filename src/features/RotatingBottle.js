@@ -58,31 +58,3 @@ export const rotatingBottleAnimation = (pageContainer) => {
     })
   }, 200)
 }
-
-// export const stTest = () => {
-//   gsap.timeline({
-//     scrollTrigger: {
-//       trigger: '.floating-bottle-section_wrapper',
-//       start: 'top 20%',
-//       end: 'bottom bottom',
-//       //endTrigger: endTrigger,
-//       markers: true,
-//       //animation: flip,
-//       scrub: true,
-//     },
-//   })
-
-// ScrollTrigger.create({
-//   trigger: '#bottle-origin2',
-//   start: 'top 20%',
-//   end: 'bottom bottom',
-//   //endTrigger: endTrigger,
-//   markers: true,
-//   //animation: flip,
-//   scrub: true,
-//   // onUpdate: (self) => {
-//   //   let frame = Math.floor(self.progress * frameCount)
-//   //   animation.goToAndStop(frame, true)
-//   // },
-// })
-//}
