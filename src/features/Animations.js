@@ -124,35 +124,34 @@ export const roundingImageElement = () => {
     '.rounding_background-image-wrapper'
   )
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: roundingElement,
-      start: 'top 75%',
-      end: 'bottom center',
-      scrub: 2,
-      // onEnter: () => {
-      //   pourPourPour().playAnimation()
-      // },
-    },
-  })
+  setTimeout(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: roundingElement,
+        start: 'top 75%',
+        end: 'bottom center',
+        scrub: 2,
+      },
+    })
 
-  tl.to(roundingElement, {
-    borderRadius: 36,
-  })
-  tl.to(
-    roundingElement.parentNode,
-    {
-      scale: 0.9,
-    },
-    '<'
-  )
-  tl.to(
-    roundingElement.querySelector('.header30_background-image'),
-    {
-      scale: 1.05,
-    },
-    '<'
-  )
+    tl.to(roundingElement, {
+      borderRadius: 36,
+    })
+    tl.to(
+      roundingElement.parentNode,
+      {
+        scale: 0.9,
+      },
+      '<'
+    )
+    tl.to(
+      roundingElement.querySelector('.header30_background-image'),
+      {
+        scale: 1.05,
+      },
+      '<'
+    )
+  }, 1000)
 }
 
 export const floatingBottle = () => {
