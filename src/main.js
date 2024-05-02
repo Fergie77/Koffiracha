@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
-  // buttonAnimation,
+  buttonAnimation,
   //floatingBottle,
   navAnimation,
   pageTransition,
@@ -39,7 +39,7 @@ import {
   checkIfRedProduct,
   // disableFooterColourSwap,
   // footerColourSwap,
-  navSwapping,
+  // navSwapping,
   // setNavColourManual,
 } from './features/NavbarSwapping'
 // import { rotatingBottleAnimation } from './features/RotatingBottle'
@@ -97,8 +97,8 @@ barba.hooks.afterEnter((data) => {
     // }, 1000)
 
     // siteWideCartButtons()
-    // buttonAnimation()
-    navSwapping()
+    buttonAnimation()
+    // navSwapping()
 
     // disableFooterColourSwap()
 
