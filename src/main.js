@@ -51,8 +51,9 @@ barba.init({
   views: [
     {
       namespace: 'home',
-      beforeEnter() {
+      beforeEnter(data) {
         //window.scrollTo(0, 0)
+        footerColourSwap(data.next.container) // is you
       },
       afterEnter() {},
     },
@@ -101,8 +102,6 @@ barba.hooks.afterEnter((data) => {
     navSwapping()
 
     disableFooterColourSwap()
-
-    footerColourSwap(data.next.container) // is you
 
     setNavColourManual('yellow')
 
