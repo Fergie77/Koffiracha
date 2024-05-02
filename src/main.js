@@ -15,7 +15,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  siteWideCartButtons,
+  // siteWideCartButtons,
   // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -28,7 +28,7 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  // chatButton2,
+  chatButton2,
   // cookieLinkSetter,
   // openChat,
   recipeFilters,
@@ -92,11 +92,11 @@ barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     // cookieLinkSetter()
     // openChat()
-    // setTimeout(() => {
-    //   chatButton2()
-    // }, 1000)
+    setTimeout(() => {
+      chatButton2()
+    }, 1000)
 
-    siteWideCartButtons()
+    // siteWideCartButtons()
     // buttonAnimation()
     // navSwapping()
 
