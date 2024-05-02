@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 import { storySliderSlideIn } from './elements/storySlider'
 import {
-  buttonAnimation,
+  //buttonAnimation,
   floatingBottle,
   navAnimation,
   pageTransition,
@@ -15,7 +15,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  siteWideCartButtons,
+  //siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -91,8 +91,8 @@ barba.hooks.afterEnter((data) => {
       chatButton2()
     }, 1000)
 
-    siteWideCartButtons()
-    buttonAnimation()
+    // siteWideCartButtons()
+    // buttonAnimation()
     //navSwapping()
 
     //disableFooterColourSwap()
