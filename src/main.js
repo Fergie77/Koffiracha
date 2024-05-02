@@ -1,3 +1,4 @@
+/*
 import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -80,7 +81,7 @@ barba.hooks.beforeEnter(() => {
 })
 
 barba.hooks.beforeLeave(() => {
-  // ScrollTrigger.killAll()
+  ScrollTrigger.killAll()
 })
 
 window.addEventListener('beforeunload', function () {
@@ -199,3 +200,5 @@ barba.hooks.enter(() => {
     },
   ])
 })
+
+*/
