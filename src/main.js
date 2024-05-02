@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/all'
 
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
-  buttonAnimation,
+  // buttonAnimation,
   //floatingBottle,
   navAnimation,
   pageTransition,
@@ -15,7 +15,7 @@ import {
   accordionToggle,
   loadCart,
   openCart,
-  siteWideCartButtons,
+  // siteWideCartButtons,
   // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
@@ -28,18 +28,18 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  chatButton2,
-  cookieLinkSetter,
-  openChat,
+  // chatButton2,
+  // cookieLinkSetter,
+  // openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  disableFooterColourSwap,
-  footerColourSwap,
-  navSwapping,
+  // disableFooterColourSwap,
+  // footerColourSwap,
+  // navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
 // import { rotatingBottleAnimation } from './features/RotatingBottle'
@@ -90,19 +90,19 @@ window.addEventListener('beforeunload', function () {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    cookieLinkSetter()
-    openChat()
-    setTimeout(() => {
-      chatButton2()
-    }, 1000)
+    // cookieLinkSetter()
+    // openChat()
+    // setTimeout(() => {
+    //   chatButton2()
+    // }, 1000)
 
-    siteWideCartButtons()
-    buttonAnimation()
-    navSwapping()
+    // siteWideCartButtons()
+    // buttonAnimation()
+    // navSwapping()
 
-    disableFooterColourSwap()
+    // disableFooterColourSwap()
 
-    footerColourSwap()
+    // footerColourSwap()
 
     setNavColourManual('yellow')
 
