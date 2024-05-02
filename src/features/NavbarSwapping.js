@@ -206,7 +206,7 @@ export const footerColourSwap = () => {
     }
   }, 100)
 
-  return { setNewColour }
+  // return { setNewColour }
 }
 
 export const setNavColourManual = (colour) => {
