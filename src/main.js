@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 // import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
-  floatingBottle,
+  // floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -112,10 +112,10 @@ barba.hooks.afterEnter((data) => {
       //   rotatingBottleAnimation(data.next.container)
       // }, 2000)
       // testimonialSliderLoadAnimation()
-      if (window.matchMedia('(min-width: 767px)').matches) {
-        floatingBottle()
-      }
-      // roundingImageElement()
+      // if (window.matchMedia('(min-width: 767px)').matches) {
+      //   floatingBottle()
+      // }
+      roundingImageElement()
       // instagramSlider()
       // pourPourPour()
       // scrollingText()
