@@ -115,8 +115,8 @@ barba.hooks.afterEnter((data) => {
       // if (window.matchMedia('(min-width: 767px)').matches) {
       //   floatingBottle()
       // }
-      roundingImageElement()
-      // instagramSlider()
+      // roundingImageElement() // is you
+      instagramSlider()
       // pourPourPour()
       // scrollingText()
       // storySliderSlideIn(
