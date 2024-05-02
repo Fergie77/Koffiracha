@@ -37,7 +37,7 @@ import {
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  // disableFooterColourSwap,
+  disableFooterColourSwap,
   // footerColourSwap,
   navSwapping,
   // setNavColourManual,
@@ -94,8 +94,9 @@ barba.hooks.afterEnter((data) => {
     siteWideCartButtons()
     buttonAnimation()
     navSwapping()
-    /*commented out for testing
+
     disableFooterColourSwap()
+    /*commented out for testing
     footerColourSwap()
     setNavColourManual('yellow')
 */
