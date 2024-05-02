@@ -171,20 +171,17 @@ function setNewColour(parentSelector, var1, var2) {
 
 export const footerColourSwap = () => {
   //ScrollTrigger.killAll()
-
   //setTimeout(() => {
   //const colour = document.querySelector('.is-red-test')
   // Only create a new ScrollTrigger if it doesn't already exist
-
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '[scroll-trigger="footer"]',
-      start: 'bottom bottom',
-      end: 'bottom bottom',
-      markers: true,
-    },
-  })
-
+  // gsap.timeline({
+  //   scrollTrigger: {
+  //     trigger: '[scroll-trigger="footer"]',
+  //     start: 'bottom bottom',
+  //     end: 'bottom bottom',
+  //     markers: true,
+  //   },
+  // })
   //   ScrollTrigger.create({
   //     trigger: '[scroll-trigger="footer"]',
   //     start: 'bottom bottom',
@@ -214,7 +211,6 @@ export const footerColourSwap = () => {
   // */
   //   })
   //}, 100)
-
   // return { setNewColour }
 }
 
