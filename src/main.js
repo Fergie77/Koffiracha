@@ -102,7 +102,7 @@ barba.hooks.afterEnter((data) => {
 
     disableFooterColourSwap()
 
-    footerColourSwap() // is you
+    footerColourSwap(data.next.container) // is you
 
     setNavColourManual('yellow')
 
