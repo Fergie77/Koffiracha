@@ -2,10 +2,10 @@ import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-import { storySliderSlideIn } from './elements/storySlider'
+// import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
-  floatingBottle,
+  // floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,11 +16,11 @@ import {
   loadCart,
   openCart,
   // siteWideCartButtons,
-  testimonialSliderLoadAnimation,
+  // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  pourPourPour,
+  // pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -111,28 +111,28 @@ barba.hooks.afterEnter((data) => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
-      testimonialSliderLoadAnimation()
-      if (window.matchMedia('(min-width: 767px)').matches) {
-        floatingBottle()
-      }
-      roundingImageElement()
-      instagramSlider()
-      pourPourPour()
-      scrollingText()
-      storySliderSlideIn(
-        document.querySelector('[story-slider = "arrow"]'),
-        document.querySelector('[story-slider = "close"]'),
-        document.querySelector('[story-slider = "slider"]'),
-        document.querySelector('[story-slider = "background"]'),
-        document.querySelector('[story-slider = "text"]')
-      )
-      storySliderSlideIn(
-        document.querySelector('[testimonial-slider = "arrow"]'),
-        document.querySelector('[testimonial-slider = "close"]'),
-        document.querySelector('[testimonial-slider = "slider"]'),
-        null,
-        document.querySelector('[testimonial-slider = "text"]')
-      )
+      // testimonialSliderLoadAnimation()
+      // if (window.matchMedia('(min-width: 767px)').matches) {
+      //   floatingBottle()
+      // }
+      // roundingImageElement()
+      // instagramSlider()
+      // pourPourPour()
+      // scrollingText()
+      // storySliderSlideIn(
+      //   document.querySelector('[story-slider = "arrow"]'),
+      //   document.querySelector('[story-slider = "close"]'),
+      //   document.querySelector('[story-slider = "slider"]'),
+      //   document.querySelector('[story-slider = "background"]'),
+      //   document.querySelector('[story-slider = "text"]')
+      // )
+      // storySliderSlideIn(
+      //   document.querySelector('[testimonial-slider = "arrow"]'),
+      //   document.querySelector('[testimonial-slider = "close"]'),
+      //   document.querySelector('[testimonial-slider = "slider"]'),
+      //   null,
+      //   document.querySelector('[testimonial-slider = "text"]')
+      // )
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
