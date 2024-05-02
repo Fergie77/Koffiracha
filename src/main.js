@@ -85,7 +85,7 @@ barba.hooks.beforeLeave(() => {
 
 window.addEventListener('beforeunload', function () {
   console.log('load')
-  window.scrollTo(0, 0)
+  // window.scrollTo(0, 0)
 })
 
 barba.hooks.afterEnter((data) => {
