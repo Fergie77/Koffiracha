@@ -175,12 +175,13 @@ export const footerColourSwap = () => {
   setTimeout(() => {
     //const colour = document.querySelector('.is-red-test')
     // Only create a new ScrollTrigger if it doesn't already exist
-    if (!footerScrollTrigger) {
-      footerScrollTrigger = ScrollTrigger.create({
-        trigger: '[scroll-trigger="footer"]',
-        start: 'bottom bottom',
-        end: 'bottom bottom',
-        /*
+
+    ScrollTrigger.create({
+      trigger: '[scroll-trigger="footer"]',
+      start: 'bottom bottom',
+      end: 'bottom bottom',
+      markers: true,
+      /*
         onEnter: () => {
           setNewColour('.nav', '--colour--black', '#ffffff')
           setNewColour('.nav', '--colour--yellow', '#000000')
@@ -202,8 +203,7 @@ export const footerColourSwap = () => {
           }
         },
 */
-      })
-    }
+    })
   }, 100)
 
   // return { setNewColour }
