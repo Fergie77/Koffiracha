@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 // import { storySliderSlideIn } from './elements/storySlider'
 import {
   // buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,7 +16,7 @@ import {
   loadCart,
   openCart,
   // siteWideCartButtons,
-  testimonialSliderLoadAnimation,
+  // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
@@ -42,7 +42,7 @@ import {
   // navSwapping,
   // setNavColourManual,
 } from './features/NavbarSwapping'
-import { rotatingBottleAnimation } from './features/RotatingBottle'
+// import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -107,14 +107,14 @@ barba.hooks.afterEnter((data) => {
     // setNavColourManual('yellow')
 
     if (data.next.namespace == 'home') {
-      setTimeout(() => {
-        pourLottieAnimations(data.next.container)
-        rotatingBottleAnimation(data.next.container)
-      }, 2000)
-      testimonialSliderLoadAnimation()
-      // if (window.matchMedia('(min-width: 767px)').matches) {
-      //   floatingBottle()
-      // }
+      // setTimeout(() => {
+      //   pourLottieAnimations(data.next.container)
+      //   rotatingBottleAnimation(data.next.container)
+      // }, 2000)
+      // testimonialSliderLoadAnimation()
+      if (window.matchMedia('(min-width: 767px)').matches) {
+        floatingBottle()
+      }
       // roundingImageElement()
       // instagramSlider()
       // pourPourPour()
