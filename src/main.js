@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 //import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,7 +16,7 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
-  // testimonialSliderLoadAnimation,
+  testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
@@ -107,13 +107,13 @@ barba.hooks.afterEnter((data) => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
-      /*commented out for testing
+
       testimonialSliderLoadAnimation()
-      
+
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
       }
-      
+      /*commented out for testing
       roundingImageElement()
       
       instagramSlider()
