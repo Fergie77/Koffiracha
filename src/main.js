@@ -28,10 +28,10 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  // chatButton2,
-  // cookieLinkSetter,
+  chatButton2,
+  cookieLinkSetter,
   // hugeTextScaling,
-  // openChat,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
@@ -86,12 +86,12 @@ barba.hooks.beforeLeave(() => {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    /*commented out for testing
     cookieLinkSetter()
     openChat()
     setTimeout(() => {
       chatButton2()
     }, 1000)
+    /*commented out for testing
     siteWideCartButtons()
     buttonAnimation()
     navSwapping()
