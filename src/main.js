@@ -29,8 +29,8 @@ import {
 } from './features/Animations'
 import {
   // chatButton2,
-  // cookieLinkSetter,
-  openChat,
+  cookieLinkSetter,
+  // openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
@@ -90,8 +90,8 @@ window.addEventListener('beforeunload', function () {
 
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
-    // cookieLinkSetter()
-    openChat()
+    cookieLinkSetter()
+    // openChat()
     // setTimeout(() => {
     //   chatButton2()
     // }, 1000)
@@ -102,7 +102,7 @@ barba.hooks.afterEnter((data) => {
 
     // disableFooterColourSwap()
 
-    // footerColourSwap()
+    // footerColourSwap() // is you
 
     // setNavColourManual('yellow')
 
