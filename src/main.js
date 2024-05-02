@@ -2,10 +2,10 @@ import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-//import { storySliderSlideIn } from './elements/storySlider'
+import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,11 +16,11 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
-  // testimonialSliderLoadAnimation,
+  testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  // pourPourPour,
+  pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -40,9 +40,9 @@ import {
   disableFooterColourSwap,
   // footerColourSwap,
   navSwapping,
-  // setNavColourManual,
+  setNavColourManual,
 } from './features/NavbarSwapping'
-//import { rotatingBottleAnimation } from './features/RotatingBottle'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -96,28 +96,27 @@ barba.hooks.afterEnter((data) => {
     navSwapping()
 
     disableFooterColourSwap()
-    /*commented out for testing
-    footerColourSwap()
-    
+
+    // footerColourSwap()
+
     setNavColourManual('yellow')
-*/
+
     if (data.next.namespace == 'home') {
-      /*commented out for testing
       setTimeout(() => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
 
       testimonialSliderLoadAnimation()
-      
+
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
       }
-      
+
       roundingImageElement()
-      
+
       instagramSlider()
-      
+
       pourPourPour()
       scrollingText()
 
@@ -135,7 +134,6 @@ barba.hooks.afterEnter((data) => {
         null,
         document.querySelector('[testimonial-slider = "text"]')
       )
-      */
     } else if (data.next.namespace == 'shop') {
       productLinkHover()
       mobileProductSlider()
