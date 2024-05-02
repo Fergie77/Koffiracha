@@ -28,9 +28,9 @@ import {
   recipeAccordionToggle,
 } from './features/Animations'
 import {
-  chatButton2,
+  // chatButton2,
   // cookieLinkSetter,
-  // openChat,
+  openChat,
   recipeFilters,
   setCheckout,
   shareRecipe,
@@ -91,10 +91,10 @@ window.addEventListener('beforeunload', function () {
 barba.hooks.afterEnter((data) => {
   setTimeout(() => {
     // cookieLinkSetter()
-    // openChat()
-    setTimeout(() => {
-      chatButton2()
-    }, 1000)
+    openChat()
+    // setTimeout(() => {
+    //   chatButton2()
+    // }, 1000)
 
     // siteWideCartButtons()
     // buttonAnimation()
