@@ -16,7 +16,7 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
-  testimonialSliderLoadAnimation,
+  // testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
@@ -104,9 +104,9 @@ barba.hooks.afterEnter((data) => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
-
-      testimonialSliderLoadAnimation()
       /*commented out for testing
+      testimonialSliderLoadAnimation()
+      
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
       }
