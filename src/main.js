@@ -30,7 +30,7 @@ import {
 import {
   chatButton2,
   cookieLinkSetter,
-  // hugeTextScaling,
+  hugeTextScaling,
   openChat,
   recipeFilters,
   setCheckout,
@@ -99,9 +99,9 @@ barba.hooks.afterEnter((data) => {
     disableFooterColourSwap()
     footerColourSwap()
     setNavColourManual('yellow')
-    /*commented out for testing
+
     hugeTextScaling()
-*/
+
     if (data.next.namespace == 'home') {
       /*commented out for testing
       setTimeout(() => {
