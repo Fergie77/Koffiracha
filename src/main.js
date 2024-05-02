@@ -38,7 +38,7 @@ import {
 import {
   checkIfRedProduct,
   disableFooterColourSwap,
-  // footerColourSwap,
+  footerColourSwap,
   navSwapping,
   // setNavColourManual,
 } from './features/NavbarSwapping'
@@ -96,8 +96,9 @@ barba.hooks.afterEnter((data) => {
     navSwapping()
 
     disableFooterColourSwap()
-    /*commented out for testing
+
     footerColourSwap()
+    /*commented out for testing
     setNavColourManual('yellow')
 */
     if (data.next.namespace == 'home') {
