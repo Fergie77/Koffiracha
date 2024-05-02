@@ -43,7 +43,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-//import { rotatingBottleAnimation } from './features/RotatingBottle'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -103,12 +103,11 @@ barba.hooks.afterEnter((data) => {
     hugeTextScaling()
 
     if (data.next.namespace == 'home') {
-      /*commented out for testing
       setTimeout(() => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
-      
+      /*commented out for testing
       testimonialSliderLoadAnimation()
       
       if (window.matchMedia('(min-width: 767px)').matches) {
