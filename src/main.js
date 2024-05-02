@@ -38,9 +38,9 @@ import {
 import {
   checkIfRedProduct,
   // disableFooterColourSwap,
-  // footerColourSwap,
+  footerColourSwap,
   // navSwapping,
-  setNavColourManual,
+  // setNavColourManual,
 } from './features/NavbarSwapping'
 // import { rotatingBottleAnimation } from './features/RotatingBottle'
 
@@ -102,9 +102,9 @@ barba.hooks.afterEnter((data) => {
 
     // disableFooterColourSwap()
 
-    // footerColourSwap()
+    footerColourSwap()
 
-    setNavColourManual('yellow')
+    // setNavColourManual('yellow')
 
     if (data.next.namespace == 'home') {
       // setTimeout(() => {
