@@ -38,10 +38,10 @@ import {
 } from './features/Functionality'
 import {
   checkIfRedProduct,
-  // disableFooterColourSwap,
-  // footerColourSwap,
+  disableFooterColourSwap,
+  footerColourSwap,
   navSwapping,
-  // setNavColourManual,
+  setNavColourManual,
 } from './features/NavbarSwapping'
 //import { rotatingBottleAnimation } from './features/RotatingBottle'
 
@@ -95,10 +95,11 @@ barba.hooks.afterEnter((data) => {
     siteWideCartButtons()
     buttonAnimation()
     navSwapping()
-    /*commented out for testing
+
     disableFooterColourSwap()
     footerColourSwap()
     setNavColourManual('yellow')
+    /*commented out for testing
     hugeTextScaling()
 */
     if (data.next.namespace == 'home') {
