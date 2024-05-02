@@ -176,34 +176,43 @@ export const footerColourSwap = () => {
   //const colour = document.querySelector('.is-red-test')
   // Only create a new ScrollTrigger if it doesn't already exist
 
-  ScrollTrigger.create({
-    trigger: '[scroll-trigger="footer"]',
-    start: 'bottom bottom',
-    end: 'bottom bottom',
-    markers: true,
-    /*
-        onEnter: () => {
-          setNewColour('.nav', '--colour--black', '#ffffff')
-          setNewColour('.nav', '--colour--yellow', '#000000')
-          setNewColour('.nav', '--colour--white', '#000000')
-        },
-        onLeaveBack: () => {
-          if (colour) {
-            if (!colour.classList.contains('w-condition-invisible')) {
-              setNavColourManual('red')
-            } else {
-              setNewColour('.nav', '--colour--black', '#000000')
-              setNewColour('.nav', '--colour--yellow', '#E6FE52')
-              setNewColour('.nav', '--colour--white', '#ffffff')
-            }
-          } else {
-            setNewColour('.nav', '--colour--black', '#000000')
-            setNewColour('.nav', '--colour--yellow', '#E6FE52')
-            setNewColour('.nav', '--colour--white', '#ffffff')
-          }
-        },
-*/
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '[scroll-trigger="footer"]',
+      start: 'bottom bottom',
+      end: 'bottom bottom',
+      markers: true,
+    },
   })
+
+  //   ScrollTrigger.create({
+  //     trigger: '[scroll-trigger="footer"]',
+  //     start: 'bottom bottom',
+  //     end: 'bottom bottom',
+  //     markers: true,
+  //     /*
+  //         onEnter: () => {
+  //           setNewColour('.nav', '--colour--black', '#ffffff')
+  //           setNewColour('.nav', '--colour--yellow', '#000000')
+  //           setNewColour('.nav', '--colour--white', '#000000')
+  //         },
+  //         onLeaveBack: () => {
+  //           if (colour) {
+  //             if (!colour.classList.contains('w-condition-invisible')) {
+  //               setNavColourManual('red')
+  //             } else {
+  //               setNewColour('.nav', '--colour--black', '#000000')
+  //               setNewColour('.nav', '--colour--yellow', '#E6FE52')
+  //               setNewColour('.nav', '--colour--white', '#ffffff')
+  //             }
+  //           } else {
+  //             setNewColour('.nav', '--colour--black', '#000000')
+  //             setNewColour('.nav', '--colour--yellow', '#E6FE52')
+  //             setNewColour('.nav', '--colour--white', '#ffffff')
+  //           }
+  //         },
+  // */
+  //   })
   //}, 100)
 
   // return { setNewColour }
