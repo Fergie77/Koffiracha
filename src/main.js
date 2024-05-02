@@ -1,4 +1,3 @@
-/*
 import barba from '@barba/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -200,5 +199,3 @@ barba.hooks.enter(() => {
     },
   ])
 })
-
-*/
