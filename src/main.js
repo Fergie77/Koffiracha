@@ -6,15 +6,15 @@ import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
   floatingBottle,
-  // navAnimation,
-  // pageTransition,
+  navAnimation,
+  pageTransition,
   roundingImageElement,
   scaleUpAnimation,
   scrollingText,
   productLinkHover,
   accordionToggle,
-  // loadCart,
-  // openCart,
+  loadCart,
+  openCart,
   siteWideCartButtons,
   testimonialSliderLoadAnimation,
   recipeCardAnimation,
@@ -32,7 +32,7 @@ import {
   cookieLinkSetter,
   openChat,
   recipeFilters,
-  // setCheckout,
+  setCheckout,
   shareRecipe,
 } from './features/Functionality'
 import {
@@ -59,12 +59,12 @@ barba.init({
   ],
 })
 
-// pageTransition()
-// navAnimation()
-// openCart()
+pageTransition()
+navAnimation()
+openCart()
 
-// loadCart()
-// setCheckout()
+loadCart()
+setCheckout()
 
 // window.onbeforeunload = function () {
 //   window.scrollTo(0, 0)
@@ -80,7 +80,7 @@ barba.hooks.beforeEnter(() => {
 })
 
 barba.hooks.beforeLeave(() => {
-  ScrollTrigger.killAll()
+  // ScrollTrigger.killAll()
 })
 
 window.addEventListener('beforeunload', function () {
