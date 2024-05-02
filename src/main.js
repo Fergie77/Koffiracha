@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/all'
 import { storySliderSlideIn } from './elements/storySlider'
 import {
   buttonAnimation,
-  // floatingBottle,
+  floatingBottle,
   navAnimation,
   pageTransition,
   roundingImageElement,
@@ -16,11 +16,11 @@ import {
   loadCart,
   openCart,
   siteWideCartButtons,
-  //  testimonialSliderLoadAnimation,
+  testimonialSliderLoadAnimation,
   recipeCardAnimation,
   filtersDropdownAnimation,
   instagramSlider,
-  //  pourPourPour,
+  pourPourPour,
   mobileProductSlider,
   pourLottieAnimations,
   recipeSlider,
@@ -42,7 +42,7 @@ import {
   navSwapping,
   setNavColourManual,
 } from './features/NavbarSwapping'
-//import { rotatingBottleAnimation } from './features/RotatingBottle'
+import { rotatingBottleAnimation } from './features/RotatingBottle'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -107,23 +107,23 @@ barba.hooks.afterEnter((data) => {
     setNavColourManual('yellow')
 
     if (data.next.namespace == 'home') {
-      // setTimeout(() => {
-      //   pourLottieAnimations(data.next.container)
-      //   rotatingBottleAnimation(data.next.container)
-      // }, 2000)
+      setTimeout(() => {
+        pourLottieAnimations(data.next.container)
+        rotatingBottleAnimation(data.next.container)
+      }, 2000)
 
-      // testimonialSliderLoadAnimation()
+      testimonialSliderLoadAnimation()
 
-      // if (window.matchMedia('(min-width: 767px)').matches) {
-      //   floatingBottle()
-      // }
+      if (window.matchMedia('(min-width: 767px)').matches) {
+        floatingBottle()
+      }
 
-      // roundingImageElement()
+      roundingImageElement()
 
-      // instagramSlider()
+      instagramSlider()
 
-      // pourPourPour()
-      // scrollingText()
+      pourPourPour()
+      scrollingText()
 
       storySliderSlideIn(
         document.querySelector('[story-slider = "arrow"]'),
