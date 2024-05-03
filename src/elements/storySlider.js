@@ -90,6 +90,7 @@ export const storySliderSlideIn = (
           disableWheelControls()
           firstClick = false
           arrow.addEventListener('click', firstArrowClick)
+          arrow.removeEventListener('click', sliderOpenedArrow)
         }
       },
     })
@@ -154,10 +155,15 @@ export const storySliderSlideIn = (
   arrow.addEventListener('mouseleave', slideOutSlightly)
 
   function firstArrowClick() {
+    arrow.addEventListener('click', sliderOpenedArrow)
     if (firstClick) {
       slider.next()
     }
     firstClick = true
+  }
+
+  function sliderOpenedArrow() {
+    slider.next()
   }
 
   const addKeenSlider = () => {
