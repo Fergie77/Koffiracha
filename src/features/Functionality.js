@@ -2,76 +2,6 @@ import { gsap } from 'gsap'
 
 import { closeNavFunction } from './Animations'
 
-// export const hugeTextScaling = () => {
-//   function adjustTextSize() {
-//     const container = document.querySelector('.footer3_heading-wrapper') // Replace '.container' with your container's selector
-//     const textElement = container.querySelector('.huge-text') // Replace '.text' with your text element's selector
-
-//     let desiredWidth = container.offsetWidth - 60 // Get the container's current width
-//     let currentFontSize = parseInt(
-//       window.getComputedStyle(textElement, null).getPropertyValue('font-size'),
-//       10
-//     )
-//     textElement.style.fontSize = currentFontSize + 'px' // Set initial font size
-
-//     // Function to estimate the width of the text element
-//     function getTextWidth(text, font) {
-//       // Create a temporary canvas to measure text width
-//       let canvas =
-//         getTextWidth.canvas ||
-//         (getTextWidth.canvas = document.createElement('canvas'))
-//       let context = canvas.getContext('2d')
-//       context.font = font
-//       let metrics = context.measureText(text)
-//       return metrics.width
-//     }
-
-//     let currentTextWidth = getTextWidth(
-//       textElement.textContent,
-//       currentFontSize +
-//         'px ' +
-//         window
-//           .getComputedStyle(textElement, null)
-//           .getPropertyValue('font-family')
-//     )
-
-//     // Adjust the font size until the text width is just less than or equal to the desired width
-//     while (currentTextWidth < desiredWidth && currentFontSize < 1000) {
-//       // Prevents infinite loops
-//       currentFontSize++
-//       textElement.style.fontSize = currentFontSize + 'px'
-//       currentTextWidth = getTextWidth(
-//         textElement.textContent,
-//         currentFontSize +
-//           'px ' +
-//           window
-//             .getComputedStyle(textElement, null)
-//             .getPropertyValue('font-family')
-//       )
-//     }
-
-//     // Optionally, decrease font size if it's too wide
-//     while (currentTextWidth > desiredWidth) {
-//       currentFontSize--
-//       textElement.style.fontSize = currentFontSize + 'px'
-//       currentTextWidth = getTextWidth(
-//         textElement.textContent,
-//         currentFontSize +
-//           'px ' +
-//           window
-//             .getComputedStyle(textElement, null)
-//             .getPropertyValue('font-family')
-//       )
-//     }
-//   }
-//   adjustTextSize()
-//   // // Run the function when the document is fully loaded
-//   // document.addEventListener('DOMContentLoaded', adjustTextSize)
-
-//   // Optionally, adjust text size on window resize
-//   window.addEventListener('resize', adjustTextSize)
-// }
-
 export const hugeTextScaling = () => {
   var title = document.querySelector('#footer-header')
 
@@ -440,48 +370,6 @@ export const setCheckout = () => {
   const checkoutButton = document.querySelector('#checkout-button')
   checkoutButton.setAttribute('href', '/checkout')
 }
-
-// export const cookieClassSwap = () => {
-//   const acceptButton = document.querySelector('#shopify-pc__banner__btn-accept')
-//   const declineButton = document.querySelector(
-//     '#shopify-pc__banner__btn-decline'
-//   )
-
-//   const dialogueWrapperButtons = document.querySelectorAll(
-//     '.shopify-pc__banner__dialog button'
-//   )
-//   const managePrefs = document.querySelector(
-//     '.shopify-pc__banner__btn-manage-prefs'
-//   )
-//   const cookieBanner = document.querySelector('.shopify-pc__banner')
-//   cookieBanner.style.fontSize = '16px'
-//   managePrefs.addEventListener('click', () => {
-//     const dialogueWrapper = document.querySelector('.shopify-pc__prefs')
-//     const inputs = document.querySelector(
-//       '.shopify-pc__prefs__options'
-//     ).childNodes
-
-//     dialogueWrapper.style.fontSize = '16px'
-//     inputs.forEach((element) => {
-//       element.querySelectorAll('span').forEach((element) => {
-//         element.style.width = '15px'
-//         element.style.height = '15px'
-//       })
-//     })
-//   })
-
-//   dialogueWrapperButtons.forEach((element) => {
-//     element.style.borderRadius = '18px'
-//     element.style.lineHeight = '1'
-//   })
-
-//   acceptButton.classList.remove('shopify-pc__banner__btn-accept')
-
-//   acceptButton.classList.add('skinny-button')
-//   acceptButton.classList.add('is-yellow')
-//   declineButton.classList.add('skinny-button')
-//   declineButton.classList.add('is-outlined')
-// }
 
 export const cookieLinkSetter = () => {
   // Select the link by its ID

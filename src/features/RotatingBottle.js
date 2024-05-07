@@ -14,7 +14,7 @@ export const rotatingBottleAnimation = (pageContainer) => {
       const endTrigger = triggerElement.querySelector('#endTrigger')
 
       let animationID =
-        element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'V2' if no title
+        element.getAttribute('title')?.toString() || 'chilli-flame' // Default to 'chilli-flame' if no title
 
       var jsonPath = `https://cdn.shopify.com/s/files/1/0551/2983/3536/files/${
         animationID + '-mobile'
@@ -42,7 +42,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
         start: 'top 20%',
         end: 'bottom bottom',
         endTrigger: endTrigger,
-        //markers: true,
         animation: flip,
         scrub: true,
         onUpdate: (self) => {
@@ -53,7 +52,6 @@ export const rotatingBottleAnimation = (pageContainer) => {
 
       ScrollTrigger.sort()
       st.refresh()
-      //ScrollTrigger.refresh()
     })
   }, 200)
 }
