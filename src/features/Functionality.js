@@ -40,7 +40,6 @@ export const shareRecipe = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        console.log('URL copied to clipboard successfully!')
         alert('URL copied to clipboard!')
       })
       .catch((err) => {
@@ -301,9 +300,7 @@ export const chatButton2 = () => {
           mutation.attributeName === 'aria-expanded'
         ) {
           var expanded = button.getAttribute('aria-expanded')
-          console.log('aria-expanded changed to:', expanded)
           const secondButton = document.querySelector('#chat-button')
-          console.log(secondButton)
           if (!expanded) {
             button.style.display = 'none'
             secondButton.setAttribute('style', 'display= "none";')

@@ -71,9 +71,17 @@ export const navSwapping = () => {
           trigger: element,
           start: 'top bottom',
           end: 'bottom bottom-=200px',
-
           onEnter: () => {
             // This code will be executed when the scroll trigger is entered
+            //changes cart colour based on product
+            /*
+            if (productID == '40011779866688') {
+              setNavColourManual('red')
+            } else {
+              setNavColourManual('yellow')
+            }
+            */
+
             gsap.to('.middle-button_wrapper .button-text', {
               y: (i, el) => {
                 el.textContent = 'Add to Cart'
@@ -84,11 +92,18 @@ export const navSwapping = () => {
                   addCartButtonListener
                 )
                 el.closest('a').addEventListener('click', addCartButtonListener)
-                //siteWideCartButtons()
               },
             })
           },
           onEnterBack: () => {
+            //changes cart colour based on product
+            /*
+            if (productID == '40011779866688') {
+              setNavColourManual('red')
+            } else {
+              setNavColourManual('yellow')
+            }
+            */
             // This code will be executed when the scroll trigger is entered
             gsap.to('.middle-button_wrapper .button-text', {
               y: (i, el) => {
@@ -100,7 +115,6 @@ export const navSwapping = () => {
                   addCartButtonListener
                 )
                 el.closest('a').addEventListener('click', addCartButtonListener)
-                //siteWideCartButtons()
               },
             })
           },
@@ -120,7 +134,6 @@ function setNewColour(parentSelector, var1, var2) {
 
 export const footerColourSwap = (container) => {
   setTimeout(() => {
-    const colour = document.querySelector('.is-red-test')
     const trigger = container.querySelector('[scroll-trigger="footer"]')
 
     ScrollTrigger.create({
@@ -134,38 +147,32 @@ export const footerColourSwap = (container) => {
         setNewColour('.nav', '--colour--white', '#000000')
       },
       onLeaveBack: () => {
-        if (colour) {
-          if (!colour.classList.contains('w-condition-invisible')) {
-            setNavColourManual('red')
-          } else {
-            setNewColour('.nav', '--colour--black', '#000000')
-            setNewColour('.nav', '--colour--yellow', '#E6FE52')
-            setNewColour('.nav', '--colour--white', '#ffffff')
-          }
-        } else {
-          setNewColour('.nav', '--colour--black', '#000000')
-          setNewColour('.nav', '--colour--yellow', '#E6FE52')
-          setNewColour('.nav', '--colour--white', '#ffffff')
-        }
+        setNavColourManual(previousNavColour)
       },
     })
   }, 2000)
   return { setNewColour }
 }
 
+var previousNavColour
+
 export const setNavColourManual = (colour) => {
+  previousNavColour = 'yellow'
   if (colour == 'yellow') {
     setNewColour('.nav', '--colour--black', '#000000')
     setNewColour('.nav', '--colour--yellow', '#E6FE52')
     setNewColour('.nav', '--colour--white', '#ffffff')
+    previousNavColour = 'yellow'
   } else if (colour == 'black') {
     setNewColour('.nav', '--colour--black', '#ffffff')
     setNewColour('.nav', '--colour--yellow', '#000000')
     setNewColour('.nav', '--colour--white', '#000000')
+    previousNavColour = 'black'
   } else if (colour == 'red') {
     setNewColour('.nav', '--colour--black', '#000000')
     setNewColour('.nav', '--colour--yellow', '#FF6E65')
     setNewColour('.nav', '--colour--white', '#ffffff')
+    previousNavColour = 'red'
   }
 }
 

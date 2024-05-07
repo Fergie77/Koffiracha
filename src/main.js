@@ -66,25 +66,11 @@ openCart()
 loadCart()
 setCheckout()
 
-// window.onbeforeunload = function () {
-//   window.scrollTo(0, 0)
-// }
-
-// if ('scrollRestoration' in history) {
-//   history.scrollRestoration = 'manual'
-// }
-
-barba.hooks.beforeEnter(() => {
-  //history.scrollRestoration = 'manual'
-  //ScrollTrigger.refresh()
-})
-
 barba.hooks.beforeLeave(() => {
   ScrollTrigger.killAll()
 })
 
 window.addEventListener('beforeunload', function () {
-  console.log('load')
   // window.scrollTo(0, 0)
 })
 
