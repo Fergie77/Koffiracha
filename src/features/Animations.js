@@ -422,7 +422,7 @@ export const pageTransition = () => {
     renderer: 'canvas',
     loop: false,
     autoplay: false,
-    path: 'https://uploads-ssl.webflow.com/6571a5766b38a3291e605413/657b1db7e1bbc3dc8b91e5eb_KOFF%20PAGE%20LOADER%203.json',
+    path: 'https://cdn.shopify.com/s/files/1/0551/2983/3536/files/KOFF_PAGE_LOADER_3.json',
   })
 
   barba.preventRunning = true
