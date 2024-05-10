@@ -67,7 +67,8 @@ export const shareRecipe = () => {
       if (navigator.share) {
         navigator
           .share({
-            title: document.title,
+            //title: document.title,
+            title: 'test title',
             url: recipePageUrl,
           })
           .then(() => {
