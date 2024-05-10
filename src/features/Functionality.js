@@ -48,6 +48,12 @@ export const shareRecipe = () => {
       })
   }
 
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    })
+  }
+
   // Function to generate the recipe page URL
   function generateRecipePageUrl() {
     // Define the base URL for the recipe page
@@ -63,12 +69,13 @@ export const shareRecipe = () => {
     button.addEventListener('click', () => {
       // Generate the URL for the recipe page
       const recipePageUrl = generateRecipePageUrl()
-
+      const recipeName = window.location.href.split('modalToOpen=')[1]
+      const formattedRecipeName = toTitleCase(recipeName.split('-').join(' '))
       if (navigator.share) {
         navigator
           .share({
             //title: document.title,
-            title: 'test title',
+            title: formattedRecipeName + ' - Koffiracha Hot Sauce',
             url: recipePageUrl,
           })
           .then(() => {
