@@ -150,7 +150,7 @@ export const footerColourSwap = (container) => {
         setNavColourManual(previousNavColour)
       },
     })
-  }, 2000)
+  }, 3000)
   return { setNewColour }
 }
 
