@@ -191,51 +191,77 @@ export const openChat = () => {
   // Function to observe child additions to the gorgias-chat-container
   function observeChildAdditions(element) {
     const childObserver = new MutationObserver((mutationsList) => {
+      console.log(element.querySelector('iframe'))
+      const iframe = element.querySelector('iframe')
+      const hideButton = () => {
+        iframe.style.display = 'none'
+      }
+
+      iframe.addEventListener('load', () => {
+        setTimeout(() => {
+          const button =
+            iframe.contentDocument.querySelector('#mountHere').firstChild
+              .firstChild
+
+          pseudoChatButton.addEventListener('click', () => {
+            // let button2 = null
+            // setTimeout(() => {
+            //   const iframe2 = node.children[1]
+            //   button2 = iframe2.contentDocument
+            //     .querySelector('#mountHere')
+            //     .querySelector('.message-window-iframe-xaqbo8')
+            //   button2.parentElement.addEventListener('touchstart', hideButton)
+            // }, 500)
+            button.click()
+            iframe.style.display = 'block'
+
+            button?.addEventListener('click', hideButton)
+            closeNavFunction()
+          })
+        }, 1000)
+
+        iframe.style.display = 'none'
+        childObserver.disconnect()
+      })
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
           mutation.addedNodes.forEach((node) => {
             // Check if the added node is an element (optional: check for specific child ID or class)
             if (node.nodeType === Node.ELEMENT_NODE) {
-              const iframe = node.children[0]
-
-              const hideButton = () => {
-                iframe.style.display = 'none'
-              }
-
-              iframe.addEventListener('load', () => {
-                setTimeout(() => {
-                  const button =
-                    iframe.contentDocument.querySelector('#mountHere')
-                      .firstChild.firstChild
-
-                  pseudoChatButton.addEventListener('click', () => {
-                    let button2 = null
-                    setTimeout(() => {
-                      const iframe2 = node.children[1]
-                      button2 = iframe2.contentDocument
-                        .querySelector('#mountHere')
-                        .querySelector('.message-window-iframe-xaqbo8')
-                      // button2.parentElement.addEventListener(
-                      //   'click',
-                      //   hideButton
-                      // )
-                      button2.parentElement.addEventListener(
-                        'touchstart',
-                        hideButton
-                      )
-                    }, 500)
-                    button.click()
-                    iframe.style.display = 'block'
-
-                    button?.addEventListener('click', hideButton)
-                    closeNavFunction()
-                  })
-                }, 1000)
-
-                iframe.style.display = 'none'
-                childObserver.disconnect()
-              })
-
+              // const iframe = node.children[0]
+              // const hideButton = () => {
+              //   iframe.style.display = 'none'
+              // }
+              // iframe.addEventListener('load', () => {
+              //   setTimeout(() => {
+              //     const button =
+              //       iframe.contentDocument.querySelector('#mountHere')
+              //         .firstChild.firstChild
+              //     pseudoChatButton.addEventListener('click', () => {
+              //       let button2 = null
+              //       setTimeout(() => {
+              //         const iframe2 = node.children[1]
+              //         button2 = iframe2.contentDocument
+              //           .querySelector('#mountHere')
+              //           .querySelector('.message-window-iframe-xaqbo8')
+              //         // button2.parentElement.addEventListener(
+              //         //   'click',
+              //         //   hideButton
+              //         // )
+              //         button2.parentElement.addEventListener(
+              //           'touchstart',
+              //           hideButton
+              //         )
+              //       }, 500)
+              //       button.click()
+              //       iframe.style.display = 'block'
+              //       button?.addEventListener('click', hideButton)
+              //       closeNavFunction()
+              //     })
+              //   }, 1000)
+              //   iframe.style.display = 'none'
+              //   childObserver.disconnect()
+              // })
               // Execute any code in response to the child element addition here
             }
           })
