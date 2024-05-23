@@ -410,6 +410,7 @@ export const pourLottieAnimations = (pageContainer) => {
         }
       })
     }
+    document.querySelector('html').style.scrollBehavior = 'auto'
   }, 200)
 }
 
