@@ -150,7 +150,12 @@ export const footerColourSwap = (container) => {
         setNavColourManual(previousNavColour)
       },
     })
-  }, 3000)
+    document.querySelector('html').style.scrollBehavior = 'auto'
+  }, 1000)
+  // setTimeout(() => {
+  //   console.log('set')
+
+  // }, 2000)
   return { setNewColour }
 }
 
