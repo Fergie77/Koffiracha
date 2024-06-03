@@ -27,6 +27,7 @@ import {
   recipeModal,
   recipeAccordionToggle,
 } from './features/Animations'
+import { announcementAnimation } from './features/AnnouncementScroller'
 import {
   chatButton2,
   cookieLinkSetter,
@@ -95,6 +96,7 @@ barba.hooks.afterEnter((data) => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
       }, 2000)
+      announcementAnimation()
       testimonialSliderLoadAnimation()
       if (window.matchMedia('(min-width: 767px)').matches) {
         floatingBottle()
