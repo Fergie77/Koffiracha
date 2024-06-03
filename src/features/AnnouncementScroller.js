@@ -2,13 +2,15 @@ import { gsap } from 'gsap'
 
 export const announcementAnimation = () => {
   const wrapper = document.querySelector('.announcement-bar_wrapper')
-  const boxes = wrapper.querySelectorAll('.announcement-bar_text')
+  const boxes = wrapper?.querySelectorAll('.announcement-bar_text')
 
-  horizontalLoop(boxes, {
-    paused: false,
-    repeat: -1,
-    speed: 1.25,
-  })
+  if (boxes) {
+    horizontalLoop(boxes, {
+      paused: false,
+      repeat: -1,
+      speed: 1.25,
+    })
+  }
 
   /*
 This helper function makes a group of elements animate along the x-axis in a seamless, responsive loop.
