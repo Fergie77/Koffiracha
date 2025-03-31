@@ -35,6 +35,7 @@ import {
   recipeFilters,
   setCheckout,
   shareRecipe,
+  hideProduct,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
