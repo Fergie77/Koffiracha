@@ -448,3 +448,11 @@ export const cookieLinkSetter = () => {
     link.href = hrefWithoutHash
   }
 }
+
+export const hideProduct = (container) => {
+  const productID = container.querySelectorAll('[featuredcartitemid]')
+  productID.forEach((element) => {
+    const parentElement = element.closest('.floating-bottle-section_wrapper')
+    console.log(parentElement)
+  })
+}

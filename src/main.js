@@ -95,6 +95,7 @@ barba.hooks.afterEnter((data) => {
       setTimeout(() => {
         pourLottieAnimations(data.next.container)
         rotatingBottleAnimation(data.next.container)
+        hideProduct(data.next.container)
       }, 2000)
       announcementAnimation()
       testimonialSliderLoadAnimation()
