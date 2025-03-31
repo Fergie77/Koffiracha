@@ -191,30 +191,30 @@ export const openChat = () => {
   // Function to observe child additions to the gorgias-chat-container
   function observeChildAdditions(element) {
     const childObserver = new MutationObserver((mutationsList) => {
-      console.log(element.querySelector('iframe'))
-      const iframe = element.querySelector('iframe')
+      console.log(element.querySelector('.chat-button'))
+      const iframe = element.querySelector('.chat-button')
       const hideButton = () => {
         iframe.style.display = 'none'
       }
 
-      async function getIframeContent() {
-        const iframe = document.querySelector('.chat-button')
-        // Wait for iframe to load
-        await new Promise((resolve) => iframe.addEventListener('load', resolve))
+      // async function getIframeContent() {
+      //   const iframe = document.querySelector('.chat-button')
+      //   // Wait for iframe to load
+      //   await new Promise((resolve) => iframe.addEventListener('load', resolve))
 
-        try {
-          const iframeDocument =
-            iframe.contentDocument || iframe.contentWindow.document
-          //const elementInside = iframeDocument.querySelector('.some-element');
-          console.log(iframeDocument)
-        } catch (error) {
-          console.error(
-            'Cannot access iframe content - possible cross-origin restriction'
-          )
-        }
-      }
+      //   try {
+      //     const iframeDocument =
+      //       iframe.contentDocument || iframe.contentWindow.document
+      //     //const elementInside = iframeDocument.querySelector('.some-element');
+      //     console.log(iframeDocument)
+      //   } catch (error) {
+      //     console.error(
+      //       'Cannot access iframe content - possible cross-origin restriction'
+      //     )
+      //   }
+      // }
 
-      getIframeContent()
+      // getIframeContent()
 
       iframe.addEventListener('load', () => {
         setTimeout(() => {
