@@ -202,7 +202,7 @@ export const openChat = () => {
           const button =
             iframe.contentDocument.querySelector('#mountHere').firstChild
               .firstChild
-
+          console.log(button)
           pseudoChatButton.addEventListener('click', () => {
             // let button2 = null
             // setTimeout(() => {
