@@ -218,6 +218,7 @@ export const openChat = () => {
 
       iframe.addEventListener('load', () => {
         setTimeout(() => {
+          console.log(document.querySelector('.chat-button'))
           const button =
             iframe.contentDocument.querySelector('#mountHere').firstChild
               .firstChild
