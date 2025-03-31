@@ -11,7 +11,6 @@ export const navSwapping = () => {
   const addToCartTriggers = document.querySelectorAll(
     '[scroll-trigger="add-to-cart"]'
   )
-  console.log(addToCartTriggers)
 
   if (exploreTriggers && exploreTriggers.length > 0) {
     exploreTriggers.forEach((element) => {
