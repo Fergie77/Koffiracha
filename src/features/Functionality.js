@@ -197,6 +197,25 @@ export const openChat = () => {
         iframe.style.display = 'none'
       }
 
+      async function getIframeContent() {
+        const iframe = document.querySelector('iframe')
+        // Wait for iframe to load
+        await new Promise((resolve) => iframe.addEventListener('load', resolve))
+
+        try {
+          const iframeDocument =
+            iframe.contentDocument || iframe.contentWindow.document
+          //const elementInside = iframeDocument.querySelector('.some-element');
+          console.log(iframeDocument)
+        } catch (error) {
+          console.error(
+            'Cannot access iframe content - possible cross-origin restriction'
+          )
+        }
+      }
+
+      getIframeContent()
+
       iframe.addEventListener('load', () => {
         setTimeout(() => {
           const button =
