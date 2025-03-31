@@ -5,7 +5,7 @@ import { addToCart } from './Animations'
 
 export const navSwapping = () => {
   const exploreTriggers = document.querySelectorAll(
-    '[scroll-trigger="explore"]'
+    '[scroll-trigger="explore"], .section_header30'
   )
 
   const addToCartTriggers = document.querySelectorAll(
