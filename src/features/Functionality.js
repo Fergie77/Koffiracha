@@ -455,7 +455,7 @@ export const hideProduct = (container) => {
     if (element.getAttribute('featuredcartitemid') != '') {
       return
     } else {
-      parentElement.style.display = 'none'
+      parentElement.remove()
     }
   })
 }
@@ -466,7 +466,7 @@ export const hideProductShopPage = (container) => {
     if (element.getAttribute('featuredcartitemid') != '') {
       return
     } else {
-      parentElement.style.display = 'none'
+      parentElement.remove()
     }
   })
 }
