@@ -192,7 +192,7 @@ export const openChat = () => {
   function observeChildAdditions(element) {
     const childObserver = new MutationObserver((mutationsList) => {
       console.log(element.querySelector('iframe'))
-      const iframe = element.querySelector('iframe')
+      const iframe = element.querySelector('#chat-button')
       const hideButton = () => {
         iframe.style.display = 'none'
       }
@@ -218,13 +218,9 @@ export const openChat = () => {
 
       iframe.addEventListener('load', () => {
         setTimeout(() => {
-          console.log(document.querySelector('#chat-button'))
           const button =
             iframe.contentDocument.querySelector('#mountHere').firstChild
               .firstChild
-          const iframeDocument =
-            iframe.contentDocument || iframe.contentWindow.document
-          console.log(iframeDocument)
           pseudoChatButton.addEventListener('click', () => {
             // let button2 = null
             // setTimeout(() => {
