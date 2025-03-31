@@ -191,7 +191,9 @@ export const openChat = () => {
   // Function to observe child additions to the gorgias-chat-container
   function observeChildAdditions(element) {
     const childObserver = new MutationObserver((mutationsList) => {
-      console.log(element.querySelector('.chat-button'))
+      setTimeout(() => {
+        console.log(element.querySelector('.chat-button'))
+      }, 5000)
       const iframe = element.querySelector('.chat-button')
       const hideButton = () => {
         iframe.style.display = 'none'
