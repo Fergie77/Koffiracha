@@ -198,7 +198,7 @@ export const openChat = () => {
       }
 
       async function getIframeContent() {
-        const iframe = document.querySelector('iframe')
+        const iframe = document.querySelector('.chat-button')
         // Wait for iframe to load
         await new Promise((resolve) => iframe.addEventListener('load', resolve))
 
