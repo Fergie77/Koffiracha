@@ -9,9 +9,9 @@ export const navSwapping = () => {
   )
 
   const addToCartTriggers = document.querySelectorAll(
-    '[scroll-trigger="add-to-cart"]'
+    '[scroll-trigger="add-to-cart"]:has(.product-id-code[featuredcartitemid]:not([featuredcartitemid=""]))'
   )
-  console.log(addToCartTriggers)
+
   if (exploreTriggers && exploreTriggers.length > 0) {
     exploreTriggers.forEach((element) => {
       // Add a ScrollTrigger for the animation

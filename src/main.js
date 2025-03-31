@@ -83,9 +83,8 @@ barba.hooks.afterEnter((data) => {
     openChat()
     setTimeout(() => {
       chatButton2()
-      navSwapping()
     }, 1000)
-
+    navSwapping()
     siteWideCartButtons()
     buttonAnimation()
 
