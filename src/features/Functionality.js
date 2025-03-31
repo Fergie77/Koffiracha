@@ -452,9 +452,10 @@ export const hideProduct = (container) => {
   const productID = container.querySelectorAll('[featuredcartitemid]')
   productID.forEach((element) => {
     const parentElement = element.closest('.floating-bottle-section_wrapper')
-    if (element.getAttribute('featuredcartitemid') != null) {
+    if (element.getAttribute('featuredcartitemid') != '') {
       console.log('this one')
       console.log(parentElement)
+      console.log(element.getAttribute('featuredcartitemid'))
       // parentElement.style.display = 'none'
     }
   })
