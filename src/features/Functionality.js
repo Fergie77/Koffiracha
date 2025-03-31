@@ -453,15 +453,9 @@ export const hideProduct = (container) => {
   productID.forEach((element) => {
     const parentElement = element.closest('.floating-bottle-section_wrapper')
     if (element.getAttribute('featuredcartitemid') != '') {
-      console.log('enabled')
-      console.log(parentElement)
-      console.log(element.getAttribute('featuredcartitemid'))
-      // parentElement.style.display = 'none'
+      return
     } else {
-      console.log('disabled')
-      console.log(parentElement)
-      console.log(element.getAttribute('featuredcartitemid'))
-      // parentElement.style.display = 'none'
+      parentElement.style.display = 'none'
     }
   })
 }
