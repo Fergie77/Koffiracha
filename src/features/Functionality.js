@@ -459,3 +459,14 @@ export const hideProduct = (container) => {
     }
   })
 }
+export const hideProductShopPage = (container) => {
+  const productID = container.querySelectorAll('[featuredcartitemid]')
+  productID.forEach((element) => {
+    const parentElement = element.closest('section')
+    if (element.getAttribute('featuredcartitemid') != '') {
+      return
+    } else {
+      parentElement.style.display = 'none'
+    }
+  })
+}

@@ -36,6 +36,7 @@ import {
   setCheckout,
   shareRecipe,
   hideProduct,
+  hideProductShopPage,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
@@ -123,6 +124,7 @@ barba.hooks.afterEnter((data) => {
         document.querySelector('[testimonial-slider = "text"]')
       )
     } else if (data.next.namespace == 'shop') {
+      hideProductShopPage(data.next.container)
       productLinkHover()
       mobileProductSlider()
       filtersDropdownAnimation()
