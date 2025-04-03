@@ -37,6 +37,7 @@ import {
   shareRecipe,
   hideProduct,
   hideProductShopPage,
+  copyrightYear,
 } from './features/Functionality'
 import {
   checkIfRedProduct,
@@ -85,6 +86,7 @@ barba.hooks.afterEnter((data) => {
       chatButton2()
     }, 1000)
     navSwapping()
+    copyrightYear()
     siteWideCartButtons()
     buttonAnimation()
 

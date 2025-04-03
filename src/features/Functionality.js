@@ -470,3 +470,9 @@ export const hideProductShopPage = (container) => {
     }
   })
 }
+
+export const copyrightYear = () => {
+  const year = new Date().getFullYear()
+  const copyright = document.querySelector('.footer3_credit-text')
+  copyright.textContent = `© ${year} Koffiracha`
+}
