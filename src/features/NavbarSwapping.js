@@ -135,7 +135,7 @@ function setNewColour(parentSelector, var1, var2) {
 export const footerColourSwap = (container) => {
   setTimeout(() => {
     const trigger = container.querySelector('[scroll-trigger="footer"]')
-    console.log(trigger)
+
     ScrollTrigger.create({
       trigger: trigger,
       start: 'bottom bottom',
