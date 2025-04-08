@@ -140,7 +140,7 @@ export const footerColourSwap = (container) => {
       trigger: trigger,
       start: 'bottom bottom',
       end: 'bottom bottom',
-      markers: true,
+      //markers: true,
 
       onEnter: () => {
         setNewColour('.nav', '--colour--black', '#ffffff')
