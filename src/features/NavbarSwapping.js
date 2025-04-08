@@ -135,11 +135,12 @@ function setNewColour(parentSelector, var1, var2) {
 export const footerColourSwap = (container) => {
   setTimeout(() => {
     const trigger = container.querySelector('[scroll-trigger="footer"]')
-
+    console.log(trigger)
     ScrollTrigger.create({
       trigger: trigger,
       start: 'bottom bottom',
       end: 'bottom bottom',
+      markers: true,
 
       onEnter: () => {
         setNewColour('.nav', '--colour--black', '#ffffff')
@@ -150,6 +151,7 @@ export const footerColourSwap = (container) => {
         setNavColourManual(previousNavColour)
       },
     })
+    ScrollTrigger.refresh()
     document.querySelector('html').style.scrollBehavior = 'auto'
   }, 1000)
   // setTimeout(() => {

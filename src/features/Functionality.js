@@ -1,4 +1,5 @@
 import { gsap } from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import { closeNavFunction } from './Animations'
 
@@ -456,10 +457,14 @@ export const hideProduct = (container) => {
       return
     } else {
       parentElement.remove()
+      setTimeout(() => {
+        ScrollTrigger.refresh()
+      }, 500)
     }
   })
 }
 export const hideProductShopPage = (container) => {
+  gsap.registerPlugin(ScrollTrigger)
   const productID = container.querySelectorAll('[featuredcartitemid]')
   productID.forEach((element) => {
     const parentElement = element.closest('section')
@@ -467,6 +472,9 @@ export const hideProductShopPage = (container) => {
       return
     } else {
       parentElement.remove()
+      setTimeout(() => {
+        ScrollTrigger.refresh()
+      }, 500)
     }
   })
 }
