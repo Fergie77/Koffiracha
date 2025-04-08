@@ -70,7 +70,7 @@ openCart()
 loadCart()
 setCheckout()
 
-barba.hooks.beforeLeave(() => {
+barba.hooks.afterEnter(() => {
   ScrollTrigger.killAll()
 })
 
